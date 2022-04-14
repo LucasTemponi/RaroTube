@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
+import { thumbnailProps } from './ThumbnailProps';
 
-export const Thumbnails = () =>{
+export const Thumbnails:React.FC<thumbnailProps> = (video) =>{
     const videoRef = useRef<HTMLVideoElement>(null);
     const [playing,setPlaying] = useState<boolean>(false)
 
@@ -9,16 +10,24 @@ export const Thumbnails = () =>{
             videoRef.current.play();
             videoRef.current.controls = true;
             setPlaying(true)
+            console.log(`${video.nome} is playing`)
         }else if (videoRef.current && playing){
             videoRef.current?.pause();
             videoRef.current.controls = false;
             setPlaying(false);
+            console.log(`${video.nome} is paused`)
         }
     }
 
     return(
-        <div className = 'transform hover:scale-110 ease-linear duration-300' >
-            <video title='Teste' ref={videoRef} onPointerLeave={onHover} onPointerEnter={onHover}><source src='https://file-examples.com/storage/fe31d99e526255e059c5846/2017/04/file_example_MP4_480_1_5MG.mp4'></source>  </video>
+        <div>
+            <video className = 'transform hover:scale-110 ease-linear duration-300 w-4/5'
+             title={video.nome}
+             ref={videoRef}
+             onPointerLeave={onHover}
+             onPointerEnter={onHover}>
+                 <source src={video.url}/>
+            </video>
         </div>
     )
 }
