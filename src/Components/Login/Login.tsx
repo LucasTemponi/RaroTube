@@ -1,4 +1,5 @@
 import { Button } from "../Button"
+import { Input } from "../Input"
 
 
 export const Login = () => {
@@ -23,35 +24,27 @@ export const Login = () => {
             </p>
           </div>
 
-          <form className="mt-8 space-y-6">
-            <div className="rounded-md shadow-sm -space-y-px">
+          <form className="mt-8 space-y-6" onSubmit={undefined}>
+            <div className=" rounded-md shadow-sm -space-6y-px  ">
               <div>
-                <label htmlFor="email-address" className="sr-only">
-                  Email address
-                </label>
-                <input
-                  id="email-address"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="Email address"
+                <Input 
+                type="text"
+                name="email"
+                label="email" 
+                placeholder="email"
+                required 
+                value={""}
                 />
               </div>
 
               <div>
-                <label htmlFor="password" className="sr-only">
-                  Password
-                </label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="Password"
+              <Input 
+                type="text"
+                name="senha"
+                label="senha" 
+                placeholder="senha"
+                required 
+                value={""}
                 />
               </div>
             </div>
