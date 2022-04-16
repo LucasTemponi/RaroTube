@@ -2,8 +2,8 @@ import { lazy, Suspense } from 'react';
 import axios from 'axios'
 import { useEffect, useState } from 'react';
 import { videoListProps } from './VideoListProps';
+import Thumbnails from '../Thumbnail/Thumbnail';
 
-const Thumbnails = lazy(()=> import('../Thumbnail/Thumbnail'));
 
 export const VideoList:React.FC<videoListProps> = (listProps) => {
 
