@@ -5,15 +5,19 @@ import { thumbnailProps } from './ThumbnailProps';
 export const Thumbnails:React.FC<thumbnailProps> = (video) =>{
     const videoRef = useRef<HTMLVideoElement>(null);
     const [favorite,setFavorite]= useState(false);
+    let debounceId = useRef(0);
 
     const playVideo = () =>{
-        if(videoRef.current){ 
-            videoRef.current.play();
-            videoRef.current.controls = true;
-        }
+        debounceId.current = window.setTimeout(()=>{
+            if(videoRef.current){ 
+                videoRef.current.play();
+                videoRef.current.controls = false;
+            }
+        },340);
     }
 
     const pauseVideo = () =>{
+        clearTimeout(debounceId.current);
         if (videoRef.current){
             videoRef.current?.pause();
             videoRef.current.controls = false;
@@ -27,17 +31,18 @@ export const Thumbnails:React.FC<thumbnailProps> = (video) =>{
     }
 
     return(
-        <div className='transform hover:scale-110 ease-linear duration-300 w-4/5 ml-5'>
+        <div className={`transform ${video.hover ? 'hover:scale-110' : ''} ease-linear duration-300 w-64 h-36 mt-3 ml-3`}>
             <video className = 'w-full h-full'
                 title={video.nome}
                 ref={videoRef}
+                preload='metadata'
                 muted
                 onPointerLeave={pauseVideo}
                 onPointerEnter={playVideo}>
                     <source src={video.url}/>                 
             </video>
             <svg xmlns="http://www.w3.org/2000/svg"
-                className={`h-6 w-6 ${favorite ? 'fill-amber-300' : 'fill-gray-100 hover:fill-amber-100'} absolute top-5 right-5`}
+                className={`h-6 w-6 ${favorite ? 'fill-amber-300' : 'fill-gray-100 hover:fill-amber-100'} absolute top-3 right-3`}
                 fill="none"
                 viewBox="0 0 24 24"
                 onClick={favoriteVideo}>
@@ -46,3 +51,5 @@ export const Thumbnails:React.FC<thumbnailProps> = (video) =>{
         </div>
     )
 }
+
+export default Thumbnails;
