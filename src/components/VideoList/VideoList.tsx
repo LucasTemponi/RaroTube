@@ -214,12 +214,14 @@ export const VideoList:React.FC<videoListProps> = (listProps) => {
 // ]
     return(
         
-        <div className={`flex flex-${ listProps.vertical ? 'col' : 'row'} flex-wrap justify-center`} >
+        <ul className={`flex flex-${ listProps.vertical ? 'col' : 'row'} flex-wrap justify-center`} >
             {videos.map((video) => {
                 return(
-                    <Suspense fallback={<div>...CARREGANDO</div>}>
-                        <Thumbnails key={video.id} {...video} hover={true} />
-                    </Suspense>
+                    <li>
+                        <Suspense fallback={<div>...CARREGANDO</div>}>
+                            <Thumbnails key={video.id} {...video} hover={true} />
+                        </Suspense>
+                    </li>
                 )
             })}
             {/* {teste.map((video) => {
@@ -227,6 +229,6 @@ export const VideoList:React.FC<videoListProps> = (listProps) => {
                     <Thumbnails key={video.id} {...video} hover />
             )
             })} */}
-        </div>
+        </ul>
     )
 }
