@@ -9,7 +9,7 @@ const Navbar = () => {
           <Logo />
         </div>
       </div>
-      <div className='felx items-center space-x-2 font-bold'>
+      <div className='flex items-center space-x-2 font-bold'>
         <Navegacao />
       </div>
     </header>
