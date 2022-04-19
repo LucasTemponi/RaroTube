@@ -31,8 +31,8 @@ export const Thumbnails:React.FC<thumbnailProps> = (video) =>{
     }
 
     return(
-        <div className={`transform ${video.hover ? 'hover:scale-110' : ''} ease-linear duration-300 w-64 h-36 mt-3 ml-3`}>
-            <video className = 'w-full h-full'
+        <div className={`transform ${video.hover ? 'hover:scale-110' : ''} ease-linear duration-300 w-64 h-36 mt-3 ml-3 rounded-md `}>
+            <video className = 'w-full h-full rounded-xl '
                 title={video.nome}
                 ref={videoRef}
                 preload='metadata'
