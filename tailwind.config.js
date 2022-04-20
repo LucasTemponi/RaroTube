@@ -10,7 +10,6 @@ module.exports = {
           maximum: '#B5B3E6',
           rosa: '#f5487f',
           azulzinho: "44c2fd",
-          
         },
       },
     },
