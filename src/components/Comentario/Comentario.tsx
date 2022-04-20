@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { TesteProps } from '../ListaComentarios/ListaComentarios';
 
-const Comentario: React.FC = () => {
+const Comentario = ({ usuario, comentario }: TesteProps) => {
   const [like, setLike] = useState(false);
   const [dislike, setDislike] = useState(false);
 
@@ -28,10 +29,10 @@ const Comentario: React.FC = () => {
         />
       </div>
       <div className='w-full p-2 flex-grow'>
-        <p className='pl-2 font-medium'>Nome do Usuário</p>
+        <p className='pl-2 font-medium'>{usuario}</p>
         <div className='mb-2 flex-grow'>
           <p className='h-auto resize-y w-full rounded p-2 focus:outline-none'>
-            Este é um comentario sobre o video
+            {comentario}
           </p>
         </div>
         <div className='flex space-x-2 pl-2'>
