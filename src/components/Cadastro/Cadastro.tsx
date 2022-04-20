@@ -1,10 +1,49 @@
+import { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
+import { UsuarioProps } from './UsuarioProps';
 
-export const Cadastro = () => {
+type CadastroProps = {
+  usuario?: UsuarioProps;
+  onSubmit?: (usuario: UsuarioProps) => void;
+}
+
+export const Cadastro: React.FC<CadastroProps> = ({
+  usuario,
+  onSubmit,
+}) => {
+
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [turma, setTurma] = useState("");
+
+  useEffect(() => {
+    if (usuario) {
+      setNome(usuario.nome);
+      setEmail(usuario.email);
+      setSenha(usuario.senha);
+      setTurma(usuario.turma.id)
+    }
+  }, [usuario]);
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (onSubmit) {
+      const novoUsuario = {
+        ...usuario,
+        nome,
+        email,
+        senha,
+        turma
+      };
+      onSubmit(novoUsuario as unknown as UsuarioProps);
+    }
+    //navigate('/artigos')
+  }
   return (
     <>
-      {/*ajustar espaçamento entre os inputs*/}
       <div className='min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
         <div className='max-w-md w-full space-y-8'>
           <div>
@@ -18,14 +57,10 @@ export const Cadastro = () => {
             </h2>
             <p className='mt-2 text-center text-sm text-gray-600'>
               Preencha os campos abaixo para se cadastrar na plataforma
-              {/* {' '}
-              <a href="#" className="font-medium text-[#4E47C2] hover:text-[#7A75D1]">
-                Clique aqui e faça seu cadastro.
-              </a> */}
             </p>
           </div>
 
-          <form className='mt-8 space-y-6' onSubmit={undefined}>
+          <form className='mt-8 space-y-6' onSubmit={handleSubmit}>
             <div className=' rounded-md shadow-sm -space-6y-px  '>
               <div>
                 <Input
@@ -34,7 +69,8 @@ export const Cadastro = () => {
                   label='nome'
                   placeholder='Nome'
                   required
-                  value={''}
+                  value={nome}
+                  onChange={(event) => setNome(event.target.value)}
                 />
               </div>
 
@@ -45,19 +81,21 @@ export const Cadastro = () => {
                   label='email'
                   placeholder='email'
                   required
-                  value={''}
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
                 />
               </div>
             </div>
 
             <div>
               <Input
-                type='text'
+                type='password'
                 name='senha'
                 label='senha'
                 placeholder='Senha'
                 required
-                value={''}
+                value={senha}
+                onChange={(event) => setSenha(event.target.value)}
               />
             </div>
 
@@ -68,7 +106,8 @@ export const Cadastro = () => {
                 label='codigoAcesso'
                 placeholder='Código de Acesso'
                 required
-                value={''}
+                value={turma}
+                onChange={(event) => setTurma(event.target.value)}
               />
             </div>
 
