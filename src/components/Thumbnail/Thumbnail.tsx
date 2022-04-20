@@ -1,10 +1,13 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useFavoritos } from '../../hooks/useFavoritos';
 import { thumbnailProps } from './ThumbnailProps';
-
 
 export const Thumbnails:React.FC<thumbnailProps> = (video) =>{
     const videoRef = useRef<HTMLVideoElement>(null);
     const [favorite,setFavorite]= useState(false);
+    const todosFavoritos = useFavoritos(state=>state.favoritos);
+    const adicionaFavorito = useFavoritos(state=>state.adicionaFavorito);
+    const removeFavorito = useFavoritos(state=>state.removeFavorito);
     let debounceId = useRef(0);
 
     const playVideo = () =>{
@@ -25,13 +28,25 @@ export const Thumbnails:React.FC<thumbnailProps> = (video) =>{
     }
 
     const favoriteVideo = () =>{
-        if (!favorite){
-            setFavorite(true)
+        if(favorite){
+            removeFavorito(video.id);
+            setFavorite(false);
+            console.log(todosFavoritos)
+        }else{
+            adicionaFavorito(video.id);
+            setFavorite(true);
+            console.log(todosFavoritos)
         }
     }
 
+    useEffect(()=>{
+        let isFavorite = todosFavoritos.includes(video.id);
+        setFavorite(isFavorite);
+    },[]);
+
     return(
-        <div className={`transform ${video.hover ? 'hover:scale-110' : ''} ease-linear duration-300 w-64 h-36 mt-3 ml-3 rounded-md `}>
+        <div className={`transform ${video.hover ? 'hover:scale-110' : ''} ease-linear duration-300
+            2xl:w-[15vw] xl:w-[19vw] lg:w-[20vw] md:w-[28vw] sm:w-[45vw] mt-4 ml-4 rounded-md `}>
             <video className = 'w-full h-full rounded-xl '
                 title={video.nome}
                 ref={videoRef}
