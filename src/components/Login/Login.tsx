@@ -1,10 +1,45 @@
+import axios from 'axios';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 
 export const Login = () => {
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [erro, setErro] = useState('')
+  //const navigate = useNavigate();
+
+  async function autenticaUsuario(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setErro('');
+
+
+    try {
+      const response = await axios.post('https://3.221.159.196:3320/auth/login',
+        { email, senha }
+      );
+
+      const { access_token, id } = response.data;
+      if (access_token) {
+        localStorage.setItem("access_token", access_token);
+        localStorage.setItem("id", id);
+        console.log('Login realizado com sucesso.')
+        //navigate("/videos");
+      }
+
+    } catch (error: any) {
+      if (error.response.data.statusCode === 401) {
+        setErro('Usuário ou senha incorretos.');
+      } else {
+        setErro('Erro ao autenticar usuário. Tente novamente mais tarde.');
+      }
+    }
+
+  }
+
   return (
     <>
-      {/*ajustar espaçamento entre os inputs*/}
       <div className='min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
         <div className='max-w-md w-full space-y-8'>
           <div>
@@ -27,7 +62,7 @@ export const Login = () => {
             </p>
           </div>
 
-          <form className='mt-8 space-y-6' onSubmit={undefined}>
+          <form className='mt-8 space-y-6' onSubmit={autenticaUsuario}>
             <div className=' rounded-md shadow-sm -space-6y-px  '>
               <div>
                 <Input
@@ -36,21 +71,35 @@ export const Login = () => {
                   label='email'
                   placeholder='email'
                   required
-                  value={''}
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
                 />
               </div>
 
               <div>
                 <Input
-                  type='text'
+                  type='password'
                   name='senha'
                   label='senha'
                   placeholder='senha'
                   required
-                  value={''}
+                  value={senha}
+                  onChange={(event) => setSenha(event.target.value)}
                 />
               </div>
             </div>
+
+            {
+              erro ? (
+                <div className='flex items-center justify-end'>
+                  <div className='text-sm'>
+                    <span className="font-small text-[#FF0000]">
+                      {erro}
+                    </span>
+                  </div>
+                </div>
+              ) : <></>
+            }
 
             <div className='flex items-center justify-end'>
               <div className='text-sm'>
@@ -71,4 +120,5 @@ export const Login = () => {
       </div>
     </>
   );
-};
+}
+
