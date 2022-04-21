@@ -1,41 +1,18 @@
 import React from 'react';
 import AdicionarComentario from '../AdicionarComentario/AdicionarComentario';
 import Comentario from '../Comentario/Comentario';
+import { ComentarioProps } from '../Comentario/ComentarioProps';
 
-export type TesteProps = {
-  usuario: string;
-  comentario: string;
-  id: number;
+export type ListaComentarioProps = {
+  comentarios: ComentarioProps[];
 };
 
-const ListaComentarios = () => {
-  const teste: TesteProps[] = [
-    {
-      usuario: 'Mauricio',
-      comentario: 'Ótimo',
-      id: 1,
-    },
-    {
-      usuario: 'Cassia',
-      comentario: 'Gostei',
-      id: 2,
-    },
-    {
-      usuario: 'Lucas',
-      comentario: 'Demais',
-      id: 3,
-    },
-    {
-      usuario: 'Laysa',
-      comentario: 'Muito bom',
-      id: 4,
-    },
-  ];
+const ListaComentarios: React.FC<ListaComentarioProps> = ({ comentarios }) => {
   return (
     <div className='flex flex-col space-y-4'>
       <AdicionarComentario />
-      {teste.map(item => {
-        return <Comentario {...item} />;
+      {comentarios.map(comentario => {
+        return <Comentario {...comentario} />;
       })}
     </div>
   );
