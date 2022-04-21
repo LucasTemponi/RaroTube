@@ -1,40 +1,19 @@
-import axios from 'axios';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 
-export const Login = () => {
+type loginProps = {
+  onLogin: (email: string, senha: string) => void;
+  erro?: string;
+};
+
+export const Login = (props: loginProps) => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const [erro, setErro] = useState('')
-  //const navigate = useNavigate();
 
-  async function autenticaUsuario(event: React.FormEvent<HTMLFormElement>) {
+  function autenticaUsuario(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setErro('');
-
-
-    try {
-      const response = await axios.post('https://3.221.159.196:3320/auth/login',
-        { email, senha }
-      );
-
-      const { access_token, id } = response.data;
-      if (access_token) {
-        localStorage.setItem("access_token", access_token);
-        localStorage.setItem("id", id);
-        console.log('Login realizado com sucesso.')
-        //navigate("/videos");
-      }
-
-    } catch (error: any) {
-      if (error.response.data.statusCode === 401) {
-        setErro('Usuário ou senha incorretos.');
-      } else {
-        setErro('Erro ao autenticar usuário. Tente novamente mais tarde.');
-      }
-    }
+   props.onLogin(email, senha);
 
   }
 
@@ -90,11 +69,11 @@ export const Login = () => {
             </div>
 
             {
-              erro ? (
+              props.erro ? (
                 <div className='flex items-center justify-end'>
                   <div className='text-sm'>
                     <span className="font-small text-[#FF0000]">
-                      {erro}
+                      {props.erro}
                     </span>
                   </div>
                 </div>
