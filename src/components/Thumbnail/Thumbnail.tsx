@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { useFavoritos } from '../../hooks/useFavoritos';
 import { thumbnailProps } from './ThumbnailProps';
 
-export const Thumbnails:React.FC<thumbnailProps> = (video) =>{
+export const Thumbnails:React.FC<thumbnailProps> = (props) =>{
     const videoRef = useRef<HTMLVideoElement>(null);
     const [favorite,setFavorite]= useState(false);
     const todosFavoritos = useFavoritos(state=>state.favoritos);
@@ -29,32 +29,33 @@ export const Thumbnails:React.FC<thumbnailProps> = (video) =>{
 
     const favoriteVideo = () =>{
         if(favorite){
-            removeFavorito(video.id);
+            removeFavorito(props.video);
             setFavorite(false);
             console.log(todosFavoritos)
         }else{
-            adicionaFavorito(video.id);
+            adicionaFavorito(props.video);
             setFavorite(true);
             console.log(todosFavoritos)
         }
     }
 
-    useEffect(()=>{
-        let isFavorite = todosFavoritos.includes(video.id);
-        setFavorite(isFavorite);
-    },[]);
+    useMemo(()=>{
+        let isFavorite = todosFavoritos.filter(favorito => favorito.id === props.video.id)
+        isFavorite.length > 0 ? setFavorite(true) : setFavorite(false)
+    },[todosFavoritos,props.video])
 
     return(
-        <div className={`transform ${video.hover ? 'hover:scale-110' : ''} ease-linear duration-300
+        <div className={`transform ${props.hover ? 'hover:scale-110' : ''} ease-linear duration-300
             2xl:w-[15vw] xl:w-[19vw] lg:w-[20vw] md:w-[28vw] sm:w-[45vw] mt-4 ml-4 rounded-md `}>
             <video className = 'w-full h-full rounded-xl '
-                title={video.nome}
+                title={props.video.nome}
                 ref={videoRef}
-                preload='metadata'
+                preload='none'
+                poster={props.video.thumbUrl}
                 muted
                 onPointerLeave={pauseVideo}
                 onPointerEnter={playVideo}>
-                    <source src={video.url}/>                 
+                    <source src={props.video.url}/>                 
             </video>
             <svg xmlns="http://www.w3.org/2000/svg"
                 className={`h-6 w-6 ${favorite ? 'fill-amber-300' : 'fill-gray-100 hover:fill-amber-100'} absolute top-3 right-3`}
