@@ -4,11 +4,13 @@ import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
 
 export const CodigoDeRecuperarSenha = () => {
-  const [codigo, setCodigo] = useState("");
+  const [codigo, setCodigo] = useState('');
 
-  const codigoDeRecuperarSenha = async (event: React.FormEvent<HTMLFormElement>) => {
+  const codigoDeRecuperarSenha = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
-  }
+  };
 
   return (
     <>
@@ -22,25 +24,30 @@ export const CodigoDeRecuperarSenha = () => {
             <p className=' mt-2 text-center text-sm text-gray-600'>
               Insira seu email no campo abaixo para receber o código de recuperação </p>
           </div>
-          <form className="mt-8 space-y-6" action="#" onSubmit={codigoDeRecuperarSenha}>
+          <form 
+            className="mt-8 space-y-6" 
+            action="#" 
+            onSubmit={codigoDeRecuperarSenha}
+          >
             <div className=" rounded-md shadow-sm -space-6y-px  ">
               <div>
                 <Input
-                  type="email"
-                  name="email"
-                  label="email"
-                  placeholder="email"
+                  type='email'
+                  name='email'
+                  label='email'
+                  placeholder='email'
                   required
                   value={codigo}
-                  onChange={(event) => { setCodigo(event.target.value) }}
+                  onChange={event => {
+                    setCodigo(event.target.value);
+                  }}
                 />
               </div>
-            </div>
+            </div>     
             <Button type="submit">Enviar Código</Button>
           </form>
         </div>
       </div>
     </>
-
-  )
-}
+  );
+};
