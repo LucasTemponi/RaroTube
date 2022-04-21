@@ -8,7 +8,6 @@ export const CadastroPage = () => {
     const [usuario, setUsuario] = useState<UsuarioProps>();
     //const navigate = useNavigate();
 
-
     const handleSubmit = async (usuario: UsuarioProps) => {
 
         try {
@@ -32,13 +31,13 @@ export const CadastroPage = () => {
         }
     }
 
-
     return (
         <>
             <div className="items-center justify-center m-10">
                 <Cadastro
                     usuario={usuario}
                     onSubmit={handleSubmit}
+
                 />
             </div>
         </>
