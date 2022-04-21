@@ -1,7 +1,6 @@
+import { videoProps } from "../VideoPlayer/VideoProps";
+
 export interface thumbnailProps{
-    nome:string,
-    id:string,
-    url:string,
-    hover?:boolean,
-    // thumbUrl:string,
+    video:videoProps
+    hover?:boolean
 }

@@ -100,7 +100,7 @@ export const VideoList:React.FC<videoListProps> = (videoList) => {
                 return(
                     <li>
                         <Suspense fallback={<div>...CARREGANDO</div>}>
-                            <Thumbnails key={video.id} {...video} hover={true} />
+                            <Thumbnails key={video.id} video={video} hover={true} />
                         </Suspense>
                     </li>
                 )
