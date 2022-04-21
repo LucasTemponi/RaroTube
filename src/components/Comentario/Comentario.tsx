@@ -29,13 +29,13 @@ const Comentario = ({ usuario, comentario }: TesteProps) => {
         />
       </div>
       <div className='w-full p-2 flex-grow'>
-        <p className='pl-2 font-medium'>{usuario}</p>
-        <div className='mb-2 flex-grow'>
-          <p className='h-auto resize-y w-full rounded p-2 focus:outline-none'>
+        <p className='pl-2 font-semibold text-sm leading-4'>{usuario}</p>
+        <div className='mb-2'>
+          <p className='h-auto resize-y w-full p-2 text-sm leading-normal'>
             {comentario}
           </p>
         </div>
-        <div className='flex space-x-2 pl-2'>
+        <div className='flex space-x-2 pl-2 -mt-2'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             className={`h-4 w-4 ${
@@ -56,7 +56,7 @@ const Comentario = ({ usuario, comentario }: TesteProps) => {
           <svg
             xmlns='http://www.w3.org/2000/svg'
             className={`h-4 w-4 ${
-              dislike ? 'fill-raro-oceano' : 'fill-transparent'
+              dislike ? 'fill-red-700' : 'fill-transparent'
             }`}
             fill='none'
             viewBox='0 0 24 24'
