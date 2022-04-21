@@ -3,7 +3,6 @@ import CapeloFbranco from "../../assets/CapeloFbranco";
 import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
 
-
 export const RecuperarSenha = () => {
   const [codigo, setCodigo] = useState("");
   const [novaSenha, setNovaSenha] = useState("");

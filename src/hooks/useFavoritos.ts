@@ -1,22 +1,28 @@
 import create from 'zustand'
 import axios from 'axios'
+import apiClient from '../services/api-client'
+import { videoProps } from '../components/VideoPlayer/VideoProps'
+
 
 type favoritosProps = {
-    favoritos:string[],
-    iniciaFavoritos: (todosFavoritos: string[]) => void,
-    adicionaFavorito: (videoId: string) => void,
-    removeFavorito: (videoId: string) => void,
+    favoritos:videoProps[],
+    iniciaFavoritos: (todosFavoritos: videoProps[]) => void,
+    adicionaFavorito: (videoId: videoProps) => void,
+    removeFavorito: (videoId: videoProps) => void,
 }
 
 export const useFavoritos = create<favoritosProps>((set) => ({
     favoritos: [],
-    iniciaFavoritos: (todosFavoritos: string[]) =>set({favoritos: todosFavoritos}),
-    adicionaFavorito: (videoId) => { 
-        axios.post(`https://3.221.159.196/videos/${videoId}/favoritos`)
-        set((state) => ({favoritos: [...state.favoritos, videoId]})
+    iniciaFavoritos: (todosFavoritos: videoProps[]) =>{
+        console.log(`Lista de favoritos: ${todosFavoritos}`)
+        set({favoritos: todosFavoritos})
+    },
+    adicionaFavorito: (video) => { 
+        apiClient.post(`/videos/${video.id}/favoritos`)
+        set((state) => ({favoritos: [...state.favoritos, video]})
     )},
-    removeFavorito: (videoId) => {
-        axios.delete(`https://3.221.159.196/video/${videoId}/favoritos`)
-        set((state) => ({favoritos: state.favoritos.filter((f) => f !== videoId)})
+    removeFavorito: (video) => {
+        apiClient.delete(`/videos/${video.id}/favoritos`)
+        set((state) => ({favoritos: state.favoritos.filter((f) => f.id !== video.id)})
     )},
 }))

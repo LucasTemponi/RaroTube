@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react"
-import Navbar from "../../components/Navbar"
+import Navbar from "../../components/Navbar/Navbar"
 import { VideoList } from "../../components/VideoList/VideoList"
-import axios from 'axios'
 import { videoProps } from "../../components/VideoPlayer/VideoProps"
 import { useFavoritos } from "../../hooks/useFavoritos"
+import apiClient from "../../services/api-client";
 
 export const PaginaPrincipal = () => {
 
@@ -17,25 +17,25 @@ export const PaginaPrincipal = () => {
 
     const loadVideos = async () =>{
         await Promise.all([
-            axios.get('https://3.221.159.196:3320/videos').then(response => setVideos(response.data)),
-            axios.get('https://3.221.159.196:3320/videos/favoritos').then(response => iniciaFavoritos(response.data)),
-            //axios.get('https://3.221.159.196:3320/videos/')
+            apiClient.get('/videos').then(response => setVideos(response.data)),
+            apiClient.get('/videos/favoritos').then(response => iniciaFavoritos(response.data)),
+            //axiosapiInstance.get('https://3.221.159.196:3320/videos/')
             ])
-        console.log(videos)
     }
 
-    const videosFavoritos = useMemo(()=>{
-        let temp:videoProps[] = [];
-        todosFavoritos.map(idFavorito=>{
-            if (videos){
-                let isVideoFavorite = videos.find(element=>element.id===idFavorito);
-                if (isVideoFavorite){
-                    temp.push(isVideoFavorite);
-                }
-            }
-        })
-        return temp;
-    },[todosFavoritos])
+    // const videosFavoritos = useMemo(()=>{
+    //     let temp:videoProps[] = [];
+    //     todosFavoritos.forEach(idFavorito=>{
+    //         if (videos){
+    //             let isVideoFavorite = videos.find(element=>element.id===idFavorito);
+    //             if (isVideoFavorite){
+    //                 temp.push(isVideoFavorite);
+    //             }
+    //         }
+    //     })
+    //     console.log(todosFavoritos)
+    //     return temp;
+    // },[todosFavoritos])
 
     useEffect(()=>{
         loadVideos()
@@ -51,7 +51,7 @@ export const PaginaPrincipal = () => {
                 {logado ? 
                     <>
                         <h1 className=" font-extrabold underline decoration-raro-rosa text-4xl m-4 mt-12 text-left " >Vídeos favoritos</h1>
-                        <VideoList videos={videosFavoritos} />
+                        <VideoList videos={todosFavoritos} />
                     </> :
                     ''
                 }
