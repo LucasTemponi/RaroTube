@@ -1,6 +1,7 @@
-import { useState } from "react"
-import { Button } from "../Button/Button"
-import { Input } from "../Input/Input"
+import { useState } from "react";
+import CapeloFbranco from "../../assets/CapeloFbranco";
+import { Button } from "../Button/Button";
+import { Input } from "../Input/Input";
 
 export const RecuperarSenha = () => {
   const [codigo, setCodigo] = useState("");
@@ -14,8 +15,16 @@ export const RecuperarSenha = () => {
 
   return (
     <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <h2 className="mt-6 text-center text-3xl font-bold text-gray-500">Recuperar Senha</h2>
+      <div className="max-w-md w-full shadow-lg  px-8 py-20 rounded-lg space-y-8">
+      <div>
+            <div className='mx-auto h-14 w-40 flex items-center'>
+              <CapeloFbranco />
+            </div>
+            <h2 className='mt-8 text-center text-2xl font-bold text-raro-cobalto'>Alterar senha</h2>
+            <p className=' mt-2 text-center text-sm text-gray-600'>
+              Insira o código recebido por email e elabore a nova senha </p>
+          </div>
+       
         <form className="mt-8 space-y-6" action="#" onSubmit={alterarSenha}>
           <div className=" rounded-md shadow-sm -space-6y-px  ">
             <div>
@@ -50,7 +59,7 @@ export const RecuperarSenha = () => {
               />
             </div>
           </div>
-          <Button type="submit">Alterar senha</Button>
+          <Button type="submit">Alterar</Button>
         </form>
       </div>
     </div>
