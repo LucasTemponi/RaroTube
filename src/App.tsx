@@ -8,7 +8,6 @@ import { Layout } from './components/Layout/Layout';
 import ListaComentarios from './components/ListaComentarios/ListaComentarios';
 import { Login } from './components/Login/Login';
 import { RecuperarSenha } from './components/RecuperarSenha/RecuperarSenha';
-import { SolicitarCodigo } from './components/SolicitarCodigo/SolicitarCodigo';
 import { VideoList } from './components/VideoList/VideoList';
 import { CadastroPage } from './pages/CadastroPage/CadastroPage';
 import { LoginPage } from './pages/LoginPage/LoginPage';
