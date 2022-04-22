@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Cadastro } from "../../components/Cadastro/Cadastro";
 import { UsuarioProps } from "../../components/Cadastro/UsuarioProps";
 import apiClient from "../../services/api-client";
@@ -7,7 +8,7 @@ import apiClient from "../../services/api-client";
 export const CadastroPage = () => {
 
     const [usuario, setUsuario] = useState<UsuarioProps>();
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const handleSubmit = async (usuario: UsuarioProps) => {
 
@@ -22,7 +23,7 @@ export const CadastroPage = () => {
                 }
             );
             setUsuario(response.data)
-            //navigate('/videos')
+            navigate('/')
 
         } catch (error: any) {
             if (error.response.data.statusCode === 400) {
