@@ -14,26 +14,25 @@ const VideoPage = () => {
   const [comentarios, setComentarios] = useState<ComentarioProps[]>();
   const { id } = useParams();
 
-  const loadRecomendados = async () => {
-    const response = await apiClient.get(`/videos/${id}/recomendacoes`);
-    setRecomendados(response.data);
-  };
-
-  const loadVideo = async () => {
-    const response = await apiClient.get(`/videos/${id}`);
-    setVideo(response.data);
-  };
-
-  const loadComentarios = async () => {
-    const response = await apiClient.get(`/videos/${id}/comentarios`);
-    setComentarios(response.data);
-  };
-
   useEffect(() => {
+    const loadRecomendados = async () => {
+      const response = await apiClient.get(`/videos/${id}/recomendacoes`);
+      setRecomendados(response.data);
+    };
+
+    const loadVideo = async () => {
+      const response = await apiClient.get(`/videos/${id}`);
+      setVideo(response.data);
+    };
+
+    const loadComentarios = async () => {
+      const response = await apiClient.get(`/videos/${id}/comentarios`);
+      setComentarios(response.data);
+    };
     loadRecomendados();
     loadVideo();
     loadComentarios();
-  }, []);
+  }, [id]);
 
   return (
     <>
