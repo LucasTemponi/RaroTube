@@ -4,7 +4,9 @@ export type videoProps = {
     url:string,
     thumbUrl:string,
     descricao:string,
-    createdAt:string,
+    createdAt:Date,
     duracao:string,
+    dataPublicacao:Date,
     topico:string,
+    tags:string[],
 }
