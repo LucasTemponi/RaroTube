@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Login } from "../../components/Login/Login";
+import { useAuthContext } from "../../context/authContext";
 import api from "../../services/api-client"
 
 export const LoginPage = () => {
   const [erro, setErro] = useState("");
+
   const navigate = useNavigate();
+  const auth = useAuthContext();
+
   const autenticaUsuario = async (email: string, senha: string) => {
     try {
       const response = await api.post('/auth/login',
@@ -14,9 +18,8 @@ export const LoginPage = () => {
 
       const { access_token, id } = response.data;
       if (access_token) {
-        localStorage.setItem("access_token", access_token);
-        localStorage.setItem("id", id);
-
+        auth.autentica(id, email, access_token);
+        
         navigate("/videos");
       }
 
@@ -29,6 +32,6 @@ export const LoginPage = () => {
     }
   }
   return (
-    <Login onLogin={ autenticaUsuario} erro={erro}/>
+    <Login onLogin={autenticaUsuario} erro={erro} />
   );
 };
