@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Cadastro } from "../../components/Cadastro/Cadastro";
 import { UsuarioProps } from "../../components/Cadastro/UsuarioProps";
+import apiClient from "../../services/api-client";
 
 export const CadastroPage = () => {
 
@@ -11,7 +12,8 @@ export const CadastroPage = () => {
     const handleSubmit = async (usuario: UsuarioProps) => {
 
         try {
-            const response = await axios.post('https://3.221.159.196:3320/auth/cadastrar',
+            const url = '/auth/cadastrar'
+            const response = await apiClient.post(url,
                 {
                     'nome': usuario.nome,
                     'email': usuario.email,
