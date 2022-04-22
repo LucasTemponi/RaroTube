@@ -75,7 +75,7 @@ export const Cadastro: React.FC<CadastroProps> = ({
 
               <div>
                 <Input
-                  type='text'
+                  type='email'
                   name='email'
                   label='email'
                   placeholder='email'
