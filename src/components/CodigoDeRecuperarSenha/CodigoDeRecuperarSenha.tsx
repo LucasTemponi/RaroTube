@@ -6,7 +6,7 @@ import apiClient from "../../services/api-client";
 import { useNavigate } from "react-router-dom";
 
 export const CodigoDeRecuperarSenha = () => {
-  const [codigo, setCodigo] = useState('');
+  const [email, setEmail] = useState('');
   const navigate=useNavigate();
 
   const codigoDeRecuperarSenha = async (
@@ -14,7 +14,7 @@ export const CodigoDeRecuperarSenha = () => {
   ) => {
     event.preventDefault();
     try{
-      await apiClient.post("/auth/solicitar-codigo")  
+      await apiClient.post("/auth/solicitar-codigo",{email})  
       navigate("/alterarsenha")
     }catch(error){
       alert("Erro ao solicitar código de recuperação. Tente novamente mais tarde.")
@@ -46,9 +46,9 @@ export const CodigoDeRecuperarSenha = () => {
                   label='email'
                   placeholder='email'
                   required
-                  value={codigo}
+                  value={email}
                   onChange={event => {
-                    setCodigo(event.target.value);
+                      setEmail(event.target.value);
                   }}
                 />
               </div>
