@@ -29,7 +29,12 @@ export const Thumbnails:React.FC<thumbnailProps> = (props) =>{
         }    
     }
 
-    const favoriteVideo = () =>{
+    const enterVideo = (event:React.MouseEvent) =>{
+        navigate(`/video/${props.video.id}/`)
+    }
+
+    const favoriteVideo = (event:React.MouseEvent) =>{
+        event.stopPropagation();
         if(favorite){
             removeFavorito(props.video);
             setFavorite(false);
@@ -49,7 +54,7 @@ export const Thumbnails:React.FC<thumbnailProps> = (props) =>{
     return(
         <div className={`flex flex-col items-center transform ${props.hover ? 'hover:scale-110' : ''} ease-linear duration-300
             2xl:w-[14vw] xl:w-[18vw] lg:w-[26vw] md:w-[42vw] sm:w-[45vw] mt-4 ml-2 mr-2 rounded-md shadow-md`}
-            onClick={()=>navigate(`/video/${props.video.id}/`)}>
+            onClick={enterVideo}>
                 <div className='relative' >
                 <span className=' absolute bottom-3 right-3 text-sm bg-black opacity-80 rounded-md px-1 text-white '>{props.video.duracao.replace('h',':').replace('m',':00')}</span> 
                     <video className = 'rounded-t-md'
