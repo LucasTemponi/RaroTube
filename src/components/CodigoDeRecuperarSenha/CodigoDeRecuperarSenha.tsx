@@ -2,14 +2,23 @@ import { useState } from "react";
 import CapeloFbranco from "../../assets/CapeloFbranco";
 import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
+import apiClient from "../../services/api-client";
+import { useNavigate } from "react-router-dom";
 
 export const CodigoDeRecuperarSenha = () => {
   const [codigo, setCodigo] = useState('');
+  const navigate=useNavigate();
 
   const codigoDeRecuperarSenha = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
+    try{
+      apiClient.post("/auth/solicitar-codigo")  
+      navigate("/alterarsenha")
+    }catch(error){
+      alert("Erro ao solicitar código de recuperação. Tente novamente mais tarde.")
+    }
   };
 
   return (
