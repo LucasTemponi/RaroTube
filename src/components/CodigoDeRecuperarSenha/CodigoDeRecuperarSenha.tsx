@@ -14,7 +14,7 @@ export const CodigoDeRecuperarSenha = () => {
   ) => {
     event.preventDefault();
     try{
-      apiClient.post("/auth/solicitar-codigo")  
+      await apiClient.post("/auth/solicitar-codigo")  
       navigate("/alterarsenha")
     }catch(error){
       alert("Erro ao solicitar código de recuperação. Tente novamente mais tarde.")
