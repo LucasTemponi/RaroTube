@@ -1,6 +1,7 @@
 import React, { useMemo, useRef, useState } from 'react';
 import { useFavoritos } from '../../hooks/useFavoritos';
 import { thumbnailProps } from './ThumbnailProps';
+import { useNavigate } from 'react-router-dom';
 
 export const Thumbnails:React.FC<thumbnailProps> = (props) =>{
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -9,6 +10,7 @@ export const Thumbnails:React.FC<thumbnailProps> = (props) =>{
     const adicionaFavorito = useFavoritos(state=>state.adicionaFavorito);
     const removeFavorito = useFavoritos(state=>state.removeFavorito);
     let debounceId = useRef(0);
+    const navigate = useNavigate();
 
     const playVideo = () =>{
         debounceId.current = window.setTimeout(()=>{
@@ -46,9 +48,10 @@ export const Thumbnails:React.FC<thumbnailProps> = (props) =>{
 
     return(
         <div className={`flex flex-col items-center transform ${props.hover ? 'hover:scale-110' : ''} ease-linear duration-300
-            2xl:w-[15vw] xl:w-[19vw] lg:w-[20vw] md:w-[28vw] sm:w-[45vw] mt-4 ml-4 rounded-md shadow-md `}>
+            2xl:w-[14vw] xl:w-[18vw] lg:w-[26vw] md:w-[42vw] sm:w-[45vw] mt-4 ml-2 mr-2 rounded-md shadow-md`}
+            onClick={()=>navigate(`/video/${props.video.id}/`)}>
                 <div className='relative' >
-                <span className=' absolute bottom-3 right-3 text-sm bg-black opacity-80 rounded-md px-1 '>{props.video.duracao.replace('h',':').replace('m',':00')}</span> 
+                <span className=' absolute bottom-3 right-3 text-sm bg-black opacity-80 rounded-md px-1 text-white '>{props.video.duracao.replace('h',':').replace('m',':00')}</span> 
                     <video className = 'rounded-t-md'
                         title={props.video.nome}
                         ref={videoRef}
@@ -69,7 +72,7 @@ export const Thumbnails:React.FC<thumbnailProps> = (props) =>{
                    
                 </div>
             <div className=' truncate w-full rounded-b-md items-start justify-start'>
-                <h2 className=' 2xl:text-xl xl:text-lg lg:text-base md:text-base sm:text-base py-4 px-2 text-white' >{props.video.nome}</h2>
+                <h2 className=' 2xl:text-xl xl:text-lg lg:text-base md:text-base sm:text-base py-4 px-2 text-black' >{props.video.nome}</h2>
             </div>            
         </div>
     )
