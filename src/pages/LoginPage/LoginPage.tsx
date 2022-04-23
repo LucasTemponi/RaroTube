@@ -20,7 +20,7 @@ export const LoginPage = () => {
       if (access_token) {
         auth.autentica(id, email, access_token);
         
-        navigate("/videos");
+        navigate("/");
       }
 
     } catch (error: any) {

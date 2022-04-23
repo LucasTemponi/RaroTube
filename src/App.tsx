@@ -9,7 +9,7 @@ import ListaComentarios from './components/ListaComentarios/ListaComentarios';
 import { Login } from './components/Login/Login';
 import { RecuperarSenha } from './components/RecuperarSenha/RecuperarSenha';
 import { RequireAuth } from './components/RequireAuth/RequireAuth';
-import { SolicitarCodigo } from './components/SolicitarCodigo/SolicitarCodigo';
+//import { SolicitarCodigo } from './components/SolicitarCodigo/SolicitarCodigo';
 import { VideoList } from './components/VideoList/VideoList';
 import { AuthContextProvider } from './context/authContext';
 import { CadastroPage } from './pages/CadastroPage/CadastroPage';
