@@ -1,7 +1,9 @@
 import React, { useMemo, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useFavoritos } from '../../hooks/useFavoritos';
 import { thumbnailProps } from './ThumbnailProps';
 import { useNavigate } from 'react-router-dom';
+
 
 export const Thumbnails:React.FC<thumbnailProps> = (props) =>{
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -12,22 +14,22 @@ export const Thumbnails:React.FC<thumbnailProps> = (props) =>{
     let debounceId = useRef(0);
     const navigate = useNavigate();
 
-    const playVideo = () =>{
-        debounceId.current = window.setTimeout(()=>{
-            if(videoRef.current){ 
-                videoRef.current.play();
-                videoRef.current.controls = false;
-            }
-        },340);
-    }
+  const playVideo = () => {
+    debounceId.current = window.setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.play();
+        videoRef.current.controls = false;
+      }
+    }, 340);
+  };
 
-    const pauseVideo = () =>{
-        clearTimeout(debounceId.current);
-        if (videoRef.current){
-            videoRef.current?.pause();
-            videoRef.current.controls = false;
-        }    
+  const pauseVideo = () => {
+    clearTimeout(debounceId.current);
+    if (videoRef.current) {
+      videoRef.current?.pause();
+      videoRef.current.controls = false;
     }
+  };
 
     const enterVideo = (event:React.MouseEvent) =>{
         navigate(`/video/${props.video.id}/`)
@@ -45,11 +47,15 @@ export const Thumbnails:React.FC<thumbnailProps> = (props) =>{
             console.log(todosFavoritos)
         }
     }
+  };
 
-    useMemo(()=>{
-        let isFavorite = todosFavoritos.filter(favorito => favorito.id === props.video.id)
-        isFavorite.length > 0 ? setFavorite(true) : setFavorite(false)
-    },[todosFavoritos,props.video])
+  useMemo(() => {
+    let isFavorite = todosFavoritos.filter(
+      favorito => favorito.id === props.video.id
+    );
+    isFavorite.length > 0 ? setFavorite(true) : setFavorite(false);
+  }, [todosFavoritos, props.video]);
+
 
     return(
         <div className={`flex flex-col items-center transform ${props.hover ? 'hover:scale-110' : ''} ease-linear duration-300
@@ -80,7 +86,7 @@ export const Thumbnails:React.FC<thumbnailProps> = (props) =>{
                 <h2 className=' 2xl:text-xl xl:text-lg lg:text-base md:text-base sm:text-base py-4 px-2 text-black' >{props.video.nome}</h2>
             </div>            
         </div>
-    )
-}
+  );
+};
 
 export default Thumbnails;
