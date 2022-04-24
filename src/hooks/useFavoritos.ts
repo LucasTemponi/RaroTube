@@ -1,5 +1,4 @@
 import create from 'zustand'
-import axios from 'axios'
 import apiClient from '../services/api-client'
 import { videoProps } from '../components/VideoPlayer/VideoProps'
 

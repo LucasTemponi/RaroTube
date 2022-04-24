@@ -1,17 +1,20 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Cadastro } from "../../components/Cadastro/Cadastro";
 import { UsuarioProps } from "../../components/Cadastro/UsuarioProps";
+import apiClient from "../../services/api-client";
 
 export const CadastroPage = () => {
 
     const [usuario, setUsuario] = useState<UsuarioProps>();
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const handleSubmit = async (usuario: UsuarioProps) => {
 
         try {
-            const response = await axios.post('https://3.221.159.196:3320/auth/cadastrar',
+            const url = '/auth/cadastrar'
+            const response = await apiClient.post(url,
                 {
                     'nome': usuario.nome,
                     'email': usuario.email,
@@ -20,7 +23,7 @@ export const CadastroPage = () => {
                 }
             );
             setUsuario(response.data)
-            //navigate('/videos')
+            navigate('/')
 
         } catch (error: any) {
             if (error.response.data.statusCode === 400) {

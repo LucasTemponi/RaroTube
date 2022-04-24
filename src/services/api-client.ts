@@ -8,7 +8,7 @@ axiosapiInstance.interceptors.request.use(
   async (config: any) => {
     config.url = `${axiosapiInstance.defaults.baseURL}${config.url}`;
 
-    const authorization = localStorage.getItem('authorization');
+    const authorization = localStorage.getItem('access_token');
     if (authorization) {
       config.headers['Authorization'] = `bearer ${authorization}`;
     }
