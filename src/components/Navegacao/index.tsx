@@ -1,21 +1,41 @@
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../context/authContext";
+
 export const Navegacao = () => {
-  if (false) {
-    return (
-      <a href='/'>
-        <button className='rounded-md bg-raro-oceano text-white px-4 py-2 text-sm'>
-          Login
-        </button>
-      </a>
-    );
+
+  const authContext = useAuthContext();
+  const navigate = useNavigate();
+  const nomeUsuario = localStorage.getItem("nome");
+  
+  const logout = () => {
+    authContext.deslogarUsuario()
+    navigate(`/`)
+    location.reload(); 
+  
   }
-  return (
-    <>
-      <span>Olá Usuario</span>
-      <a href='/'>
-        <button className='rounded-md bg-raro-oceano text-white px-4 py-2 text-sm'>
+ 
+
+  if (authContext.estaAutenticado()) {
+    return (
+      <>
+      <span>Olá {nomeUsuario}</span>
+     
+        <button className='rounded-md bg-raro-oceano text-white px-4 py-2 text-sm' onClick = {() => logout()}>
           Logout
         </button>
-      </a>
-    </>
-  );
-};
+      
+      </>
+    )
+  }
+  else {
+    return (
+      <Link to={`/login`}>
+        <button className='rounded-md bg-raro-oceano text-white px-4 py-2 text-sm'>
+          Faça Login
+        </button>
+     </Link>
+    
+    )
+  }
+}
+
