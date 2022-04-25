@@ -10,7 +10,7 @@ export const Navegacao = () => {
   const logout = () => {
     authContext.deslogarUsuario()
     navigate(`/`)
-    location.reload(); 
+    //location.reload(); 
   
   }
  

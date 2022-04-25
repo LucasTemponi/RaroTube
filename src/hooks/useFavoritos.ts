@@ -13,7 +13,6 @@ type favoritosProps = {
 export const useFavoritos = create<favoritosProps>((set) => ({
     favoritos: [],
     iniciaFavoritos: (todosFavoritos: videoProps[]) =>{
-        console.log(`Lista de favoritos: ${todosFavoritos}`)
         set({favoritos: todosFavoritos})
     },
     adicionaFavorito: (video) => { 
