@@ -1,41 +1,49 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useAuthContext } from "../../context/authContext";
+import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../context/authContext';
 
 export const Navegacao = () => {
-
-  const authContext = useAuthContext();
+  const { estaAutenticado, deslogarUsuario } = useAuthContext();
   const navigate = useNavigate();
-  const nomeUsuario = localStorage.getItem("nome");
-  
-  const logout = () => {
-    authContext.deslogarUsuario()
-    navigate(`/`)
-    location.reload(); 
-  
-  }
- 
+  const nomeUsuario = localStorage.getItem('nome');
 
-  if (authContext.estaAutenticado()) {
+  const logout = () => {
+    deslogarUsuario();
+    navigate(`/`);
+    // eslint-disable-next-line no-restricted-globals
+    location.reload();
+  };
+
+  if (estaAutenticado()) {
     return (
       <>
-      <span>Olá {nomeUsuario}</span>
-     
-        <button className='rounded-md bg-raro-oceano text-white px-4 py-2 text-sm' onClick = {() => logout()}>
+        <span>Olá {nomeUsuario}</span>
+        <button
+          className='rounded-md bg-raro-oceano text-white px-4 py-2 text-sm'
+          onClick={() => logout()}
+        >
           Logout
         </button>
-      
       </>
-    )
+    );
   }
-  else {
-    return (
-      <Link to={`/login`}>
-        <button className='rounded-md bg-raro-oceano text-white px-4 py-2 text-sm'>
-          Faça Login
-        </button>
-     </Link>
-    
-    )
-  }
-}
-
+  return (
+    <>
+      <button
+        onClick={() => {
+          navigate('/login');
+        }}
+        className='rounded-md bg-raro-oceano text-white px-4 py-2 text-sm'
+      >
+        Login
+      </button>
+      <button
+        onClick={() => {
+          navigate('/cadastro');
+        }}
+        className='rounded-md bg-raro-oceano text-white px-4 py-2 text-sm'
+      >
+        Cadastrar
+      </button>
+    </>
+  );
+};
