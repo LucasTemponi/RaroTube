@@ -16,9 +16,9 @@ export const LoginPage = () => {
         { email, senha }
       );
 
-      const { access_token, id } = response.data;
+      const { access_token, id, nome} = response.data;
       if (access_token) {
-        auth.autentica(id, email, access_token);
+        auth.autentica(id, email, access_token, nome);
         
         navigate("/");
       }
