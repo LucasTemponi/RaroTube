@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ComentarioProps } from '../../components/Comentario/ComentarioProps';
 import ListaComentarios from '../../components/ListaComentarios/ListaComentarios';
@@ -6,6 +6,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import { VideoList } from '../../components/VideoList/VideoList';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer';
 import { videoProps } from '../../components/VideoPlayer/VideoProps';
+import { useScroll } from '../../hooks/useScroll';
 import apiClient from '../../services/api-client';
 
 const VideoPage = () => {
@@ -13,6 +14,12 @@ const VideoPage = () => {
   const [video, setVideo] = useState<videoProps>();
   const [comentarios, setComentarios] = useState<ComentarioProps[]>();
   const { id } = useParams();
+
+  const containerRefComentarios = useRef<HTMLDivElement|null>(null);
+  const paginaComentarios = useScroll(containerRefComentarios);
+
+  const containerRefRecomendados = useRef<HTMLDivElement|null>(null);
+  const paginaRecomendados = useScroll(containerRefRecomendados);
 
   useEffect(() => {
     const loadRecomendados = async () => {
@@ -34,20 +41,22 @@ const VideoPage = () => {
     loadComentarios();
   }, [id]);
 
+
   return (
     <>
       <Navbar />
-      <div className='grid grid-cols-4 gap-4 mx-6 mt-10 p-6'>
-        <div className='col-span-3'>
+      <div className=' flex flex-col items-center '>
+        <div className=' max-w-screen-2xl '>
           {video && <VideoPlayer {...video} />}
-          <div className='mt-16'>
-            {comentarios && <ListaComentarios comentarios={comentarios} />}
-          </div>
-        </div>
-        <div>
-          <p>Relacionados</p>
-          <div className='mx-auto'>
-            <VideoList videos={recomendados} vertical={true} />
+          <div className=' flex flex-row justify-center mt-16 mx-8 ' >
+            <div className=' w-3/4 '>
+              {comentarios && <ListaComentarios videoId={video?.id} comentarios={comentarios?.slice(0,paginaComentarios*10)} />}
+              <div ref={containerRefComentarios} className='h-10' ></div>
+            </div>
+            <div className='w-1/4'>
+              <VideoList videos={recomendados?.slice(0,paginaRecomendados*10)} vertical />
+              <div ref={containerRefRecomendados} className='h-10' ></div>
+            </div>
           </div>
         </div>
       </div>
