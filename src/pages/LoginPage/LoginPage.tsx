@@ -1,28 +1,25 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Login } from "../../components/Login/Login";
-import { useAuthContext } from "../../context/authContext";
-import api from "../../services/api-client"
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Login } from '../../components/Login/Login';
+import { useAuthContext } from '../../context/authContext';
+import api from '../../services/api-client';
 
 export const LoginPage = () => {
-  const [erro, setErro] = useState("");
+  const [erro, setErro] = useState('');
 
   const navigate = useNavigate();
   const auth = useAuthContext();
 
   const autenticaUsuario = async (email: string, senha: string) => {
     try {
-      const response = await api.post('/auth/login',
-        { email, senha }
-      );
+      const response = await api.post('/auth/login', { email, senha });
 
-      const { access_token, id, nome} = response.data;
+      const { access_token, id, nome, foto } = response.data;
       if (access_token) {
-        auth.autentica(id, email, access_token, nome);
-        
-        navigate("/");
-      }
+        auth.autentica(id, email, access_token, nome, foto);
 
+        navigate('/');
+      }
     } catch (error: any) {
       if (error.response.data.statusCode === 401) {
         setErro('Usuário ou senha incorretos.');
@@ -30,8 +27,6 @@ export const LoginPage = () => {
         setErro('Erro ao autenticar usuário. Tente novamente mais tarde.');
       }
     }
-  }
-  return (
-    <Login onLogin={autenticaUsuario} erro={erro} />
-  );
+  };
+  return <Login onLogin={autenticaUsuario} erro={erro} />;
 };
