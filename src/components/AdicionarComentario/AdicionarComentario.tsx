@@ -1,22 +1,28 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useAuthContext } from '../../context/authContext';
+import apiClient from '../../services/api-client';
 
 const AdicionarComentario: React.FC = () => {
-  const [comentario, setComentario] = useState('');
-  const authContext = useAuthContext();
-
+  const [texto, setTexto] = useState('');
+  const { estaAutenticado, foto } = useAuthContext();
+  const { id } = useParams();
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const url = `/videos/${id}/comentarios`;
+    const response = await apiClient.post(url, { texto });
+    setTexto('');
+    return response;
   }
 
-  if (authContext.estaAutenticado()) {
+  if (estaAutenticado()) {
     return (
       <div className='max-w-full flex'>
         <div className='pt-4'>
           <img
             className='rounded-full h-10 w-10'
-            src='https://github.com/msb07.png'
+            src={foto}
             alt='Foto do usuário'
           />
         </div>
@@ -27,8 +33,8 @@ const AdicionarComentario: React.FC = () => {
               name='comentario'
               placeholder='Adicione seu  comentário...'
               rows={1}
-              value={comentario}
-              onChange={(e) => setComentario(e.target.value)}
+              value={texto}
+              onChange={e => setTexto(e.target.value)}
             ></textarea>
           </div>
           <div className='flex space-x-3'>
@@ -40,9 +46,9 @@ const AdicionarComentario: React.FC = () => {
             </button>
             <button
               className='px-3 py-2 text-sm text-blue-600 border border-blue-500 rounded'
-              onClick={(e) => {
+              onClick={e => {
                 e.preventDefault();
-                setComentario('');
+                setTexto('');
               }}
             >
               Cancelar
@@ -52,9 +58,7 @@ const AdicionarComentario: React.FC = () => {
       </div>
     );
   } else {
-    return (
-      <></>
-    )
+    return <></>;
   }
-}
+};
 export default AdicionarComentario;
