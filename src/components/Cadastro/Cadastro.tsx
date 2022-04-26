@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CapeloFbranco from '../../assets/CapeloFbranco';
 import apiClient from '../../services/api-client';
 import { Button } from '../Button/Button';
@@ -12,7 +12,8 @@ export const Cadastro: React.FC = () => {
   const [senha, setSenha] = useState('');
   const [confirmaSenha, setConfirmaSenha] = useState('');
   const [codigoAcesso, setCodigoAcesso] = useState('');
-  const [erro, setErro] = useState('');
+  const [erroConfirmacao, setErroConfirmacao] = useState('');
+  const [erroRequest, setErroRequest] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -22,16 +23,16 @@ export const Cadastro: React.FC = () => {
       if (senha === confirmaSenha) {
         const url = '/auth/cadastrar';
         const response = await apiClient.post(url, { nome, email, senha, codigoAcesso });
-        setErro('')
+        setErroConfirmacao('')
         navigate("/");
       } else {
-        setErro('As senhas não são iguais.');
+        setErroConfirmacao('As senhas não são iguais.');
       }
     } catch (error: any) {
       if (error.response.data.statusCode === 400) {
-        setErro('Esse usuário já existe. Faça o Login');
+        setErroRequest('Esse usuário já existe');
       } else {
-        setErro('Erro. Tente novamente mais tarde.');
+        setErroRequest('Erro. Tente novamente mais tarde.');
       }
     }
   }
@@ -126,12 +127,33 @@ export const Cadastro: React.FC = () => {
               </div>
             </div> */}
             {
-              erro ? (
+              erroConfirmacao ? (
                 <div className='flex items-center justify-end'>
                   <div className='text-sm'>
                     <span className="font-small text-[#FF0000]">
-                      {erro}
+                      {erroConfirmacao}
                     </span>
+                  </div>
+                </div>
+              ) : <></>
+            }
+            {
+              erroRequest ? (
+                <div className='flex items-center justify-end space-6y-px'>
+                  <div className='text-sm '>
+                    <div className='justify-end flex-row'>
+                      <p className="font-small text-[#FF0000]">
+                        {erroRequest}
+                      </p>
+                      <Link to={`/login`}>
+                        <a
+                          href='#'
+                          className='font-medium text-[#4E47C2] hover:text-[#7A75D1]'
+                        >
+                          Clique aqui para fazer login
+                        </a>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               ) : <></>
