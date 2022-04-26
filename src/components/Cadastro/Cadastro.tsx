@@ -5,18 +5,35 @@ import apiClient from '../../services/api-client';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 
-export const Cadastro = () => {
+export const Cadastro: React.FC = () => {
+
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [confirmaSenha, setConfirmaSenha] = useState('');
   const [codigoAcesso, setCodigoAcesso] = useState('');
+  const [erro, setErro] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const url = '/auth/cadastrar';
-    const response = await apiClient.post(url, {nome, email, senha, codigoAcesso});
-    console.log(response.data)
+    try {
+      if (senha === confirmaSenha) {
+        const url = '/auth/cadastrar';
+        const response = await apiClient.post(url, { nome, email, senha, codigoAcesso });
+        setErro('')
+        navigate("/");
+      } else {
+        setErro('As senhas não são iguais.');
+      }
+    } catch (error: any) {
+      if (error.response.data.statusCode === 400) {
+        setErro('Esse usuário já existe. Faça o Login');
+      } else {
+        setErro('Erro. Tente novamente mais tarde.');
+      }
+    }
   }
 
   return (
@@ -74,17 +91,17 @@ export const Cadastro = () => {
               />
             </div>
 
-            {/* <div>
+            <div>
               <Input
                 type='password'
-                name='senha'
+                name='ConfirmaSenha'
                 label='senha'
-                placeholder='Senha'
+                placeholder='Confirme sua senha'
                 required
                 value={confirmaSenha}
                 onChange={(event) => setConfirmaSenha(event.target.value)}
               />
-            </div> */}
+            </div>
 
             <div>
               <Input
@@ -108,6 +125,17 @@ export const Cadastro = () => {
                 </a>
               </div>
             </div> */}
+            {
+              erro ? (
+                <div className='flex items-center justify-end'>
+                  <div className='text-sm'>
+                    <span className="font-small text-[#FF0000]">
+                      {erro}
+                    </span>
+                  </div>
+                </div>
+              ) : <></>
+            }
 
             <div>
               <Button type='submit'>Cadastrar</Button>
@@ -117,4 +145,6 @@ export const Cadastro = () => {
       </div>
     </>
   );
-};
+}
+
+
