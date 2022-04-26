@@ -116,16 +116,6 @@ export const Cadastro: React.FC = () => {
               />
             </div>
 
-            {/* <div className='flex items-center justify-end'>
-              <div className='text-sm'>
-                <a
-                  href='#'
-                  className='font-medium text-[#4E47C2] hover:text-[#7A75D1]'
-                >
-                  Não possui o Código de acesso? Clique aqui e Solicite.
-                </a>
-              </div>
-            </div> */}
             {
               erroConfirmacao ? (
                 <div className='flex items-center justify-end'>
