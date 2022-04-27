@@ -28,5 +28,6 @@ export const LoginPage = () => {
       }
     }
   };
+  
   return <Login onLogin={autenticaUsuario} erro={erro} />;
 };

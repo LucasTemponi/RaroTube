@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import Navbar from "../../components/Navbar/Navbar"
 import { VideoList } from "../../components/VideoList/VideoList"
 import { videoProps } from "../../components/VideoPlayer/VideoProps"
 import { useAuthContext } from "../../context/authContext"
 import { useFavoritos } from "../../hooks/useFavoritos"
+import { useScroll } from "../../hooks/useScroll"
 import apiClient from "../../services/api-client";
 
 export const PaginaPrincipal = () => {
@@ -15,28 +16,16 @@ export const PaginaPrincipal = () => {
 
     const iniciaFavoritos = useFavoritos(state => state.iniciaFavoritos);
     const todosFavoritos = useFavoritos(state => state.favoritos);
+    const containerRef = useRef<HTMLDivElement | null>(null);
+    const pagina = useScroll(containerRef)
 
     const loadVideos = async () => {
         await Promise.all([
-            apiClient.get('/videos').then(response => setVideos(response.data)),
+            apiClient.get('/videos').then(response => setVideos(response.data.reverse())),
             apiClient.get('/videos/favoritos').then(response => iniciaFavoritos(response.data)),
-            //axiosapiInstance.get('https://3.221.159.196:3320/videos/')
+            apiClient.get(`/videos/${authContext.id}/recomendacoes?itensPorPagina=100`).then(response => setRecomendados(response.data))
         ])
     }
-
-    // const videosFavoritos = useMemo(()=>{
-    //     let temp:videoProps[] = [];
-    //     todosFavoritos.forEach(idFavorito=>{
-    //         if (videos){
-    //             let isVideoFavorite = videos.find(element=>element.id===idFavorito);
-    //             if (isVideoFavorite){
-    //                 temp.push(isVideoFavorite);
-    //             }
-    //         }
-    //     })
-    //     console.log(todosFavoritos)
-    //     return temp;
-    // },[todosFavoritos])
 
     useEffect(() => {
         loadVideos()
@@ -55,8 +44,10 @@ export const PaginaPrincipal = () => {
                     <h1 className=" font-extrabold underline decoration-raro-rosa text-4xl m-4 mt-12 text-left " >Vídeos favoritos</h1>
                     <VideoList videos={todosFavoritos} />
                     <h1 className=" font-extrabold underline decoration-raro-oceano text-4xl m-4 mt-12 text-left">Adicionados recentemente</h1>
-                    <VideoList videos={videos} />
+                    <VideoList videos={videos?.slice(0,10)} />
                     <h1 className=" font-extrabold underline decoration-raro-violeta text-4xl m-4 mt-12 text-left">Recomendados</h1>
+                    <VideoList videos={recomendados?.slice(0,pagina*15)} />
+                    <div ref={containerRef} className="h-10"/>
                 </>
             </>
         )
@@ -69,8 +60,10 @@ export const PaginaPrincipal = () => {
                 <div className="4xl:max-w-[70vw] xl:max-w-[80vw] lg:w-[85vw] 
                 md:w-[90vw] sm:w-[95vw] m-auto" >
                     <h1 className=" font-extrabold underline decoration-raro-oceano text-4xl m-4 mt-12 text-left">Adicionados recentemente</h1>
-                    <VideoList videos={videos} />
+                    <VideoList videos={videos?.slice(0,10)} />
                     <h1 className=" font-extrabold underline decoration-raro-violeta text-4xl m-4 mt-12 text-left">Recomendados</h1>
+                    <VideoList videos={recomendados?.slice(0,pagina*15)} />
+                    <div ref={containerRef} className="h-10"/>
                 </div>
             </>
         )
