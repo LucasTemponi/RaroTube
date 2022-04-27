@@ -44,7 +44,7 @@ const VideoPage = () => {
   return (
     <>
       <div className=' flex flex-col items-center '>
-        <div className=' max-w-screen-2xl '>
+        <div className=' 2xl:min-w-[80vw] md:min-w-full max-w-screen-2xl '>
           {video && <VideoPlayer {...video} />}
           <div className=' flex flex-row justify-center mt-16 mx-8 ' >
             <div className=' w-3/4 '>
