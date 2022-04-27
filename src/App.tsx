@@ -19,8 +19,8 @@ function App() {
           <Route path='/solicitarcodigo' element={<CodigoDeRecuperarSenha />} />
           <Route path='/alterarsenha' element={<RecuperarSenha />} />
           <Route path='/' element={<Layout />} >
-            <Route index element={<PaginaPrincipal />} />
-            <Route path='/video/:id' element={<VideoPage />} />
+          <Route index element={<PaginaPrincipal />} />
+          <Route path='/video/:id' element={<VideoPage />} />
             <Route element={<RequireAuth />}>
               {/* As rotas que precisam de autenticação vem aqui */}
             </Route>
