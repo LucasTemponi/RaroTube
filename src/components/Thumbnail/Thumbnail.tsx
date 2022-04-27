@@ -130,6 +130,7 @@ export const Thumbnails: React.FC<thumbnailProps> = props => {
           <h2 className=' 2xl:text-xl xl:text-lg lg:text-base md:text-base sm:text-base py-4 px-2 text-black'>
             {props.video.nome}
           </h2>
+          <p>{props.video.dataPublicacao.toString()}</p>
         </div>
       </div>
     )
