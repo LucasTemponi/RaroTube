@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useRef, useState } from "react"
-import Navbar from "../../components/Navbar/Navbar"
 import { VideoList } from "../../components/VideoList/VideoList"
 import { videoProps } from "../../components/VideoPlayer/VideoProps"
 import { useAuthContext } from "../../context/authContext"
@@ -35,7 +34,6 @@ export const PaginaPrincipal = () => {
     if (authContext.estaAutenticado()) {
         return (
             <>
-                <Navbar />
                 {carregando ? <div>Carregando...</div> : <></>}
                 <div className="4xl:max-w-[70vw] xl:max-w-[80vw] lg:w-[85vw] 
                 md:w-[90vw] sm:w-[95vw] m-auto" >
@@ -44,10 +42,10 @@ export const PaginaPrincipal = () => {
                     <h1 className=" font-extrabold underline decoration-raro-rosa text-4xl m-4 mt-12 text-left " >Vídeos favoritos</h1>
                     <VideoList videos={todosFavoritos} />
                     <h1 className=" font-extrabold underline decoration-raro-oceano text-4xl m-4 mt-12 text-left">Adicionados recentemente</h1>
-                    <VideoList videos={videos?.slice(0,10)} />
+                    <VideoList videos={videos?.slice(0, 10)} />
                     <h1 className=" font-extrabold underline decoration-raro-violeta text-4xl m-4 mt-12 text-left">Recomendados</h1>
-                    <VideoList videos={recomendados?.slice(0,pagina*15)} />
-                    <div ref={containerRef} className="h-10"/>
+                    <VideoList videos={recomendados?.slice(0, pagina * 15)} />
+                    <div ref={containerRef} className="h-10" />
                 </>
             </>
         )
@@ -55,15 +53,14 @@ export const PaginaPrincipal = () => {
     else {
         return (
             <>
-                <Navbar />
                 {carregando ? <div>Carregando...</div> : <></>}
                 <div className="4xl:max-w-[70vw] xl:max-w-[80vw] lg:w-[85vw] 
                 md:w-[90vw] sm:w-[95vw] m-auto" >
                     <h1 className=" font-extrabold underline decoration-raro-oceano text-4xl m-4 mt-12 text-left">Adicionados recentemente</h1>
-                    <VideoList videos={videos?.slice(0,10)} />
+                    <VideoList videos={videos?.slice(0, 10)} />
                     <h1 className=" font-extrabold underline decoration-raro-violeta text-4xl m-4 mt-12 text-left">Recomendados</h1>
-                    <VideoList videos={recomendados?.slice(0,pagina*15)} />
-                    <div ref={containerRef} className="h-10"/>
+                    <VideoList videos={recomendados?.slice(0, pagina * 15)} />
+                    <div ref={containerRef} className="h-10" />
                 </div>
             </>
         )
