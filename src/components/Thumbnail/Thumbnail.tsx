@@ -4,7 +4,7 @@ import { thumbnailProps } from './ThumbnailProps';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../context/authContext';
 
-export const Thumbnails: React.FC<thumbnailProps> = props => {
+export const Thumbnail: React.FC<thumbnailProps> = props => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [favorite, setFavorite] = useState(false);
   const todosFavoritos = useFavoritos(state => state.favoritos);
@@ -136,5 +136,5 @@ export const Thumbnails: React.FC<thumbnailProps> = props => {
     )
   }
 }
-export default Thumbnails;
 
+export default Thumbnail
