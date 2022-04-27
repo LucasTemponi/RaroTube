@@ -68,7 +68,7 @@ export const Thumbnail: React.FC<thumbnailProps> = props => {
             {props.video.duracao.replace('h', ':').replace('m', ':00')}
           </span>
           <video
-            className='rounded-t-md'
+            className='rounded-t-md aspect-video'
             title={props.video.nome}
             ref={videoRef}
             preload='none'
