@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { text } from 'stream/consumers';
 import { ComentarioProps } from './ComentarioProps';
 import apiClient from '../../services/api-client';
+import { useAuthContext } from '../../context/authContext';
 
 const Comentario: React.FC<ComentarioProps> = ({
   videoId,
@@ -14,49 +14,100 @@ const Comentario: React.FC<ComentarioProps> = ({
 }) => {
   const [like, setLike] = useState(false);
   const [dislike, setDislike] = useState(false);
-  const [votes,setVotes] = useState({upVotes:upVotes,downVotes:downVotes});
+  const [votes, setVotes] = useState({
+    upVotes: upVotes,
+    downVotes: downVotes,
+  });
+  const [editavel, setEditavel] = useState(false);
+  const [exclui, setExclui] = useState(false);
+  const auth = useAuthContext();
+
+  function handleEdit() {
+    console.log(editavel);
+  }
+
+  function handleExcluir() {
+    const url = `/videos/${videoId}/comentarios/${id}`;
+
+    try {
+      apiClient.delete(url);
+    } catch (error) {
+      alert('Erro ao excluir');
+    }
+  }
+
+  useEffect(() => {
+    setEditavel(aluno.id === auth.id);
+    setExclui(aluno.id === auth.id);
+  }, [aluno, auth]);
 
   function handleDislike() {
-    if (!dislike){
-      try{
-        apiClient.put(`/videos/${videoId}/comentarios/${id}/votes`,{'vote':'down'});
-        setDislike(true)
+    if (!dislike) {
+      try {
+        apiClient.put(`/videos/${videoId}/comentarios/${id}/votes`, {
+          vote: 'down',
+        });
+        setDislike(true);
         if (like) {
-          console.log(like)
+          console.log(like);
           setLike(false);
-          setVotes({downVotes:votes.downVotes+1,upVotes:votes.upVotes-1});
-        } else{
-          setVotes({...votes,downVotes:votes.downVotes+1});
+          setVotes({
+            downVotes: votes.downVotes + 1,
+            upVotes: votes.upVotes - 1,
+          });
+        } else {
+          setVotes({ ...votes, downVotes: votes.downVotes + 1 });
         }
-      }catch(e){
+      } catch (e) {
         alert('Erro ao votar');
+      }
+    } else {
+      try {
+        apiClient.delete(`/videos/${videoId}/comentarios/${id}/votes`);
+        setVotes({ ...votes, downVotes: votes.downVotes - 1 });
+        setDislike(!dislike);
+      } catch (error) {
+        alert('Erro ao deletar');
       }
     }
   }
 
   function handleLike() {
-    if (!like){
-      try{
-        apiClient.put(`/videos/${videoId}/comentarios/${id}/votes`,{'vote':'up'});
-        setLike(true)
-        setVotes({...votes,upVotes:votes.upVotes+1});
+    if (!like) {
+      try {
+        apiClient.put(`/videos/${videoId}/comentarios/${id}/votes`, {
+          vote: 'up',
+        });
+        setLike(true);
+        setVotes({ ...votes, upVotes: votes.upVotes + 1 });
         if (dislike) {
           setDislike(false);
-          setVotes({upVotes:votes.upVotes+1,downVotes:votes.downVotes-1});
-        } else{
-          setVotes({...votes,upVotes:votes.upVotes+1});
+          setVotes({
+            upVotes: votes.upVotes + 1,
+            downVotes: votes.downVotes - 1,
+          });
+        } else {
+          setVotes({ ...votes, upVotes: votes.upVotes + 1 });
         }
-      }catch(e){
+      } catch (e) {
         alert('Erro ao votar');
+      }
+    } else {
+      try {
+        apiClient.delete(`/videos/${videoId}/comentarios/${id}/votes`);
+        setVotes({ ...votes, upVotes: votes.upVotes - 1 });
+        setLike(!like);
+      } catch (error) {
+        alert('Erro ao deletar');
       }
     }
   }
 
   useEffect(() => {
-    if (meuVote){
+    if (meuVote) {
       meuVote.vote === 'up' ? setLike(true) : setDislike(true);
     }
-  },[])
+  }, []);
 
   return (
     <div className='flex max-w-full'>
@@ -68,7 +119,9 @@ const Comentario: React.FC<ComentarioProps> = ({
         />
       </div>
       <div className='w-full p-2 flex-grow'>
-        <p className=' text-justify pl-2 font-semibold text-sm leading-4'>{aluno.nome}</p>
+        <p className=' text-justify pl-2 font-semibold text-sm leading-4'>
+          {aluno.nome}
+        </p>
         <div className='mb-2'>
           <p className=' text-justify h-auto resize-y w-full p-2 text-sm leading-normal'>
             {texto}
@@ -115,6 +168,30 @@ const Comentario: React.FC<ComentarioProps> = ({
             </svg>
             <span className='leading-normal text-xs'>{votes.downVotes}</span>
           </button>
+          {editavel && (
+            <button
+              onClick={handleEdit}
+              className={`
+                  hover:bg-blue-400 bg-blue-300 text-white
+                  delay-100 duration-100
+                  rounded-full py-1 px-2 text-xs
+                  `}
+            >
+              Editar
+            </button>
+          )}
+          {exclui && (
+            <button
+              onClick={handleExcluir}
+              className={`
+                  hover:bg-red-400 bg-red-300 text-white
+                  delay-100 duration-100
+                  rounded-full py-1 px-2 text-xs
+                  `}
+            >
+              Excluir
+            </button>
+          )}
         </div>
       </div>
     </div>
