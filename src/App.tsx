@@ -18,11 +18,12 @@ function App() {
           <Route path='/cadastro' element={<CadastroPage />} />
           <Route path='/solicitarcodigo' element={<CodigoDeRecuperarSenha />} />
           <Route path='/alterarsenha' element={<RecuperarSenha />} />
-          <Route element={<RequireAuth />}>
-            <Route path='/' element={<Layout />} />
+          <Route path='/' element={<Layout />} >
             <Route index element={<PaginaPrincipal />} />
             <Route path='/video/:id' element={<VideoPage />} />
-            {/* As rotas que precisam de autenticação vem aqui */}
+            <Route element={<RequireAuth />}>
+              {/* As rotas que precisam de autenticação vem aqui */}
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>
