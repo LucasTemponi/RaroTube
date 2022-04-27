@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuthContext } from '../../context/authContext';
+import { useEditar } from '../../hooks/useEditar';
 import apiClient from '../../services/api-client';
 
 const AdicionarComentario: React.FC = () => {
@@ -8,12 +9,26 @@ const AdicionarComentario: React.FC = () => {
   const { estaAutenticado, foto } = useAuthContext();
   const { id } = useParams();
 
+  const editando = useEditar(state => state.editando);
+  const setEditando = useEditar(state => state.setEditando);
+  const idEdit = useEditar(state => state.idEdit);
+  const textoEdit = useEditar(state => state.textoEdit);
+  const setTextoEdit = useEditar(state => state.setTextoEdit);
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const url = `/videos/${id}/comentarios`;
-    const response = await apiClient.post(url, { texto });
-    setTexto('');
-    return response;
+    if (!editando) {
+      const url = `/videos/${id}/comentarios`;
+      const response = await apiClient.post(url, { texto });
+      setTexto('');
+      return response;
+    } else {
+      const url = `/videos/${id}/comentarios/${idEdit}`;
+      const response = await apiClient.patch(url, { texto: textoEdit });
+      setTexto('');
+      setEditando(false);
+      return response;
+    }
   }
 
   if (estaAutenticado()) {
@@ -33,8 +48,12 @@ const AdicionarComentario: React.FC = () => {
               name='comentario'
               placeholder='Adicione seu  comentário...'
               rows={1}
-              value={texto}
-              onChange={e => setTexto(e.target.value)}
+              value={editando ? textoEdit : texto}
+              onChange={e =>
+                editando
+                  ? setTextoEdit(e.target.value)
+                  : setTexto(e.target.value)
+              }
             ></textarea>
           </div>
           <div className='flex space-x-3'>
