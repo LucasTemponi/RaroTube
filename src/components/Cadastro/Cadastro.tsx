@@ -45,7 +45,7 @@ export const Cadastro: React.FC = () => {
             <div className='mx-auto h-12 w-40 flex items-center'>
               <CapeloFbranco />
             </div>
-            <h2 className='mt-6 text-center text-3xl font-bold text-raro-cobalto'>
+            <h2 className='mt-6 text-center text-2xl font-bold text-raro-cobalto'>
               Cadastro
             </h2>
             <p className='mt-2 text-center text-sm text-gray-600'>
