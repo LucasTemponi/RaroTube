@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/Logo.svg';
 import { Navegacao } from '../Navegacao';
+import { Sidebar } from '../Sidebar/Sidebar';
 
 const Navbar = () => {
   return (
+    
     <header className='flex items-center justify-between bg-gray-200 px-6 py-4 w-full'>
       <div className='flex items-center space-x-2'>
         <Link to={'/'} className='flex items-center h-12 w-32'>
