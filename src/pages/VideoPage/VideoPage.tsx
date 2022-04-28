@@ -1,17 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { LazyThumbnail } from '../../components/LazyThumbnail/LazyThumbnail';
 import ListaComentarios from '../../components/ListaComentarios/ListaComentarios';
 import { VideoList } from '../../components/VideoList/VideoList';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer';
-import { videoProps } from '../../components/VideoPlayer/VideoProps';
+import { VideoProps } from '../../components/VideoPlayer/VideoProps';
 import { useComentarios } from '../../hooks/useComentarios';
 import { useScroll } from '../../hooks/useScroll';
 import apiClient from '../../services/api-client';
 
 const VideoPage = () => {
 
-  const [recomendados, setRecomendados] = useState<videoProps[]>();
-  const [video, setVideo] = useState<videoProps>();
+  const [recomendados, setRecomendados] = useState<VideoProps[]>();
+  const [video, setVideo] = useState<VideoProps>();
   const { id } = useParams();
   const comentarios = useComentarios(state => state.comentarios);
   const iniciaComentarios = useComentarios(state => state.iniciaComentarios);
@@ -45,8 +46,8 @@ const VideoPage = () => {
   return (
     <>
       <div className=' flex flex-col items-center '>
-        <div className=' 2xl:min-w-[80vw] md:min-w-full max-w-screen-2xl '>
-          {video && <VideoPlayer {...video} />}
+        <div className=' 2xl:min-w-[80vw] min-w-full max-w-screen-2xl '>
+          {video ? <VideoPlayer key={video.id} {...video} /> : <video className='w-full h-full' />}
           <div className=' flex flex-row justify-center mt-16 mx-10 ' >
             <div className=' w-3/4 '>
               {comentarios && (
