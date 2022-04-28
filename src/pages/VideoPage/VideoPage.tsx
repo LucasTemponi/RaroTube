@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ListaComentarios from '../../components/ListaComentarios/ListaComentarios';
-import Navbar from '../../components/Navbar/Navbar';
 import { VideoList } from '../../components/VideoList/VideoList';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer';
 import { videoProps } from '../../components/VideoPlayer/VideoProps';
@@ -10,6 +9,7 @@ import { useScroll } from '../../hooks/useScroll';
 import apiClient from '../../services/api-client';
 
 const VideoPage = () => {
+
   const [recomendados, setRecomendados] = useState<videoProps[]>();
   const [video, setVideo] = useState<videoProps>();
   const { id } = useParams();
@@ -44,9 +44,8 @@ const VideoPage = () => {
 
   return (
     <>
-      <Navbar />
       <div className=' flex flex-col items-center '>
-        <div className=' max-w-screen-2xl '>
+        <div className=' 2xl:min-w-[80vw] md:min-w-full max-w-screen-2xl '>
           {video && <VideoPlayer {...video} />}
           <div className=' flex flex-row justify-between mt-16 mx-8 '>
             <div className=' w-3/4 '>

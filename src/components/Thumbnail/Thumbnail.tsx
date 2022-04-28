@@ -4,7 +4,7 @@ import { thumbnailProps } from './ThumbnailProps';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../context/authContext';
 
-export const Thumbnails: React.FC<thumbnailProps> = props => {
+export const Thumbnail: React.FC<thumbnailProps> = props => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [favorite, setFavorite] = useState(false);
   const todosFavoritos = useFavoritos(state => state.favoritos);
@@ -68,7 +68,7 @@ export const Thumbnails: React.FC<thumbnailProps> = props => {
             {props.video.duracao.replace('h', ':').replace('m', ':00')}
           </span>
           <video
-            className='rounded-t-md'
+            className='rounded-t-md aspect-video'
             title={props.video.nome}
             ref={videoRef}
             preload='none'
@@ -130,10 +130,11 @@ export const Thumbnails: React.FC<thumbnailProps> = props => {
           <h2 className=' 2xl:text-xl xl:text-lg lg:text-base md:text-base sm:text-base py-4 px-2 text-black'>
             {props.video.nome}
           </h2>
+          <p>{props.video.dataPublicacao.toString()}</p>
         </div>
       </div>
     )
   }
 }
-export default Thumbnails;
 
+export default Thumbnail

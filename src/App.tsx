@@ -14,15 +14,16 @@ function App() {
     <AuthContextProvider>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Layout />} />
-          <Route index element={<PaginaPrincipal />} />
-          <Route path='/video/:id' element={<VideoPage />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/cadastro' element={<CadastroPage />} />
           <Route path='/solicitarcodigo' element={<CodigoDeRecuperarSenha />} />
           <Route path='/alterarsenha' element={<RecuperarSenha />} />
-          <Route element={<RequireAuth />}>
-            {/* As rotas que precisam de autenticação vem aqui */}
+          <Route path='/' element={<Layout />} >
+          <Route index element={<PaginaPrincipal />} />
+          <Route path='/video/:id' element={<VideoPage />} />
+            <Route element={<RequireAuth />}>
+              {/* As rotas que precisam de autenticação vem aqui */}
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

@@ -1,6 +1,6 @@
-import { memo, Suspense} from 'react';
+import { memo } from 'react';
+import { Thumbnail } from '../Thumbnail/Thumbnail';
 import { videoListProps } from './VideoListProps';
-import Thumbnails from '../Thumbnail/Thumbnail';
 
 
 export const VideoList:React.FC<videoListProps> = (videoList) => {
@@ -11,9 +11,7 @@ export const VideoList:React.FC<videoListProps> = (videoList) => {
             {videoList.videos?.map((video) => {
                 return(
                     <li>
-                        <Suspense fallback={<div>...CARREGANDO</div>}>
-                            <Thumbnails key={video.id} video={video} hover={true} />
-                        </Suspense>
+                        <Thumbnail key={video.id} video={video} hover={true} />
                     </li>
                 )
             })}
@@ -21,4 +19,4 @@ export const VideoList:React.FC<videoListProps> = (videoList) => {
     )
 }
 
-export default memo(VideoList)
+export default memo(VideoList);

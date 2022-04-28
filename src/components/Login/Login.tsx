@@ -19,8 +19,7 @@ export const Login = (props: loginProps) => {
 
   function autenticaUsuario(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-   props.onLogin(email, senha);
-
+    props.onLogin(email, senha);
   }
 
   return (
