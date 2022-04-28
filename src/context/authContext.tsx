@@ -48,7 +48,7 @@ export const AuthContextProvider: React.FC<Props> = ({ children }) => {
       idInLocalStorage
     ) {
       setToken(tokenInLocalStorage);
-      setToken(fotoInLocalStorage);
+      setFoto(fotoInLocalStorage);
       setNome(nomeInLocalStorage);
       setId(idInLocalStorage);
     }
