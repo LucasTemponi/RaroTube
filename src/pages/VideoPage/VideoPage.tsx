@@ -46,7 +46,7 @@ const VideoPage = () => {
       <div className=' flex flex-col items-center '>
         <div className=' 2xl:min-w-[80vw] md:min-w-full max-w-screen-2xl '>
           {video && <VideoPlayer {...video} />}
-          <div className=' flex flex-row justify-center mt-16 mx-8 ' >
+          <div className=' flex flex-row justify-center mt-16 mx-10 ' >
             <div className=' w-3/4 '>
               {comentarios && <ListaComentarios videoId={video?.id} comentarios={comentarios?.slice(0, paginaComentarios * 10)} />}
               <div ref={containerRefComentarios} className='h-10' ></div>
