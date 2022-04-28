@@ -3,6 +3,7 @@ import { ComentarioProps } from './ComentarioProps';
 import apiClient from '../../services/api-client';
 import { useAuthContext } from '../../context/authContext';
 import { useEditar } from '../../hooks/useEditar';
+import { useComentarios } from '../../hooks/useComentarios';
 
 const Comentario: React.FC<ComentarioProps> = ({
   videoId,
@@ -23,8 +24,10 @@ const Comentario: React.FC<ComentarioProps> = ({
   const [exclui, setExclui] = useState(false);
   const auth = useAuthContext();
   const setEditando = useEditar(state => state.setEditando);
+
   const setIdEdit = useEditar(state => state.setIdEdit);
   const setTextoEdit = useEditar(state => state.setTextoEdit);
+  const removeComentario = useComentarios(state => state.removeComentario);
 
   function handleEdit() {
     setEditando(true);
@@ -37,6 +40,7 @@ const Comentario: React.FC<ComentarioProps> = ({
 
     try {
       apiClient.delete(url);
+      removeComentario(id);
     } catch (error) {
       alert('Erro ao excluir');
     }

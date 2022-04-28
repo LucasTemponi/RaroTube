@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuthContext } from '../../context/authContext';
+import { useComentarios } from '../../hooks/useComentarios';
 import { useEditar } from '../../hooks/useEditar';
 import apiClient from '../../services/api-client';
 
@@ -14,6 +15,8 @@ const AdicionarComentario: React.FC = () => {
   const idEdit = useEditar(state => state.idEdit);
   const textoEdit = useEditar(state => state.textoEdit);
   const setTextoEdit = useEditar(state => state.setTextoEdit);
+  const addComentario = useComentarios(state => state.addComentarios);
+  const atualizaEdicao = useComentarios(state => state.atualizaEdicao);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -21,12 +24,14 @@ const AdicionarComentario: React.FC = () => {
       const url = `/videos/${id}/comentarios`;
       const response = await apiClient.post(url, { texto });
       setTexto('');
+      addComentario(response.data);
       return response;
     } else {
       const url = `/videos/${id}/comentarios/${idEdit}`;
       const response = await apiClient.patch(url, { texto: textoEdit });
       setTexto('');
       setEditando(false);
+      atualizaEdicao(idEdit, textoEdit);
       return response;
     }
   }
