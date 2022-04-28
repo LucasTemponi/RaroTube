@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { LazyThumbnail } from '../../components/LazyThumbnail/LazyThumbnail';
 import ListaComentarios from '../../components/ListaComentarios/ListaComentarios';
 import { VideoList } from '../../components/VideoList/VideoList';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer';
@@ -45,8 +46,8 @@ const VideoPage = () => {
   return (
     <>
       <div className=' flex flex-col items-center '>
-        <div className=' 2xl:min-w-[80vw] md:min-w-full max-w-screen-2xl '>
-          {video && <VideoPlayer key={video.id} {...video} />}
+        <div className=' 2xl:min-w-[80vw] min-w-full max-w-screen-2xl '>
+          {video ? <VideoPlayer key={video.id} {...video} /> : <video className='w-full h-full' />}
           <div className=' flex flex-row justify-center mt-16 mx-10 ' >
             <div className=' w-3/4 '>
               {comentarios && (
