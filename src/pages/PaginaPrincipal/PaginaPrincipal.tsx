@@ -1,7 +1,6 @@
-import { lazy,useEffect, useRef, useState, Suspense } from "react"
-import { LazyThumbList } from "../../components/LazyThumbList/LazyThumbList"
+import { useEffect, useRef, useState } from "react"
 import { VideoList } from "../../components/VideoList/VideoList"
-import { videoProps } from "../../components/VideoPlayer/VideoProps"
+import { VideoProps } from "../../components/VideoPlayer/VideoProps"
 import { useAuthContext } from "../../context/authContext"
 import { useFavoritos } from "../../hooks/useFavoritos"
 import { useScroll } from "../../hooks/useScroll"
@@ -13,8 +12,8 @@ export const PaginaPrincipal = () => {
 
     // const VideoList = lazy(()=>import('../../components/VideoList/VideoList'));
 
-    const [videos, setVideos] = useState<videoProps[]>();
-    const [recomendados, setRecomendados] = useState<videoProps[]>();
+    const [videos, setVideos] = useState<VideoProps[]>();
+    const [recomendados, setRecomendados] = useState<VideoProps[]>();
     const [carregando, setCarregando] = useState<boolean>(true);
     const authContext = useAuthContext();
 
@@ -24,16 +23,22 @@ export const PaginaPrincipal = () => {
     const pagina = useScroll(containerRef)
 
     const loadVideos = async () => {
-        await Promise.all([
-            apiClient.get('/videos').then(response => setVideos(response.data.reverse())),
-            apiClient.get('/videos/favoritos').then(response => iniciaFavoritos(response.data)),
-            apiClient.get(`/videos/${authContext.id}/recomendacoes?itensPorPagina=100`).then(response => setRecomendados(response.data))
-        ])
+        setCarregando(true);
+        try{
+            await Promise.all([
+                apiClient.get('/videos').then(response => setVideos(response.data.reverse())),
+                apiClient.get('/videos/favoritos').then(response => iniciaFavoritos(response.data)),
+                //apiClient.get(`/videos/${authContext.id}/recomendacoes?itensPorPagina=100`).then(response => setRecomendados(response.data))
+            ]);
+            setCarregando(false);
+        }catch(e){
+            console.log(e)
+        }
     }
 
     useEffect(() => {
         loadVideos()
-        setTimeout(()=>setCarregando(false),2000)
+        // setTimeout(()=>setCarregando(false),5000)
     }, [])
 
     return (

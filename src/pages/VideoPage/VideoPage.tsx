@@ -4,13 +4,13 @@ import { ComentarioProps } from '../../components/Comentario/ComentarioProps';
 import ListaComentarios from '../../components/ListaComentarios/ListaComentarios';
 import { VideoList } from '../../components/VideoList/VideoList';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer';
-import { videoProps } from '../../components/VideoPlayer/VideoProps';
+import { VideoProps } from '../../components/VideoPlayer/VideoProps';
 import { useScroll } from '../../hooks/useScroll';
 import apiClient from '../../services/api-client';
 
 const VideoPage = () => {
-  const [recomendados, setRecomendados] = useState<videoProps[]>();
-  const [video, setVideo] = useState<videoProps>();
+  const [recomendados, setRecomendados] = useState<VideoProps[]>();
+  const [video, setVideo] = useState<VideoProps>();
   const [comentarios, setComentarios] = useState<ComentarioProps[]>();
   const { id } = useParams();
 
