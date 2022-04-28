@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { videoProps } from './VideoProps';
+import { VideoProps } from './VideoProps';
 
-export const VideoPlayer: React.FC<videoProps> = video => {
+export const VideoPlayer: React.FC<VideoProps> = video => {
   const [favorite, setFavorite] = useState(false);
 
   const favoriteVideo = () => {
@@ -9,7 +9,7 @@ export const VideoPlayer: React.FC<videoProps> = video => {
   };
 
   return (
-    <div>
+    <div className='w-full' >
       <div className={`transform m-auto`}>
         <video className='w-full h-full' title={video.nome} controls>
           <source src={video.url} />

@@ -30,10 +30,10 @@ type Props = {
   children?: React.ReactNode;
 };
 export const AuthContextProvider: React.FC<Props> = ({ children }) => {
-  const [token, setToken] = useState('');
-  const [foto, setFoto] = useState('');
-  const [nome, setNome] = useState('');
-  const [id, setId] = useState('');
+  const [token, setToken] = useState(localStorage.getItem('token') || '');
+  const [foto, setFoto] = useState(localStorage.getItem('foto') || '');
+  const [nome, setNome] = useState(localStorage.getItem('nome') || '');
+  const [id, setId] = useState(localStorage.getItem('id') || '');
 
   useEffect(() => {
     const tokenInLocalStorage = localStorage.getItem('access_token');
@@ -48,7 +48,7 @@ export const AuthContextProvider: React.FC<Props> = ({ children }) => {
       idInLocalStorage
     ) {
       setToken(tokenInLocalStorage);
-      setToken(fotoInLocalStorage);
+      setFoto(fotoInLocalStorage);
       setNome(nomeInLocalStorage);
       setId(idInLocalStorage);
     }
