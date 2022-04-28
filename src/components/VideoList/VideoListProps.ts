@@ -1,6 +1,6 @@
-import { videoProps } from "../VideoPlayer/VideoProps";
+import { VideoProps } from "../VideoPlayer/VideoProps";
 
 export type videoListProps = {
     vertical?:boolean,
-    videos:Array<videoProps> | undefined,
+    videos:Array<VideoProps> | undefined,
 }

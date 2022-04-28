@@ -1,6 +1,6 @@
-import { videoProps } from "../VideoPlayer/VideoProps";
+import { VideoProps } from "../VideoPlayer/VideoProps";
 
 export interface thumbnailProps{
-    video:videoProps
+    video:VideoProps
     hover?:boolean
 }

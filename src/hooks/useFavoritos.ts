@@ -1,26 +1,26 @@
 import create from 'zustand'
 import apiClient from '../services/api-client'
-import { videoProps } from '../components/VideoPlayer/VideoProps'
+import { VideoProps } from '../components/VideoPlayer/VideoProps'
 
 
 type favoritosProps = {
-    favoritos:videoProps[],
-    iniciaFavoritos: (todosFavoritos: videoProps[]) => void,
-    adicionaFavorito: (videoId: videoProps) => void,
-    removeFavorito: (videoId: videoProps) => void,
+    favoritos:VideoProps[],
+    iniciaFavoritos: (todosFavoritos: VideoProps[]) => void,
+    adicionaFavorito: (VideoId: VideoProps) => void,
+    removeFavorito: (VideoId: VideoProps) => void,
 }
 
 export const useFavoritos = create<favoritosProps>((set) => ({
     favoritos: [],
-    iniciaFavoritos: (todosFavoritos: videoProps[]) =>{
+    iniciaFavoritos: (todosFavoritos: VideoProps[]) =>{
         set({favoritos: todosFavoritos})
     },
-    adicionaFavorito: (video) => { 
-        apiClient.post(`/videos/${video.id}/favoritos`)
-        set((state) => ({favoritos: [...state.favoritos, video]})
+    adicionaFavorito: (Video) => { 
+        apiClient.post(`/Videos/${Video.id}/favoritos`)
+        set((state) => ({favoritos: [...state.favoritos, Video]})
     )},
-    removeFavorito: (video) => {
-        apiClient.delete(`/videos/${video.id}/favoritos`)
-        set((state) => ({favoritos: state.favoritos.filter((f) => f.id !== video.id)})
+    removeFavorito: (Video) => {
+        apiClient.delete(`/Videos/${Video.id}/favoritos`)
+        set((state) => ({favoritos: state.favoritos.filter((f) => f.id !== Video.id)})
     )},
 }))
