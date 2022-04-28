@@ -28,10 +28,14 @@ export const PaginaPrincipal = () => {
     const loadVideos = async () => {
         setCarregando(true);
         try{
-            await Promise.all([
-                apiClient.get('/videos').then(response => iniciaVideos(response.data.reverse())),
-                apiClient.get('/videos/favoritos').then(response => iniciaFavoritos(response.data)),
-            ]);
+            if (authContext.estaAutenticado()) {
+                await Promise.all([
+                    apiClient.get('/videos').then(response => iniciaVideos(response.data.reverse())),
+                    apiClient.get('/videos/favoritos').then(response => iniciaFavoritos(response.data)),
+                    ]);
+            } else {
+                await apiClient.get('/videos').then(response => iniciaVideos(response.data.reverse()));    
+            }
             setCarregando(false);
         }catch(e){
             console.log(e)
