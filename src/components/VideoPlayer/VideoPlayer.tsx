@@ -9,7 +9,7 @@ export const VideoPlayer: React.FC<VideoProps> = video => {
   };
 
   return (
-    <div>
+    <div className='w-full' >
       <div className={`transform m-auto`}>
         <video className='w-full h-full' title={video.nome} controls>
           <source src={video.url} />

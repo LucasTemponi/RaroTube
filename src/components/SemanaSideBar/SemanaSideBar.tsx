@@ -13,13 +13,13 @@ export const SemanaSideBar:React.FC<SemanaSideBarProps> = (semana) => {
 
     return(
         <div className="flex flex-col bg-neutral-300">
-            <span onClick={()=>setIsOpen(!isOpen)} >{semana.semana}</span>
+            <button className=' text-left py-1 font-semibold ' onClick={()=>setIsOpen(!isOpen)} >{`${semana.semana.charAt(0).toUpperCase()}${semana.semana.slice(1)}`}</button>
                 {isOpen && 
                     <ul className='ml-4'>
                         {semana.videos.map((video)=>{
                             return(
                                 <Link to={`/video/${video.id}`}>
-                                    <li>{video.nome}</li>
+                                    <li className='py-1' >{video.nome}</li>
                                 </Link>
                             )}
                         )}

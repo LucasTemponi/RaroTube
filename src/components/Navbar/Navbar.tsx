@@ -40,7 +40,7 @@ const semanas:semanasProps = useMemo(() => {
 
   return (
     <>    
-    <header className='flex items-center justify-between fixed bg-neutral-300 px-6 py-4 w-full'>
+    <header className='flex items-center justify-between fixed z-10 bg-neutral-300 px-6 py-4 w-full'>
       <div className='flex items-center space-x-2 '>
       <div onClick={()=>setIsOpen(!isOpen)} >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -55,12 +55,14 @@ const semanas:semanasProps = useMemo(() => {
         <Navegacao />
       </div>
     </header>
-        <div className="flex flex-row w-full" >
-          <div className={` ${isOpen ? 'hidden' : ''} flex flex-col w-[35em] h-screen pl-8 mt-20 bg-neutral-300`}>
-            <h2>Meus cursos</h2>
-            {Object.keys(semanas).map(semana => <SemanaSideBar semana={semana} videos={semanas[semana]} />)}
-          </div>
-        <div>
+        <div className="flex flex-row " >
+          {
+            isOpen &&
+              <div className={` flex flex-col w-56 h-screen pl-8 mt-20 bg-neutral-300`}>
+                <h2 className='my-4' >Meus cursos</h2>
+                {Object.keys(semanas).map(semana => <SemanaSideBar semana={semana} videos={semanas[semana]} />)}
+            </div>}
+        <div className="w-full" >
             <div className="w-full mt-20 " >{children}</div>        
         </div>
     </div>

@@ -4,6 +4,7 @@ import { VideoProps } from "../../components/VideoPlayer/VideoProps"
 import { useAuthContext } from "../../context/authContext"
 import { useFavoritos } from "../../hooks/useFavoritos"
 import { useScroll } from "../../hooks/useScroll"
+import { useVideos } from "../../hooks/useVideos"
 
 import apiClient from "../../services/api-client";
 import { LazyPrincipal } from "./LazyPagina"
@@ -12,7 +13,9 @@ export const PaginaPrincipal = () => {
 
     // const VideoList = lazy(()=>import('../../components/VideoList/VideoList'));
 
-    const [videos, setVideos] = useState<VideoProps[]>();
+    // const [videos, setVideos] = useState<VideoProps[]>();
+    const videos = useVideos(state=>state.videos);
+    const iniciaVideos = useVideos(state=>state.iniciaVideos);
     const [recomendados, setRecomendados] = useState<VideoProps[]>();
     const [carregando, setCarregando] = useState<boolean>(true);
     const authContext = useAuthContext();
@@ -26,9 +29,8 @@ export const PaginaPrincipal = () => {
         setCarregando(true);
         try{
             await Promise.all([
-                apiClient.get('/videos').then(response => setVideos(response.data.reverse())),
+                apiClient.get('/videos').then(response => iniciaVideos(response.data.reverse())),
                 apiClient.get('/videos/favoritos').then(response => iniciaFavoritos(response.data)),
-                //apiClient.get(`/videos/${authContext.id}/recomendacoes?itensPorPagina=100`).then(response => setRecomendados(response.data))
             ]);
             setCarregando(false);
         }catch(e){
@@ -37,7 +39,12 @@ export const PaginaPrincipal = () => {
     }
 
     useEffect(() => {
-        loadVideos()
+        if (videos.length === 0 || todosFavoritos.length === 0) {
+            loadVideos()
+        } else {
+            setCarregando(false);
+        }
+        
         // setTimeout(()=>setCarregando(false),5000)
     }, [])
 
@@ -57,7 +64,7 @@ export const PaginaPrincipal = () => {
                 <h1 className=" font-extrabold underline decoration-raro-oceano text-4xl m-4 mt-12 text-left">Adicionados recentemente</h1>
                     <VideoList videos={videos?.slice(0, 10)} />
                 <h1 className=" font-extrabold underline decoration-raro-violeta text-4xl m-4 mt-12 text-left">Recomendados</h1>
-                    <VideoList videos={recomendados?.slice(0, pagina * 15)} />
+                    <VideoList videos={videos?.slice(0, pagina * 15)} />
 
                 <div ref={containerRef} className="h-10" /> 
         </>
