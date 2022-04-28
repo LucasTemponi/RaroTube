@@ -23,7 +23,7 @@ const AdicionarComentario: React.FC = () => {
         <form action='' className='w-full p-4' onSubmit={handleSubmit}>
           <div className='mb-2'>
             <textarea
-              className='w-full p-2 h-10 border border-b-blue-200 rounded focus:outline-none focus:border-blue-600 focus:ring-1 '
+              className='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-raro-cobalto dark:focus:border-raro-cobalto focus:outline-none focus:ring-0 focus:border-raro-cobalto peer '
               name='comentario'
               placeholder='Adicione seu  comentário...'
               rows={1}
@@ -31,15 +31,15 @@ const AdicionarComentario: React.FC = () => {
               onChange={(e) => setComentario(e.target.value)}
             ></textarea>
           </div>
-          <div className='flex space-x-3'>
+          <div className='flex-end space-x-3'>
             <button
-              className='px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded'
+              className='px-3 py-2 text-sm text-blue-100 bg-raro-oceano rounded-md'
               type='submit'
             >
               Comentar
             </button>
             <button
-              className='px-3 py-2 text-sm text-blue-600 border border-blue-500 rounded'
+              className='px-3 py-2 text-sm text-blue-600 border border-raro-oceano rounded-md'
               onClick={(e) => {
                 e.preventDefault();
                 setComentario('');
