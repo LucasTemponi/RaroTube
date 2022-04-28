@@ -15,7 +15,7 @@ export const VideoPlayer: React.FC<VideoProps> = video => {
           <source src={video.url} />
         </video>
       </div>
-      <div className='w-10/12 m-auto '>
+      <div className='w-14/12 mx-8 mt-8'>
         <div className='flex flex-row justify-items-start mt-2 mb-4'>
           <h1 className='w-2/3'>{video.nome}</h1>
           <svg
@@ -34,7 +34,7 @@ export const VideoPlayer: React.FC<VideoProps> = video => {
             />
           </svg>
         </div>
-        <hr className='border-raro-rosa ' />
+        <hr className='border-raro-rosa' />
         <div className='mt-6'>
           <p>{video.descricao}</p>
         </div>
