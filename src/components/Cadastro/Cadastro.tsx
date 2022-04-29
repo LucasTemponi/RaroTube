@@ -116,39 +116,29 @@ export const Cadastro: React.FC = () => {
               />
             </div>
 
-            {
-              erroConfirmacao ? (
-                <div className='flex items-center justify-end'>
-                  <div className='text-sm'>
-                    <span className="font-small text-[#FF0000]">
-                      {erroConfirmacao}
-                    </span>
-                  </div>
-                </div>
-              ) : <></>
-            }
-            {
-              erroRequest ? (
-                <div className='flex items-center justify-end space-6y-px'>
-                  <div className='text-sm '>
-                    <div className='justify-end flex-row'>
-                      <p className="font-small text-[#FF0000]">
-                        {erroRequest}
-                      </p>
-                      <Link to={`/login`}>
-                        <a
-                          href='#'
-                          className='font-medium text-[#4E47C2] hover:text-[#7A75D1]'
-                        >
-                          Clique aqui para fazer login
-                        </a>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ) : <></>
-            }
+            <div className={`flex items-center justify-end h-5 ${erroConfirmacao ? 'visible' : 'invisible'
+              }`}>
+              <span className="font-small text-[#FF0000]">
+                {erroConfirmacao}
+              </span>
+            </div>
 
+            <div className={`flex items-center justify-end h-5 space-6y-px ${erroRequest ? 'visible' : 'invisible'
+              }`}>
+              <div className='justify-end flex-row'>
+                <p className="font-small text-[#FF0000]">
+                  {erroRequest}
+                </p>
+                <Link to={`/login`}>
+                  <a
+                    href='#'
+                    className='font-medium text-[#4E47C2] hover:text-[#7A75D1]'
+                  >
+                    Clique aqui para fazer login
+                  </a>
+                </Link>
+              </div>
+            </div>
             <div>
               <Button type='submit'>Cadastrar</Button>
             </div>
