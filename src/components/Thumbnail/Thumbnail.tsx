@@ -40,11 +40,9 @@ export const Thumbnail: React.FC<thumbnailProps> = props => {
     if (favorite) {
       removeFavorito(props.video);
       setFavorite(false);
-      console.log(todosFavoritos);
     } else {
       adicionaFavorito(props.video);
       setFavorite(true);
-      console.log(todosFavoritos);
     }
   };
 

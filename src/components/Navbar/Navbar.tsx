@@ -34,7 +34,6 @@ const Navbar: React.FC<Props> = ({ children }) => {
         semanas[video.topico] ? semanas[video.topico].push(video) : semanas[video.topico] = [video]
       }
     })
-    console.log(semanas)
     return semanas
   }, [todosVideos]);
 
@@ -55,6 +54,7 @@ const Navbar: React.FC<Props> = ({ children }) => {
           <Navegacao />
         </div>
       </header>
+
       <div className="flex flex-row" >
         {
           isOpen &&

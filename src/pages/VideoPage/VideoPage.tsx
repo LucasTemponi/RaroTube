@@ -1,3 +1,4 @@
+import { timeStamp } from 'console';
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { LazyThumbnail } from '../../components/LazyThumbnail/LazyThumbnail';
@@ -7,6 +8,7 @@ import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer';
 import { VideoProps } from '../../components/VideoPlayer/VideoProps';
 import { useComentarios } from '../../hooks/useComentarios';
 import { useScroll } from '../../hooks/useScroll';
+import { useTimestamp } from '../../hooks/useTimestamp';
 import apiClient from '../../services/api-client';
 
 const VideoPage = () => {
@@ -22,6 +24,8 @@ const VideoPage = () => {
 
   const containerRefRecomendados = useRef<HTMLDivElement | null>(null);
   const paginaRecomendados = useScroll(containerRefRecomendados);
+
+  const timestamp = useTimestamp(state => state.setVideo);
 
   useEffect(() => {
     const loadRecomendados = async () => {
@@ -42,6 +46,10 @@ const VideoPage = () => {
     loadVideo();
     loadComentarios();
   }, [id]);
+
+  useEffect(() => {
+    timestamp(document.getElementById('VideoPrincipal') as HTMLVideoElement);
+  },[video]);
 
   return (
     <>

@@ -4,6 +4,7 @@ import apiClient from '../../services/api-client';
 import { useAuthContext } from '../../context/authContext';
 import { useEditar } from '../../hooks/useEditar';
 import { useComentarios } from '../../hooks/useComentarios';
+import { BuscaTimestamps } from '../../helpers/BuscaTimestamps';
 
 const Comentario: React.FC<ComentarioProps> = ({
   videoId,
@@ -20,6 +21,7 @@ const Comentario: React.FC<ComentarioProps> = ({
     upVotes: upVotes,
     downVotes: downVotes,
   });
+
   const [editavel, setEditavel] = useState(false);
   const [exclui, setExclui] = useState(false);
   const auth = useAuthContext();
@@ -59,7 +61,6 @@ const Comentario: React.FC<ComentarioProps> = ({
         });
         setDislike(true);
         if (like) {
-          console.log(like);
           setLike(false);
           setVotes({
             downVotes: votes.downVotes + 1,
@@ -134,7 +135,7 @@ const Comentario: React.FC<ComentarioProps> = ({
         </p>
         <div className='mb-2'>
           <p className=' text-justify h-auto resize-y w-full p-2 text-sm leading-normal'>
-            {texto}
+            {BuscaTimestamps(texto)}
           </p>
         </div>
         <div className='flex justify-between space-x-2 pl-2 -mt-2'>
@@ -142,9 +143,8 @@ const Comentario: React.FC<ComentarioProps> = ({
             <button>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
-                className={`h-4 w-4 ${
-                  like ? 'fill-raro-oceano' : 'fill-transparent'
-                }`}
+                className={`h-4 w-4 ${like ? 'fill-raro-oceano' : 'fill-transparent'
+                  }`}
                 fill='none'
                 viewBox='0 0 24 24'
                 stroke='currentColor'
@@ -162,9 +162,8 @@ const Comentario: React.FC<ComentarioProps> = ({
             <button>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
-                className={`h-4 w-4 ${
-                  dislike ? 'fill-red-700' : 'fill-transparent'
-                }`}
+                className={`h-4 w-4 ${dislike ? 'fill-red-700' : 'fill-transparent'
+                  }`}
                 fill='none'
                 viewBox='0 0 24 24'
                 stroke='currentColor'

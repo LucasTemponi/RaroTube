@@ -1,5 +1,5 @@
 export type ComentarioProps = {
-  videoId:string|undefined
+  videoId: string | undefined
   id: string;
   texto: string;
   editado: boolean;
@@ -12,8 +12,8 @@ export type ComentarioProps = {
     senha: string;
     foto: string;
   };
-  meuVote?:{
-    vote:string,
+  meuVote?: {
+    vote: string,
   }
   upVotes: number;
   downVotes: number;

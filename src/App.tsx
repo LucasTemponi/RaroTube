@@ -6,6 +6,7 @@ import { RequireAuth } from './components/RequireAuth/RequireAuth';
 import { AuthContextProvider } from './context/authContext';
 import { CadastroPage } from './pages/CadastroPage/CadastroPage';
 import { LoginPage } from './pages/LoginPage/LoginPage';
+import { PaginaNaoEncontrada } from './pages/PaginaNaoEncontrada/PaginaNaoEncontrada';
 import { PaginaPrincipal } from './pages/PaginaPrincipal/PaginaPrincipal';
 import VideoPage from './pages/VideoPage/VideoPage';
 
@@ -25,6 +26,7 @@ function App() {
               {/* As rotas que precisam de autenticação vem aqui */}
             </Route>
           </Route>
+          <Route path='*' element={<PaginaNaoEncontrada />} />
         </Routes>
       </BrowserRouter>
     </AuthContextProvider>
