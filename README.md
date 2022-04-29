@@ -1,6 +1,6 @@
 # Projeto Raro Tube
 
-O projeto Raro Tube visa atender as expectativas dos alunos, disponibilizando links das aulas gravadas durante a semana.  **tendo vídeos públicos e vídeos privados.**
+Visa atender as expectativas dos alunos, disponibilizando links das aulas gravadas durante a semana.  **tendo vídeos públicos e vídeos privados.**
 
 ## Funcionalidades
 
@@ -23,7 +23,7 @@ Recomendados
  
 ## Instalação
 
-Comando para o download do projeto pelo Git:
+Comando para o download do projeto pelo Git
 
 ```bash
 mkdir RaroTube
@@ -31,13 +31,13 @@ cd RaroTube
 git clone https://github.com/rarolabs/raro-academy-react-grupo-3 .
  ```
 
-Comando para instalar as dependências com comando:
+Comando para instalar as dependências com comando
 
 ```bash
 npm install
  ```
 
-Comando para executar o projeto:
+Comando para executar o projeto
 
  ```bash
 npm start
