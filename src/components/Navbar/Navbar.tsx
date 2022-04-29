@@ -34,7 +34,6 @@ const semanas:semanasProps = useMemo(() => {
         semanas[video.topico] ? semanas[video.topico].push(video) : semanas[video.topico] = [video]
       }
     })
-    console.log(semanas)
     return semanas
 }, [todosVideos]);
 
