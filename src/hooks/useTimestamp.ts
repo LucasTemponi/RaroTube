@@ -9,7 +9,7 @@ type VideoTimeProps = {
 export const useTimestamp = create<VideoTimeProps>(set => ({
   video: null,
   setVideo: param => {
-    set({ video: param });
+    set({ video: param});
   },
   setTempo: (tempo) => set((state) => {
     if (state.video) {

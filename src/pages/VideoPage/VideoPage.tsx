@@ -25,8 +25,6 @@ const VideoPage = () => {
   const containerRefRecomendados = useRef<HTMLDivElement | null>(null);
   const paginaRecomendados = useScroll(containerRefRecomendados);
 
-  // const VideoPrincipal = useRef<HTMLVideoElement | null>(document.getElementById('VideoPrincipal'));
-
   const timestamp = useTimestamp(state => state.setVideo);
 
   useEffect(() => {

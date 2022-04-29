@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { VideoProps } from './VideoProps';
+import { BuscaTimestamps } from '../../helpers/BuscaTimestamps';
 
 export const VideoPlayer: React.FC<VideoProps> = video => {
   const [favorite, setFavorite] = useState(false);
@@ -36,9 +37,10 @@ export const VideoPlayer: React.FC<VideoProps> = video => {
         </div>
         <hr className='border-raro-rosa' />
         <div className='mt-6'>
-          <p>{video.descricao}</p>
+          <p>{BuscaTimestamps(video.descricao)}</p>
         </div>
       </div>
     </div>
   );
 };
+

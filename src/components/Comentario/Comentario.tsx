@@ -4,7 +4,7 @@ import apiClient from '../../services/api-client';
 import { useAuthContext } from '../../context/authContext';
 import { useEditar } from '../../hooks/useEditar';
 import { useComentarios } from '../../hooks/useComentarios';
-import { useTimestamp } from '../../hooks/useTimestamp';
+import { BuscaTimestamps } from '../../helpers/BuscaTimestamps';
 
 const Comentario: React.FC<ComentarioProps> = ({
   videoId,
@@ -21,6 +21,7 @@ const Comentario: React.FC<ComentarioProps> = ({
     upVotes: upVotes,
     downVotes: downVotes,
   });
+
   const [editavel, setEditavel] = useState(false);
   const [exclui, setExclui] = useState(false);
   const auth = useAuthContext();
@@ -29,24 +30,6 @@ const Comentario: React.FC<ComentarioProps> = ({
   const setIdEdit = useEditar(state => state.setIdEdit);
   const setTextoEdit = useEditar(state => state.setTextoEdit);
   const removeComentario = useComentarios(state => state.removeComentario);
-
-  const videoTime = useTimestamp(state=>state.setTempo);
-  
-  const buscaTimestamps = (texto:string) => {
-    const regex = /((00|[0-9]|1[0-9]|2[0-3]):)?([0-9]|[0-5][0-9]):([0-5][0-9])/g;
-    const matches = texto.match(regex);
-    if (matches){
-      const tempoString = matches[0].split(':')
-      let tempoEmSegundos = 0
-      for (let i = 0; i < tempoString.length; i++){
-        tempoEmSegundos += parseInt(tempoString[i]) * Math.pow(60, tempoString.length - i - 1)
-      }
-      return texto.split(' ').map(part=>
-        regex.test(part) ? <button className=' font-semibold text-raro-cobalto ' onClick={()=>videoTime(tempoEmSegundos)}>{part}</button> : `${part} `);
-    }else {
-      return texto
-    }
-  }
 
   function handleEdit() {
     setEditando(true);
@@ -58,7 +41,7 @@ const Comentario: React.FC<ComentarioProps> = ({
     const url = `/videos/${videoId}/comentarios/${id}`;
 
     try {
-      // apiClient.delete(url);
+      apiClient.delete(url);
       removeComentario(id);
     } catch (error) {
       alert('Erro ao excluir');
@@ -152,7 +135,7 @@ const Comentario: React.FC<ComentarioProps> = ({
         </p>
         <div className='mb-2'>
           <p className=' text-justify h-auto resize-y w-full p-2 text-sm leading-normal'>
-            {buscaTimestamps(texto)}
+            {BuscaTimestamps(texto)}
           </p>
         </div>
         <div className='flex justify-between space-x-2 pl-2 -mt-2'>
