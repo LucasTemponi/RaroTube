@@ -7,16 +7,16 @@ import { useNavigate } from "react-router-dom";
 
 export const CodigoDeRecuperarSenha = () => {
   const [email, setEmail] = useState('');
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const codigoDeRecuperarSenha = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
-    try{
-      await apiClient.post("/auth/solicitar-codigo",{email})  
+    try {
+      await apiClient.post("/auth/solicitar-codigo", { email })
       navigate("/alterarsenha")
-    }catch(error){
+    } catch (error) {
       alert("Erro ao solicitar código de recuperação. Tente novamente mais tarde.")
     }
   };
@@ -33,9 +33,9 @@ export const CodigoDeRecuperarSenha = () => {
             <p className=' mt-2 text-center text-sm text-gray-600'>
               Insira seu email no campo abaixo para receber o código de recuperação </p>
           </div>
-          <form 
-            className="mt-8 space-y-6" 
-            action="#" 
+          <form
+            className="mt-8 space-y-6"
+            action="#"
             onSubmit={codigoDeRecuperarSenha}
           >
             <div className=" rounded-md shadow-sm -space-6y-px  ">
@@ -48,11 +48,11 @@ export const CodigoDeRecuperarSenha = () => {
                   required
                   value={email}
                   onChange={event => {
-                      setEmail(event.target.value);
+                    setEmail(event.target.value);
                   }}
                 />
               </div>
-            </div>     
+            </div>
             <Button type="submit">Enviar Código</Button>
           </form>
         </div>
