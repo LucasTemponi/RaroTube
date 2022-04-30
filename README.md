@@ -5,7 +5,7 @@
 
 #  Projeto Raro Tube
 
-Visa atender as expectativas dos alunos, disponibilizando links das aulas gravadas durante a semana.  **tendo vídeos públicos e vídeos privados.**
+Projeto final do curso de React Raro Academy, visa atender as expectativas dos alunos, disponibilizando links das aulas gravadas durante a semana.  **tendo vídeos públicos e vídeos privados.**
 
 ##  **Funcionalidades**
 
@@ -30,9 +30,9 @@ Visa atender as expectativas dos alunos, disponibilizando links das aulas gravad
 ### Exibição do conteúdo
 - Visulização do vídeo
 - Lista de vídeos sugeridos
+- Botão de favoritar vídeo
 - Adicionar comentário
 - Excluir comentário
-- Botão de favoritar vídeo
 
 ### Layout
 - Header
@@ -46,7 +46,7 @@ Visa atender as expectativas dos alunos, disponibilizando links das aulas gravad
 Clonar o projeto
 
 ```bash
-git clone https://github.com/rarolabs/raro-academy-react-grupo-3 .
+git clone https://github.com/rarolabs/raro-academy-react-grupo-3 
  ```
 
 Acesse a pasta do projeto no terminal/cmd
