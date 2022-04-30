@@ -7,7 +7,7 @@ export const VideoList:React.FC<videoListProps> = (videoList) => {
 
     return(
         
-        <ul className={`flex flex-${ videoList.vertical ? 'col' : 'row'} flex-wrap justify-center`} >
+        <ul className={`flex flex-${ videoList.vertical ? 'col' : 'row'} flex-wrap justify-start`} >
             {videoList.videos?.map((video) => {
                 return(
                     <li>

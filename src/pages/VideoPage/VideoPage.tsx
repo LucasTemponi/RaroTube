@@ -31,25 +31,6 @@ const VideoPage = () => {
   const timestamp = useTimestamp(state => state.setVideo);
 
 
-  // useEffect(() => {
-  //   if (todosVideos) {
-  //     console.log(video?.id)
-  //     const videoIndex = todosVideos.findIndex(element => element.id === video?.id);
-  //     console.log(videoIndex)
-  //     if (videoIndex >= 0) {
-  //       console.log(videoIndex, '>=0')
-  //       setProximoVideo(todosVideos.slice(videoIndex - 1)[0])
-  //     } else {
-  //       console.log(videoIndex, '<0')
-  //       setProximoVideo(todosVideos.slice(-1)[0])
-  //     } 
-  //   } else {
-  //     console.log('todosVideos não carregado')
-  //   }
-  // }, [todosVideos]);
-
-
-
   useEffect(() => {
 
     const loadRecomendados = async () => {
