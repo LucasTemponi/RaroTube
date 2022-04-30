@@ -1,30 +1,49 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import CapeloFbranco from '../../assets/CapeloFbranco';
+import { useAuthContext } from '../../context/authContext';
 import apiClient from '../../services/api-client';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 
 export const Cadastro: React.FC = () => {
 
-  const [nome, setNome] = useState('');
+  const [nomeCadastro, setNomeCadastro] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [confirmaSenha, setConfirmaSenha] = useState('');
   const [codigoAcesso, setCodigoAcesso] = useState('');
   const [erroConfirmacao, setErroConfirmacao] = useState('');
   const [erroRequest, setErroRequest] = useState('');
+  const [success, setSuccess] = useState(false)
   const navigate = useNavigate();
+  const auth = useAuthContext();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    const awaitToNavigate = () => {
+      navigate('/')
+    }
+
     try {
       if (senha === confirmaSenha) {
         const url = '/auth/cadastrar';
-        const response = await apiClient.post(url, { nome, email, senha, codigoAcesso });
+        await apiClient.post(url, { nome: nomeCadastro, email, senha, codigoAcesso });
+
         setErroConfirmacao('')
-        navigate("/");
+        setSuccess(true)
+
+        const urlLogin = '/auth/login'
+        const response = await apiClient.post(urlLogin, { email, senha });
+
+        const { access_token, id, nome, foto } = response.data;
+        if (access_token) {
+          auth.autentica(id, email, access_token, nome, foto);
+          setTimeout(() => {
+            awaitToNavigate()
+          }, 2500);
+        }
       } else {
         setErroConfirmacao('As senhas não são iguais.');
       }
@@ -39,6 +58,7 @@ export const Cadastro: React.FC = () => {
 
   return (
     <>
+
       <div className='min-h-full flex items-center justify-center py-18 px-4 sm:px-6 lg:px-8'>
         <div className='max-w-md w-full shadow-lg  px-8 py-16 rounded-lg space-y-8'>
           <div>
@@ -48,12 +68,22 @@ export const Cadastro: React.FC = () => {
             <h2 className='mt-10 text-center text-2xl font-bold text-raro-cobalto'>
               Cadastro
             </h2>
-            <p className='mt-2 text-center text-sm text-gray-600'>
-              Preencha os campos e cadastre-se para ter acesso às aulas da sua turma na Raro Academy.
-            </p>
+            {
+              success ? (
+                <div className='flex flex-col mt-2 text-center justify-center items-center '>
+                  <span className="font-sm text-raro-rosa">
+                    Cadastro realizado com sucesso!
+                  </span>
+                  <span className="font-sm text-raro-rosa">Em breve você será redirecionado para a página inicial.</span>
+                </div>
+              ) : <p className='mt-2 text-center text-sm text-gray-600'>
+                Preencha os campos e cadastre-se para ter acesso às aulas da sua turma na Raro Academy.
+              </p>
+            }
           </div>
 
           <form className='mt-8 space-y-8' onSubmit={handleSubmit}>
+
             <div className=' rounded-md shadow-sm '>
               <div className='mt-6'>
                 <Input
@@ -62,8 +92,8 @@ export const Cadastro: React.FC = () => {
                   label='nome'
                   placeholder='Nome'
                   required
-                  value={nome}
-                  onChange={(event) => setNome(event.target.value)}
+                  value={nomeCadastro}
+                  onChange={(event) => setNomeCadastro(event.target.value)}
                 />
               </div>
 
@@ -118,9 +148,9 @@ export const Cadastro: React.FC = () => {
             {
               erroConfirmacao ? (
                 <div className='flex items-center justify-end'>
-                    <span className="font-sm text-[#FF0000]">
-                      {erroConfirmacao}
-                    </span>
+                  <span className="font-sm text-[#FF0000]">
+                    {erroConfirmacao}
+                  </span>
                 </div>
               ) : <></>
             }
