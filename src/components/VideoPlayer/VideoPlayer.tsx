@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { videoProps } from './VideoProps';
+import { VideoProps } from './VideoProps';
+import { BuscaTimestamps } from '../../helpers/BuscaTimestamps';
 
-export const VideoPlayer: React.FC<videoProps> = video => {
+export const VideoPlayer: React.FC<VideoProps> = video => {
   const [favorite, setFavorite] = useState(false);
 
   const favoriteVideo = () => {
@@ -9,13 +10,13 @@ export const VideoPlayer: React.FC<videoProps> = video => {
   };
 
   return (
-    <div>
+    <div className='w-full' >
       <div className={`transform m-auto`}>
-        <video className='w-full h-full' title={video.nome} controls>
+        <video id="VideoPrincipal" className='w-full h-full' title={video.nome} controls>
           <source src={video.url} />
         </video>
       </div>
-      <div className='w-10/12 m-auto '>
+      <div className='w-14/12 mx-8 mt-8'>
         <div className='flex flex-row justify-items-start mt-2 mb-4'>
           <h1 className='w-2/3'>{video.nome}</h1>
           <svg
@@ -34,11 +35,12 @@ export const VideoPlayer: React.FC<videoProps> = video => {
             />
           </svg>
         </div>
-        <hr className='border-raro-rosa ' />
+        <hr className='border-raro-rosa' />
         <div className='mt-6'>
-          <p>{video.descricao}</p>
+          <p>{BuscaTimestamps(video.descricao)}</p>
         </div>
       </div>
     </div>
   );
 };
+

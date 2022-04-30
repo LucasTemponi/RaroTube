@@ -1,4 +1,4 @@
-export type videoProps = {
+export type VideoProps = {
     id:string,
     nome:string,
     url:string,
