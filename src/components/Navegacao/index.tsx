@@ -22,13 +22,11 @@ export const Navegacao = () => {
     return (
       <>
         <div className=" relative inline-block text-left dropdown">
-          <span className="rounded-md shadow-sm font-lg">
-            <button className="inline-flex justify-center w-48 px-4 py-2 text-lg font-bold leading-5 text-raro-cobalto transition duration-150 ease-in-out bg-white border border-gray-300 rounded-lg hover:text-raro-oceano focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800" onClick={() => setIsOpen(!isOpen)}
+            <button className="inline flex items-center font-bold underline decoration-raro-rosa px-4 py-2 text-lg text-raro-cobalto hover:text-raro-rosa" onClick={() => setIsOpen(!isOpen)}
               type="button" aria-haspopup="true" aria-expanded="true" aria-controls="headlessui-menu-items-117">
               <p className='truncate'>{nomeUsuario}</p>
               <svg className="w-5 h-5 ml-2 -mr-1" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </button>
-          </span>
           {isOpen &&
             <div className="opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95">
               <div className="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none" aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117" role="menu">
@@ -55,7 +53,7 @@ export const Navegacao = () => {
         onClick={() => {
           navigate('/login');
         }}
-        className='px-4 py-2 text-lg leading-5 text-raro-cobalto bg-white border border-gray-300 rounded-lg hover:text-raro-oceano focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800'
+        className='font-bold underline decoration-raro-rosa px-4 py-2 text-lg text-raro-cobalto hover:text-raro-rosa'
       >
         Login
       </button>
@@ -63,7 +61,7 @@ export const Navegacao = () => {
         onClick={() => {
           navigate('/cadastro');
         }}
-        className='px-4 py-2 text-lg leading-5 text-raro-cobalto bg-white border border-gray-300 rounded-lg hover:text-raro-oceano focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800'
+        className='font-bold underline decoration-raro-rosa px-4 py-2 text-lg text-raro-cobalto hover:text-raro-rosa'
       >
         Cadastre-se
       </button>
