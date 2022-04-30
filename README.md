@@ -39,7 +39,7 @@ Projeto final do curso de React Raro Academy, visa atender as expectativas dos a
 - Menu (autenticado e não autenticado)
 - Conteúdo
 
-### Navegação (sistemas de rotas para as páginas, tratamento de página de não encontrada)
+### Navegação (sistemas de rotas para as páginas e página de não encontrada)
  
 ##  **Instalando e executando o projeto**
 
