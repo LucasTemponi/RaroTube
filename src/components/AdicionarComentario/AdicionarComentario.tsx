@@ -22,7 +22,7 @@ const AdicionarComentario: React.FC = () => {
     return response;
   }
 
-  if (estaAutenticado()) {
+  if (estaAutenticado) {
     return (
       <div className='max-w-full flex'>
         <div className='pt-4'>

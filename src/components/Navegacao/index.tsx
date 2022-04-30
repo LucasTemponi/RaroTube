@@ -18,7 +18,7 @@ export const Navegacao = () => {
     location.reload();
   };
 
-  if (estaAutenticado()) {
+  if (estaAutenticado) {
     return (
       <>
         <div className=" relative inline-block text-left dropdown">
