@@ -45,7 +45,7 @@ export const Cadastro: React.FC = () => {
             <div className='mx-auto h-12 w-40 flex items-center'>
               <CapeloFbranco />
             </div>
-            <h2 className='mt-6 text-center text-2xl font-bold text-raro-cobalto'>
+            <h2 className='mt-10 text-center text-2xl font-bold text-raro-cobalto'>
               Cadastro
             </h2>
             <p className='mt-2 text-center text-sm text-gray-600'>
@@ -53,9 +53,9 @@ export const Cadastro: React.FC = () => {
             </p>
           </div>
 
-          <form className='mt-8 space-y-6' onSubmit={handleSubmit}>
-            <div className=' rounded-md shadow-sm -space-6y-px  '>
-              <div>
+          <form className='mt-8 space-y-8' onSubmit={handleSubmit}>
+            <div className=' rounded-md shadow-sm '>
+              <div className='mt-6'>
                 <Input
                   type='text'
                   name='nome'
@@ -78,77 +78,68 @@ export const Cadastro: React.FC = () => {
                   onChange={(event) => setEmail(event.target.value)}
                 />
               </div>
-            </div>
 
-            <div>
-              <Input
-                type='password'
-                name='senha'
-                label='senha'
-                placeholder='Senha'
-                required
-                value={senha}
-                onChange={(event) => setSenha(event.target.value)}
-              />
-            </div>
+              <div>
+                <Input
+                  type='password'
+                  name='senha'
+                  label='senha'
+                  placeholder='Senha'
+                  required
+                  value={senha}
+                  onChange={(event) => setSenha(event.target.value)}
+                />
+              </div>
 
-            <div>
-              <Input
-                type='password'
-                name='ConfirmaSenha'
-                label='senha'
-                placeholder='Confirme sua senha'
-                required
-                value={confirmaSenha}
-                onChange={(event) => setConfirmaSenha(event.target.value)}
-              />
-            </div>
+              <div>
+                <Input
+                  type='password'
+                  name='ConfirmaSenha'
+                  label='senha'
+                  placeholder='Confirme sua senha'
+                  required
+                  value={confirmaSenha}
+                  onChange={(event) => setConfirmaSenha(event.target.value)}
+                />
+              </div>
 
-            <div>
-              <Input
-                type='text'
-                name='codigoAcesso'
-                label='codigoAcesso'
-                placeholder='Código de Acesso'
-                required
-                value={codigoAcesso}
-                onChange={(event) => setCodigoAcesso(event.target.value)}
-              />
+              <div>
+                <Input
+                  type='text'
+                  name='codigoAcesso'
+                  label='codigoAcesso'
+                  placeholder='Código de Acesso'
+                  required
+                  value={codigoAcesso}
+                  onChange={(event) => setCodigoAcesso(event.target.value)}
+                />
+              </div>
             </div>
-
             {
               erroConfirmacao ? (
                 <div className='flex items-center justify-end'>
-                  <div className='text-sm'>
-                    <span className="font-small text-[#FF0000]">
+                    <span className="font-sm text-[#FF0000]">
                       {erroConfirmacao}
                     </span>
-                  </div>
                 </div>
               ) : <></>
             }
-            {
-              erroRequest ? (
-                <div className='flex items-center justify-end space-6y-px'>
-                  <div className='text-sm '>
-                    <div className='justify-end flex-row'>
-                      <p className="font-small text-[#FF0000]">
-                        {erroRequest}
-                      </p>
-                      <Link to={`/login`}>
-                        <a
-                          href='#'
-                          className='font-medium text-[#4E47C2] hover:text-[#7A75D1]'
-                        >
-                          Clique aqui para fazer login
-                        </a>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ) : <></>
-            }
-
+            <div className={`flex items-center justify-end h-3 space-6y-px ${erroRequest ? 'visible' : 'invisible'
+              }`}>
+              <div className='justify-end flex-row'>
+                <p className="text-sm text-[#FF0000]">
+                  {erroRequest}
+                </p>
+                <Link to={`/login`}>
+                  <a
+                    href='#'
+                    className='text-sm text-[#4E47C2] hover:text-[#7A75D1]'
+                  >
+                    Clique aqui para fazer login
+                  </a>
+                </Link>
+              </div>
+            </div>
             <div>
               <Button type='submit'>Cadastrar</Button>
             </div>
