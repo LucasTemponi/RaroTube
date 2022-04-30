@@ -34,12 +34,12 @@ Visa atender as expectativas dos alunos, disponibilizando links das aulas gravad
 - Excluir comentário
 - Botão de favoritar vídeo
 
-### Navegação (sistemas de rotas para as páginas, tratamento de página de não encontrada)
-
 ### Layout
 - Header
 - Menu (autenticado e não autenticado)
 - Conteúdo
+
+### Navegação (sistemas de rotas para as páginas, tratamento de página de não encontrada)
  
 ##  **Instalando e executando o projeto**
 
