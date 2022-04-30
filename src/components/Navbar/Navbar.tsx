@@ -12,7 +12,7 @@ export type Props = {
 
 const Navbar: React.FC<Props> = ({ children }) => {
 
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const iniciaVideos = useVideos(state => state.iniciaVideos);
 
   useEffect(() => {
