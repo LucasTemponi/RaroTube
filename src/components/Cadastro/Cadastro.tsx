@@ -49,7 +49,7 @@ export const Cadastro: React.FC = () => {
               Cadastro
             </h2>
             <p className='mt-2 text-center text-sm text-gray-600'>
-              Preencha os campos abaixo para se cadastrar na plataforma
+              Preencha os campos e cadastre-se para ter acesso às aulas da sua turma na Raro Academy.
             </p>
           </div>
 
