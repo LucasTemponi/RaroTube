@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react"
+import { FavoritosVazio } from "../../components/FavoritosVazio/FavoritosVazio"
 import { VideoList } from "../../components/VideoList/VideoList"
 import { VideoProps } from "../../components/VideoPlayer/VideoProps"
 
@@ -28,14 +29,14 @@ export const PaginaPrincipal = () => {
 
     const loadVideos = async () => {
 
-        try{
+        try {
             if (authContext.estaAutenticado) {
                 console.log('autenticado')
                 await apiClient.get('/videos/favoritos').then(response => iniciaFavoritos(response.data));
-                await apiClient.get('/videos').then(response => iniciaVideos(response.data.reverse()));                
+                await apiClient.get('/videos').then(response => iniciaVideos(response.data.reverse()));
             } else {
                 console.log('não autenticado')
-                await apiClient.get('/videos').then(response => iniciaVideos(response.data.reverse()));    
+                await apiClient.get('/videos').then(response => iniciaVideos(response.data.reverse()));
             }
             setCarregando(false);
         } catch (e) {
@@ -43,7 +44,7 @@ export const PaginaPrincipal = () => {
         }
     }
 
-    useEffect(() => { 
+    useEffect(() => {
         if (videos.length === 0 || todosFavoritos.length === 0) {
             loadVideos();
         } else {
@@ -57,21 +58,24 @@ export const PaginaPrincipal = () => {
         carregando ? <LazyPrincipal /> :
             <>
                 <div className=" my-auto 4xl:max-w-[70vw] xl:max-w-[80vw] lg:w-[85vw] md:w-[90vw] sm:w-[95vw] m-auto" >
-               
-                {
-                    authContext.estaAutenticado &&
-                    (<>
-                        <h1 className=" font-extrabold underline decoration-raro-rosa text-2xl ml-7 py-4 text-left text-raro-cobalto" >Vídeos favoritos</h1>
-                        <VideoList hover videos={todosFavoritos} />
 
-                    </>)
-                }
-                <h1 className=" font-extrabold underline decoration-raro-rosa text-2xl  ml-7 py-4 text-left text-raro-cobalto">Adicionados recentemente</h1>
-                <VideoList hover videos={videos?.slice(0, 10)} />
-                <h1 className=" font-extrabold underline decoration-raro-rosa text-2xl  ml-7 py-4 text-left text-raro-cobalto">Recomendados</h1>
-                <VideoList hover videos={videos?.slice(0, pagina * 15)} />
+                    {
+                        authContext.estaAutenticado &&
+                        (<>
+                            <h1 className=" font-extrabold underline decoration-raro-rosa text-2xl ml-7 py-4 text-left text-raro-cobalto" >Vídeos favoritos</h1>
 
-                <div ref={containerRef} className="h-10" />
+                            {
+                                todosFavoritos.length === 0 ? <FavoritosVazio /> : <VideoList hover videos={todosFavoritos} />
+                            }
+
+                        </>)
+                    }
+                    <h1 className=" font-extrabold underline decoration-raro-rosa text-2xl  ml-7 py-4 text-left text-raro-cobalto">Adicionados recentemente</h1>
+                    <VideoList hover videos={videos?.slice(0, 10)} />
+                    <h1 className=" font-extrabold underline decoration-raro-rosa text-2xl  ml-7 py-4 text-left text-raro-cobalto">Recomendados</h1>
+                    <VideoList hover videos={videos?.slice(0, pagina * 15)} />
+
+                    <div ref={containerRef} className="h-10" />
                 </div>
             </>
     )
