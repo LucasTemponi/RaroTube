@@ -26,14 +26,13 @@ export const PaginaPrincipal = () => {
     const pagina = useScroll(containerRef)
 
     const loadVideos = async () => {
-        setCarregando(true);
         try{
             if (authContext.estaAutenticado()) {
-                await Promise.all([
-                    apiClient.get('/videos').then(response => iniciaVideos(response.data.reverse())),
-                    apiClient.get('/videos/favoritos').then(response => iniciaFavoritos(response.data)),
-                    ]);
+                console.log('autenticado')
+                await apiClient.get('/videos/favoritos').then(response => iniciaFavoritos(response.data));
+                await apiClient.get('/videos').then(response => iniciaVideos(response.data.reverse()));                
             } else {
+                console.log('não autenticado')
                 await apiClient.get('/videos').then(response => iniciaVideos(response.data.reverse()));    
             }
             setCarregando(false);
@@ -42,15 +41,14 @@ export const PaginaPrincipal = () => {
         }
     }
 
-    useEffect(() => {
+    useEffect(() => { 
         if (videos.length === 0 || todosFavoritos.length === 0) {
-            loadVideos()
+            loadVideos();
         } else {
             setCarregando(false);
+            loadVideos();
         }
-        
-        // setTimeout(()=>setCarregando(false),5000)
-    }, [])
+    }, [authContext.estaAutenticado()])
 
     return (
         carregando ? <LazyPrincipal /> :
@@ -61,14 +59,13 @@ export const PaginaPrincipal = () => {
                     authContext.estaAutenticado() &&
                     (<>
                         <h1 className=" font-extrabold underline decoration-raro-rosa text-4xl m-4 mt-12 text-left " >Vídeos favoritos</h1>
-                            <VideoList videos={todosFavoritos} />
-                        
+                            <VideoList hover videos={todosFavoritos} />
                     </>)
                 }
                 <h1 className=" font-extrabold underline decoration-raro-oceano text-4xl m-4 mt-12 text-left">Adicionados recentemente</h1>
-                    <VideoList videos={videos?.slice(0, 10)} />
+                    <VideoList hover videos={videos?.slice(0, 10)} />
                 <h1 className=" font-extrabold underline decoration-raro-violeta text-4xl m-4 mt-12 text-left">Recomendados</h1>
-                    <VideoList videos={videos?.slice(0, pagina * 15)} />
+                    <VideoList hover videos={videos?.slice(0, pagina * 15)} />
 
                 <div ref={containerRef} className="h-10" /> 
         </>

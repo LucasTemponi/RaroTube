@@ -11,7 +11,7 @@ export const VideoList:React.FC<videoListProps> = (videoList) => {
             {videoList.videos?.map((video) => {
                 return(
                     <li>
-                        <Thumbnail key={video.id} video={video} hover={true} />
+                        <Thumbnail key={video.id} video={video} hover={videoList.hover} />
                     </li>
                 )
             })}

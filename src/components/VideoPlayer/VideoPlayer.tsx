@@ -1,29 +1,72 @@
-import { useState } from 'react';
-import { VideoProps } from './VideoProps';
+import { useEffect, useRef, useState } from 'react';
 import { BuscaTimestamps } from '../../helpers/BuscaTimestamps';
+import { useVideos } from '../../hooks/useVideos';
+import { VideoPlayerProps } from './VideoPlayerProps';
+import { NextUp } from '../NextUp/NextUP';
+import { useNavigate } from 'react-router-dom';
 
-export const VideoPlayer: React.FC<VideoProps> = video => {
+export const VideoPlayer: React.FC<VideoPlayerProps> = props => {
+
   const [favorite, setFavorite] = useState(false);
+  const [videoAcabando, setVideoAcabando] = useState<boolean>(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  // const navigate = useNavigate();
+  // const [timer,setTimer] = useState<number>(0);
+  // const setTimeoutId = useRef(0);
 
   const favoriteVideo = () => {
     setFavorite(!favorite);
   };
 
+  const handleOnTimeUpdate = () => {
+    if (videoRef.current) {
+      if (videoRef.current?.currentTime >= (videoRef.current.duration - 2)) {
+        setVideoAcabando(true);
+      } else {
+        setVideoAcabando(false);
+      }
+    }
+  }
+
+  // const handleTimer = () => {
+  //   console.log(timer);
+  //   setTimeout(() => {
+  //     setTimer(timer - 1);
+  //   }, 1000);
+  // }
+
+  // useEffect(() => {
+  //   if (videoAcabando){
+  //     setTimer(5);
+  //     setTimeoutId.current = window.setTimeout(() => {
+  //       navigate(`/video/${props.proximoVideo.id}/`);
+  //     },5000);
+  //   }
+  //   handleTimer();
+  // }, [videoAcabando]);
+
+  // useEffect(() => {
+  //   if (timer > 0) {
+  //     handleTimer();
+  //   }
+  // }, [timer]);
+
+
   return (
     <div className='w-full' >
-      <div className={`transform m-auto`}>
-        <video id="VideoPrincipal" className='w-full h-full' title={video.nome} controls>
-          <source src={video.url} />
+      <div className={`transform m-auto relative `}>
+        {videoAcabando && <NextUp {...props.proximoVideo} />       }
+        <video ref={videoRef} id="VideoPrincipal" className='w-full h-full' title={props.video.nome} controls onTimeUpdate={handleOnTimeUpdate}>
+          <source src={props.video.url} />
         </video>
       </div>
       <div className='w-14/12 mx-8 mt-8'>
         <div className='flex flex-row justify-items-start mt-2 mb-4'>
-          <h1 className='w-2/3'>{video.nome}</h1>
+          <h1 className='w-2/3'>{props.video.nome}</h1>
           <svg
             xmlns='http://www.w3.org/2000/svg'
-            className={`h-6 w-6  ${
-              favorite ? 'fill-amber-300' : 'fill-gray-100 hover:fill-amber-100'
-            } content-center`}
+            className={`h-6 w-6  ${favorite ? 'fill-amber-300' : 'fill-gray-100 hover:fill-amber-100'
+              } content-center`}
             fill='none'
             viewBox='0 0 24 24'
             onClick={favoriteVideo}
@@ -37,7 +80,7 @@ export const VideoPlayer: React.FC<VideoProps> = video => {
         </div>
         <hr className='border-raro-rosa' />
         <div className='mt-6'>
-          <p>{BuscaTimestamps(video.descricao)}</p>
+          <p>{BuscaTimestamps(props.video.descricao)}</p>
         </div>
       </div>
     </div>
