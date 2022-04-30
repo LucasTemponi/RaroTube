@@ -10,41 +10,36 @@ Visa atender as expectativas dos alunos, disponibilizando links das aulas gravad
 ##  **Funcionalidades**
 
 
-- Home não autenticada
+### Home não autenticada
+- Lista de vídeos públicos
+- Botão de login no header
+- Botão de cadastrar no header
+- Funcionalidade de se matricular no menu
 
-  - vídeos públicos
-  - botão de login 
-  - botão de cadastra-se
-  - Menu
-    - Matricule-se
+### Página de login
+- Realizar a autenticação
+- Recuperar senha
 
-- Página de login
-  - autenticação
-  - esqueceu senha
+### Home autenticada
+- Lista de vídeos favoritos
+- Lista de vídeos recentes
+- Lista de vídeos recomendados
+- Botão dropdown de ações com o usuário (alterar senha, sair)
+- Menu com vídeos das aulas
 
-- Home autenticada
+### Exibição do conteúdo
+- Visulização do vídeo
+- Lista de vídeos sugeridos
+- Adicionar comentário
+- Excluir comentário
+- Botão de favoritar vídeo
 
-  - Vídeos favoritos
-  - Vídeos recentes
-  - Vídeos recomendados
-  - botão dropdown de ações com o usuário
-  - menu com vídeos das aulas
+### Navegação (sistemas de rotas para as páginas, tratamento de página de não encontrada)
 
-- Navegação
-- Rotas
-
-- Visualização do conteúdo
-  - visulização do vídeo
-  - vídeos sugeridos
-  - funcionalidade de comentar.
-  - excluir comentário
-  - botão de favoritar vídeo
-
-- Layout
-
-  - Cabeçalho
-  - Menu
-  - Navegação
+### Layout
+- Header
+- Menu (autenticado e não autenticado)
+- Conteúdo
  
 ##  **Instalando e executando o projeto**
 
