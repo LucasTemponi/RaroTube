@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { VideoProps } from '../../components/VideoPlayer/VideoProps';
 
-
 type SemanaSideBarProps = {
-  semana: string;
-  videos: VideoProps[];
+    semana: string,
+    videos: VideoProps[],
+
 };
 
 export const SemanaSideBar: React.FC<SemanaSideBarProps> = (semana) => {
