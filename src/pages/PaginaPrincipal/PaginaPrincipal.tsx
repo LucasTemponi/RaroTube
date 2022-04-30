@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { VideoList } from "../../components/VideoList/VideoList"
-import { videoProps } from "../../components/VideoPlayer/VideoProps"
+import { VideoProps } from "../../components/VideoPlayer/VideoProps"
 
 import { useAuthContext } from "../../context/authContext"
 import { useFavoritos } from "../../hooks/useFavoritos"
@@ -17,7 +17,7 @@ export const PaginaPrincipal = () => {
     // const [videos, setVideos] = useState<VideoProps[]>();
     const videos = useVideos(state => state.videos);
     const iniciaVideos = useVideos(state => state.iniciaVideos);
-    const [recomendados, setRecomendados] = useState<videoProps[]>();
+    const [recomendados, setRecomendados] = useState<VideoProps[]>();
     const [carregando, setCarregando] = useState<boolean>(true);
     const authContext = useAuthContext();
 
