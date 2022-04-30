@@ -31,19 +31,27 @@ const VideoPage = () => {
   const timestamp = useTimestamp(state => state.setVideo);
 
 
-  useEffect(() => {
-    if (todosVideos) {
-      const videoIndex = todosVideos.findIndex(element => element.id === video?.id);
-      console.log(videoIndex)
-      if (videoIndex >= 0) {
-        setProximoVideo(todosVideos.slice(videoIndex - 1)[0])
-      } else {
-        setProximoVideo(todosVideos.slice(-1)[0])
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (todosVideos) {
+  //     console.log(video?.id)
+  //     const videoIndex = todosVideos.findIndex(element => element.id === video?.id);
+  //     console.log(videoIndex)
+  //     if (videoIndex >= 0) {
+  //       console.log(videoIndex, '>=0')
+  //       setProximoVideo(todosVideos.slice(videoIndex - 1)[0])
+  //     } else {
+  //       console.log(videoIndex, '<0')
+  //       setProximoVideo(todosVideos.slice(-1)[0])
+  //     } 
+  //   } else {
+  //     console.log('todosVideos não carregado')
+  //   }
+  // }, [todosVideos]);
+
+
 
   useEffect(() => {
+
     const loadRecomendados = async () => {
       const response = await apiClient.get(`/videos/${id}/recomendacoes`);
       setRecomendados(response.data);
@@ -59,8 +67,8 @@ const VideoPage = () => {
       iniciaComentarios(response.data);
     };
 
-    loadRecomendados();
     loadVideo();
+    loadRecomendados();
     loadComentarios();
     if (!todosVideos.length) {
       apiClient.get('/videos').then(response => iniciaVideos(response.data.reverse()));
@@ -68,7 +76,25 @@ const VideoPage = () => {
   }, [id]);
 
   useEffect(() => {
+    const localizaIndexVideo = () => {
+      if (todosVideos) {
+        console.log(video?.id)
+        const videoIndex = todosVideos.findIndex(element => element.id === video?.id);
+        console.log(videoIndex)
+        if (videoIndex >= 0) {
+          console.log(videoIndex, '>=0')
+          setProximoVideo(todosVideos.slice(videoIndex - 1)[0])
+        } else {
+          console.log(videoIndex, '<0')
+          setProximoVideo(todosVideos.slice(-1)[0])
+        } 
+      } else {
+        console.log('todosVideos não carregado')
+      }
+    }
+
     timestamp(document.getElementById('VideoPrincipal') as HTMLVideoElement);
+    localizaIndexVideo();
   }, [video]);
 
   return (

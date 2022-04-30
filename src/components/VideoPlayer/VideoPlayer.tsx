@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { BuscaTimestamps } from '../../helpers/BuscaTimestamps';
-import { useVideos } from '../../hooks/useVideos';
 import { VideoPlayerProps } from './VideoPlayerProps';
 import { NextUp } from '../NextUp/NextUP';
-import { useNavigate } from 'react-router-dom';
+
 
 export const VideoPlayer: React.FC<VideoPlayerProps> = props => {
 
@@ -27,30 +26,6 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = props => {
       }
     }
   }
-
-  // const handleTimer = () => {
-  //   console.log(timer);
-  //   setTimeout(() => {
-  //     setTimer(timer - 1);
-  //   }, 1000);
-  // }
-
-  // useEffect(() => {
-  //   if (videoAcabando){
-  //     setTimer(5);
-  //     setTimeoutId.current = window.setTimeout(() => {
-  //       navigate(`/video/${props.proximoVideo.id}/`);
-  //     },5000);
-  //   }
-  //   handleTimer();
-  // }, [videoAcabando]);
-
-  // useEffect(() => {
-  //   if (timer > 0) {
-  //     handleTimer();
-  //   }
-  // }, [timer]);
-
 
   return (
     <div className='w-full' >
