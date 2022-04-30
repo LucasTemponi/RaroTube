@@ -46,7 +46,7 @@ export const SideBar: React.FC<Props> = ({ children, isOpen }) => {
     return (
         <div className="flex flex-row z-10 w-full " >
             {closeSidebar &&
-                <div className={` fixed xl:relative w-full md:w-1/2 xl:w-64 z-30 flex flex-col mt-20 bg-gray-50 transition-all duration-200 ease-linear ${animation} `}>
+                <div className={` min-h-screen absolute xl:relative w-full md:w-1/2 xl:w-64 z-20 flex flex-col mt-20 bg-gray-50 dark:bg-gray-800 transition-all duration-200 ease-linear ${animation} `}>
                     <div className=" py-2 px-3 bg-gray-50 dark:bg-gray-800">
                     </div>
                     {Object.keys(semanas).length ?
