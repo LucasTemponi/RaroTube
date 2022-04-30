@@ -27,15 +27,15 @@ export const PaginaPrincipal = () => {
     const pagina = useScroll(containerRef)
 
     const loadVideos = async () => {
-        setCarregando(true);
-        try {
+
+        try{
             if (authContext.estaAutenticado()) {
-                await Promise.all([
-                    apiClient.get('/videos').then(response => iniciaVideos(response.data.reverse())),
-                    apiClient.get('/videos/favoritos').then(response => iniciaFavoritos(response.data)),
-                ]);
+                console.log('autenticado')
+                await apiClient.get('/videos/favoritos').then(response => iniciaFavoritos(response.data));
+                await apiClient.get('/videos').then(response => iniciaVideos(response.data.reverse()));                
             } else {
-                await apiClient.get('/videos').then(response => iniciaVideos(response.data.reverse()));
+                console.log('não autenticado')
+                await apiClient.get('/videos').then(response => iniciaVideos(response.data.reverse()));    
             }
             setCarregando(false);
         } catch (e) {
@@ -43,15 +43,15 @@ export const PaginaPrincipal = () => {
         }
     }
 
-    useEffect(() => {
+    useEffect(() => { 
         if (videos.length === 0 || todosFavoritos.length === 0) {
-            loadVideos()
+            loadVideos();
         } else {
             setCarregando(false);
+            loadVideos();
         }
+    }, [authContext.estaAutenticado()])
 
-        // setTimeout(()=>setCarregando(false),5000)
-    }, [])
 
     return (
         carregando ? <LazyPrincipal /> :
@@ -62,14 +62,14 @@ export const PaginaPrincipal = () => {
                     authContext.estaAutenticado() &&
                     (<>
                         <h1 className=" font-extrabold underline decoration-raro-rosa text-2xl ml-7 py-4 text-left text-raro-cobalto" >Vídeos favoritos</h1>
-                        <VideoList videos={todosFavoritos} />
+                        <VideoList hover videos={todosFavoritos} />
 
                     </>)
                 }
                 <h1 className=" font-extrabold underline decoration-raro-rosa text-2xl  ml-7 py-4 text-left text-raro-cobalto">Adicionados recentemente</h1>
-                <VideoList videos={videos?.slice(0, 10)} />
+                <VideoList hover videos={videos?.slice(0, 10)} />
                 <h1 className=" font-extrabold underline decoration-raro-rosa text-2xl  ml-7 py-4 text-left text-raro-cobalto">Recomendados</h1>
-                <VideoList videos={videos?.slice(0, pagina * 15)} />
+                <VideoList hover videos={videos?.slice(0, pagina * 15)} />
 
                 <div ref={containerRef} className="h-10" />
                 </div>
