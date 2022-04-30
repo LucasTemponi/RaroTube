@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import CapeloFbranco from '../../assets/CapeloFbranco';
+import { useAuthContext } from '../../context/authContext';
 import apiClient from '../../services/api-client';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 
 export const Cadastro: React.FC = () => {
 
-  const [nome, setNome] = useState('');
+  const [nomeCadastro, setNomeCadastro] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [confirmaSenha, setConfirmaSenha] = useState('');
@@ -16,23 +17,33 @@ export const Cadastro: React.FC = () => {
   const [erroRequest, setErroRequest] = useState('');
   const [success, setSuccess] = useState(false)
   const navigate = useNavigate();
+  const auth = useAuthContext();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const awaitToNavigate = () => {
-      navigate('/login')
+      navigate('/')
     }
 
     try {
       if (senha === confirmaSenha) {
         const url = '/auth/cadastrar';
-        const response = await apiClient.post(url, { nome, email, senha, codigoAcesso });
+        await apiClient.post(url, { nome: nomeCadastro, email, senha, codigoAcesso });
+
         setErroConfirmacao('')
         setSuccess(true)
-        setTimeout(() => {
-          awaitToNavigate()
-        }, 5000);
+
+        const urlLogin = '/auth/login'
+        const response = await apiClient.post(urlLogin, { email, senha });
+
+        const { access_token, id, nome, foto } = response.data;
+        if (access_token) {
+          auth.autentica(id, email, access_token, nome, foto);
+          setTimeout(() => {
+            awaitToNavigate()
+          }, 2500);
+        }
       } else {
         setErroConfirmacao('As senhas não são iguais.');
       }
@@ -59,14 +70,11 @@ export const Cadastro: React.FC = () => {
             </h2>
             {
               success ? (
-                <div className='flex flex-col mt-2 justify-center items-center '>
+                <div className='flex flex-col mt-2 text-center justify-center items-center '>
                   <span className="font-sm text-raro-rosa">
                     Cadastro realizado com sucesso!
                   </span>
-                  <span className="font-sm text-raro-rosa">Em breve você será redirecionado ao login.</span>
-                  <Link to={'/login'}>
-                    <span className="flex justify-end font-sm text-raro-oceano">Ir Agora</span>
-                  </Link>
+                  <span className="font-sm text-raro-rosa">Em breve você será redirecionado para a página inicial.</span>
                 </div>
               ) : <p className='mt-2 text-center text-sm text-gray-600'>
                 Preencha os campos e cadastre-se para ter acesso às aulas da sua turma na Raro Academy.
@@ -84,8 +92,8 @@ export const Cadastro: React.FC = () => {
                   label='nome'
                   placeholder='Nome'
                   required
-                  value={nome}
-                  onChange={(event) => setNome(event.target.value)}
+                  value={nomeCadastro}
+                  onChange={(event) => setNomeCadastro(event.target.value)}
                 />
               </div>
 
