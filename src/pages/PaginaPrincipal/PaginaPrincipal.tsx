@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { VideoList } from "../../components/VideoList/VideoList"
-import { videoProps } from "../../components/VideoPlayer/VideoProps"
+import { VideoProps } from "../../components/VideoPlayer/VideoProps"
 
 import { useAuthContext } from "../../context/authContext"
 import { useFavoritos } from "../../hooks/useFavoritos"
@@ -17,7 +17,7 @@ export const PaginaPrincipal = () => {
     // const [videos, setVideos] = useState<VideoProps[]>();
     const videos = useVideos(state => state.videos);
     const iniciaVideos = useVideos(state => state.iniciaVideos);
-    const [recomendados, setRecomendados] = useState<videoProps[]>();
+    const [recomendados, setRecomendados] = useState<VideoProps[]>();
     const [carregando, setCarregando] = useState<boolean>(true);
     const authContext = useAuthContext();
 
@@ -29,7 +29,7 @@ export const PaginaPrincipal = () => {
     const loadVideos = async () => {
 
         try{
-            if (authContext.estaAutenticado()) {
+            if (authContext.estaAutenticado) {
                 console.log('autenticado')
                 await apiClient.get('/videos/favoritos').then(response => iniciaFavoritos(response.data));
                 await apiClient.get('/videos').then(response => iniciaVideos(response.data.reverse()));                
@@ -50,16 +50,16 @@ export const PaginaPrincipal = () => {
             setCarregando(false);
             loadVideos();
         }
-    }, [authContext.estaAutenticado()])
+    }, [authContext.estaAutenticado])
 
 
     return (
         carregando ? <LazyPrincipal /> :
             <>
-                <div className="4xl:max-w-[70vw] xl:max-w-[80vw] lg:w-[85vw] md:w-[90vw] sm:w-[95vw] m-auto" >
+                <div className=" my-auto 4xl:max-w-[70vw] xl:max-w-[80vw] lg:w-[85vw] md:w-[90vw] sm:w-[95vw] m-auto" >
                
                 {
-                    authContext.estaAutenticado() &&
+                    authContext.estaAutenticado &&
                     (<>
                         <h1 className=" font-extrabold underline decoration-raro-rosa text-2xl ml-7 py-4 text-left text-raro-cobalto" >Vídeos favoritos</h1>
                         <VideoList hover videos={todosFavoritos} />

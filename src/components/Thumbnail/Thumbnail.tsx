@@ -53,7 +53,7 @@ export const Thumbnail: React.FC<thumbnailProps> = props => {
     isFavorite.length > 0 ? setFavorite(true) : setFavorite(false);
   }, [todosFavoritos, props.video]);
 
-  if (authContext.estaAutenticado()) {
+  if (authContext.estaAutenticado) {
     return (
       <div
         className={`flex flex-col items-center transform ${props.hover ? 'hover:scale-110' : ''
