@@ -1,3 +1,10 @@
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
 <div align="center">
 <img src="./src/assets/Logo.svg" alt="Logo" width="300" height="90">  
 </div>
@@ -5,7 +12,7 @@
 
 #  Projeto Raro Tube
 
-Projeto final do curso de React Raro Academy, visa atender as expectativas dos alunos, disponibilizando links das aulas gravadas durante a semana.  **tendo vídeos públicos e vídeos privados.**
+Projeto final do curso de React Raro Academy, visa atender as expectativas dos alunos, disponibilizando vídeos das aulas gravadas durante a semana no portal .  **tendo vídeos públicos e vídeos privados.**
 
 ##  **Funcionalidades**
 
