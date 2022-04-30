@@ -69,7 +69,7 @@ export const CodigoDeRecuperarSenha = () => {
             <div className='flex items-center justify-end'>
               <div className='text-sm'>
                 <Link
-                  className='font-medium text-[#4E47C2] hover:text-[#7A75D1]'
+                  className='font-medium text-[#4E47C2] hover:text-raro-rosa'
                   to={`/alterarsenha`}
                 >
                   Recebi o código e gostaria de prosseguir
