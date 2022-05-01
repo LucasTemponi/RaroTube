@@ -50,17 +50,19 @@ const AdicionarComentario: React.FC = () => {
             }`}
           >
             <button
-              className='px-3 py-2 w-24 text-sm text-blue-100 border border-raro-oceano bg-raro-oceano rounded-md transition-all duration-[4000] delay-[4000] ease-out'
+              className='px-3 py-2 w-24 text-sm text-blue-100 border border-raro-oceano bg-raro-oceano rounded-md disabled:bg-gray-300 disabled:border-gray-300 transition-all duration-[4000] delay-[4000] ease-out'
               type='submit'
+              disabled={!texto}
             >
               Comentar
             </button>
             <button
-              className='px-3 py-2 w-24 text-sm text-blue-600 border border-raro-oceano rounded-md'
+              className='px-3 py-2 w-24 text-sm text-blue-600 border border-raro-oceano disabled:bg-gray-300 disabled:border-gray-300 disabled:text-blue-100 rounded-md'
               onClick={e => {
                 e.preventDefault();
                 setTexto('');
               }}
+              disabled={!texto}
             >
               Cancelar
             </button>

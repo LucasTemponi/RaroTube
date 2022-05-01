@@ -50,17 +50,19 @@ const EditarComentario: React.FC<EditarComentarioProps> = ({
         </div>
         <div className='flex-end space-x-3'>
           <button
-            className='px-3 py-2 text-sm text-blue-100 bg-raro-oceano rounded-md'
+            className='px-3 py-2 text-sm text-blue-100 bg-raro-oceano rounded-md disabled:bg-gray-300 disabled:border-gray-300'
             type='submit'
+            disabled={!textoEdit}
           >
             Comentar
           </button>
           <button
-            className='px-3 py-2 text-sm text-blue-600 border border-raro-oceano rounded-md'
+            className='px-3 py-2 text-sm text-blue-600 border border-raro-oceano rounded-md disabled:bg-gray-300 disabled:border-gray-300 disabled:text-blue-100'
             onClick={e => {
               e.preventDefault();
               setTextoEdit('');
             }}
+            disabled={!textoEdit}
           >
             Cancelar
           </button>
