@@ -93,8 +93,8 @@ export const Thumbnail: React.FC<thumbnailProps> = props => {
             />
           </svg>
         </div>
-        <div className=' bg-white truncate w-full rounded-b-md items-start justify-start'>
-          <h2 className=' 2xl:text-xl xl:text-lg lg:text-base md:text-base sm:text-base py-4 px-2 text-black'>
+        <div className='bg-white w-full rounded-b-md items-start justify-start'>
+          <h2 className='truncate 2xl:text-xl xl:text-lg lg:text-base md:text-base sm:text-base py-4 px-2 text-black'>
             {props.video.nome}
           </h2>
           <p className='px-2'>{formatarDataThumbnail(props.video.dataPublicacao.toString())}</p>
@@ -126,8 +126,8 @@ export const Thumbnail: React.FC<thumbnailProps> = props => {
             <source src={props.video.url} />
           </video>
         </div>
-        <div className=' truncate w-full rounded-b-md items-start justify-start'>
-          <h2 className=' 2xl:text-xl xl:text-lg lg:text-base md:text-base sm:text-base py-4 px-2 text-black'>
+        <div className='w-full rounded-b-md items-start justify-start'>
+          <h2 className='truncate 2xl:text-xl xl:text-lg lg:text-base md:text-base sm:text-base py-4 px-2 text-black'>
             {props.video.nome}
           </h2>
           <p className='px-2'>{formatarDataThumbnail(props.video.dataPublicacao.toString())}</p>
@@ -138,3 +138,4 @@ export const Thumbnail: React.FC<thumbnailProps> = props => {
 }
 
 export default Thumbnail
+
