@@ -48,14 +48,13 @@ const VideoPage = () => {
       console.log(response.data);
       iniciaComentarios(response.data);
     };
-    console.log('useEffect id')
+    console.log(id)
     loadVideo();
     loadRecomendados();
     loadComentarios();
     if (!videosCarregados) {
       iniciaVideos();
     }
-    setCarregando(false);
   }, [id]);
 
   useEffect(() => {
@@ -76,24 +75,27 @@ const VideoPage = () => {
         console.log('todosVideos não carregado');
       }
     };
+
     console.log('useEffect video,videoCarregados')
-    buscaProximoVideo();
-    
+    if (video && videosCarregados){
+      buscaProximoVideo();
+      setCarregando(false);
+    }    
   }, [video,videosCarregados]);
 
   useEffect(() => {
-    console.log('useEffect video, proximoVideo')
-    timestamp(document.getElementById('VideoPrincipal') as HTMLVideoElement);
-    console.log('Teste',document.getElementById('VideoPrincipal'))
-  },[proximoVideo])
+    if (!carregando){
+      timestamp(document.getElementById('VideoPrincipal') as HTMLVideoElement);
+    }
+  },[carregando])
 
   return (
     <>
       <div className=' flex flex-col items-center '>
         <div className=' w-full max-w-screen-2xl '>
-          {video && proximoVideo ? (
+          {!carregando && video && proximoVideo ? (
             <VideoPlayer
-              key={video.id}
+              key={video?.id}
               video={video}
               proximoVideo={proximoVideo}
             />
@@ -111,7 +113,7 @@ const VideoPage = () => {
               <div ref={containerRefComentarios} className='h-10'></div>
             </div>
             <div className=' m-auto sm:ml-8'>
-              {video && proximoVideo ? (
+              {!carregando ? (
                 <VideoList
                   videos={recomendados?.slice(0, paginaRecomendados * 10)}
                   vertical
