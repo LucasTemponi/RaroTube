@@ -1,7 +1,8 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { BuscaTimestamps } from '../../helpers/BuscaTimestamps';
 import { VideoPlayerProps } from './VideoPlayerProps';
 import { NextUp } from '../NextUp/NextUP';
+import { useFavoritos } from '../../hooks/useFavoritos';
 
 
 export const VideoPlayer: React.FC<VideoPlayerProps> = props => {
@@ -9,12 +10,20 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = props => {
   const [favorite, setFavorite] = useState(false);
   const [videoAcabando, setVideoAcabando] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const todosFavoritos = useFavoritos(state=>state.favoritos);
+  const favoritosCarregados = useFavoritos(state=>state.favoritosCarregados);
+  const removeFavorito = useFavoritos(state=>state.removeFavorito);
+  const adicionaFavorito = useFavoritos(state=>state.adicionaFavorito);
   // const navigate = useNavigate();
   // const [timer,setTimer] = useState<number>(0);
   // const setTimeoutId = useRef(0);
 
   const favoriteVideo = () => {
-    setFavorite(!favorite);
+    if (favorite) {
+      removeFavorito(props.video);      
+    } else {
+      adicionaFavorito(props.video);
+    }
   };
 
   const handleOnTimeUpdate = () => {
@@ -26,6 +35,12 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = props => {
       }
     }
   }
+
+  useEffect(() => {
+    let isFavorite = todosFavoritos.filter(
+      favorito => favorito.id === props.video.id);
+    isFavorite.length > 0 ? setFavorite(true) : setFavorite(false);
+  },[todosFavoritos]);
 
   return (
     <div className='w-full' >
@@ -61,4 +76,3 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = props => {
     </div>
   );
 };
-
