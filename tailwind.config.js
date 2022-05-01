@@ -9,7 +9,7 @@ module.exports = {
           violeta: '#7475D1',
           maximum: '#B5B3E6',
           rosa: '#f5487f',
-          azulzinho: "44c2fd",
+          azulzinho: "#44c2fd",
         },
       },
     },

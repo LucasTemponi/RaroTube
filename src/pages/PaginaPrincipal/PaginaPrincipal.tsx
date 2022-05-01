@@ -58,28 +58,30 @@ export const PaginaPrincipal = () => {
 
 
     return (
-        <div className=' my-auto max-w-[95vw] lg:max-w-[85vw] mx-auto'>
+        <section className=' my-auto mt-2 max-w-[95vw] lg:max-w-[85vw] mx-auto'>
             {carregando ? (
-            <LazyPrincipal />
+                <LazyPrincipal />
             ) : (
-            <>
-                {authContext.estaAutenticado && (
-                    <>
-                        <h1 className=' font-extrabold underline decoration-raro-rosa text-2xl ml-7 py-4 text-left text-raro-cobalto'>
-                            Vídeos favoritos
+                <>
+                    {authContext.estaAutenticado && (
+                        <article className=" mb-10 " >
+                            <h1 className=' font-extrabold underline decoration-raro-rosa text-4xl my-2 py-4 text-left text-raro-cobalto'>
+                                Vídeos favoritos
+                            </h1>
+                            {
+                                todosFavoritos.length === 0 ? <FavoritosVazio /> : <VideoList hover videos={todosFavoritos} />
+                            }
+                        </article>
+                    )}
+                    <article className=" mb-10 " >
+                        <h1 className=' font-extrabold underline decoration-raro-rosa text-4xl my-2 py-4 text-left text-raro-cobalto'>
+                            Adicionados recentemente
                         </h1>
-                        {
-                            todosFavoritos.length === 0 ? <FavoritosVazio /> : <VideoList hover videos={todosFavoritos} />
-                        }
-                    </>
-                )}
-                <h1 className=' font-extrabold underline decoration-raro-rosa text-2xl  ml-7 py-4 text-left text-raro-cobalto'>
-                    Adicionados recentemente
-                </h1>
-                <VideoList hover videos={videos?.slice(0, pagina * 10)} />
-            </>
+                        <VideoList hover videos={videos?.slice(0, pagina * 20)} />
+                    </article>
+                </>
             )}
             <div ref={containerRef} className='h-10' />
-        </div>
-    );    
+        </section>
+    );
 };

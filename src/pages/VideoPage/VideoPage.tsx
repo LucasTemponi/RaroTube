@@ -83,7 +83,7 @@ const VideoPage = () => {
   return (
     <>
       <div className=' flex flex-col items-center '>
-        <div className=' 2xl:min-w-[80vw] max-w-screen-2xl '>
+        <div className=' w-full max-w-screen-2xl '>
           {video && proximoVideo ? (
             <VideoPlayer
               key={video.id}
@@ -91,9 +91,9 @@ const VideoPage = () => {
               proximoVideo={proximoVideo}
             />
           ) : (
-            <video className='w-full h-full' />
+            <div className='mx-auto w-full aspect-video max-h-[80vh] bg-gradient-to-b from-black to-gray-800 ' />
           )}
-          <div className=' flex flex-row justify-center mt-16 mx-10 '>
+          <div className=' flex flex-col sm:flex-row justify-center mt-16 mx-10 '>
             <div className=' w-3/4 '>
               {comentarios && (
                 <ListaComentarios
@@ -103,7 +103,7 @@ const VideoPage = () => {
               )}
               <div ref={containerRefComentarios} className='h-10'></div>
             </div>
-            <div className='w-1/4'>
+            <div className='ml-8'>
               <VideoList
                 videos={recomendados?.slice(0, paginaRecomendados * 10)}
                 vertical
