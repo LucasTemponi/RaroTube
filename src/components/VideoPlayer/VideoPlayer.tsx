@@ -44,10 +44,12 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = props => {
 
   return (
     <>
+      <div className="w-full h-full">
       {videoAcabando && <NextUp {...props.proximoVideo} />}
       <video ref={videoRef} id="VideoPrincipal" className='w-full max-h-[80vh]' title={props.video.nome} controls onTimeUpdate={handleOnTimeUpdate}>
         <source src={props.video.url} />
       </video>
+      </div>
       <div className='w-14/12 mx-8 mt-8'>
         <div className='flex flex-row justify-items-start mt-2 mb-4'>
           <h1 className='w-2/3'>{props.video.nome}</h1>
@@ -71,6 +73,6 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = props => {
           <p>{BuscaTimestamps(props.video.descricao)}</p>
         </div>
       </div>
-      </>
+    </>
   );
 };

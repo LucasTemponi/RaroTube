@@ -45,10 +45,10 @@ export const SideBar: React.FC<Props> = ({ children, isOpen }) => {
 
 
     return (
-        <div className="flex flex-row relative z-10 w-full ">
+        <div className="flex flex-row relative w-full ">
             {closeSidebar &&
             <>
-                <div className={`flex flex-col fixed xl:relative overflow-y-auto xl:overflow-visible z-20 w-full xl:w-64 h-screen md:bg-black-rgba xl:bg-gray-50 bg-gray-50 transition-all duration-200 ease-linear ${animation} `}> 
+                <div className={`flex flex-col fixed xl:relative z-10 overflow-y-auto xl:overflow-visible w-full xl:w-64 h-screen md:bg-black-rgba xl:bg-gray-50 bg-gray-50 transition-all duration-200 ease-linear ${animation} `}> 
                         {Object.keys(semanas).length ?
                             Object.keys(semanas).map(semana => <SemanaSideBar semana={semana} videos={semanas[semana]} />)
                             :
