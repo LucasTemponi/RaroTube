@@ -11,10 +11,11 @@ export type Props = {
 };
 
 const Navbar: React.FC<Props> = ({ children }) => {
+
   const [isOpen, setIsOpen] = useState(true);
 
+
   const handleClick = () => {
-    console.log('clicado');
     setIsOpen(!isOpen);
   };
 
@@ -36,7 +37,8 @@ const Navbar: React.FC<Props> = ({ children }) => {
                 fill='#343090'
                 d='M220 128a4 4 0 0 1-4 4H40a4 4 0 0 1 0-8h176a4 4 0 0 1 4 4ZM40 68h176a4 4 0 0 0 0-8H40a4 4 0 0 0 0 8Zm176 120H40a4 4 0 0 0 0 8h176a4 4 0 0 0 0-8Z'
               />
-            </svg>{' '}
+            </svg>
+
           </div>
           <Link to={'/'} className='flex items-center h-12 w-32'>
             <Logo />

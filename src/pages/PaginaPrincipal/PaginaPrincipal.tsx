@@ -1,5 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
-import { VideoList } from '../../components/VideoList/VideoList';
+import { useEffect, useRef, useState } from "react"
+import { FavoritosVazio } from "../../components/FavoritosVazio/FavoritosVazio"
+import { VideoList } from "../../components/VideoList/VideoList"
+import { VideoProps } from "../../components/VideoPlayer/VideoProps"
 
 import { useAuthContext } from '../../context/authContext';
 import { useFavoritos } from '../../hooks/useFavoritos';
@@ -9,9 +11,7 @@ import { useVideos } from '../../hooks/useVideos';
 import { LazyPrincipal } from './LazyPagina';
 
 export const PaginaPrincipal = () => {
-    // const VideoList = lazy(()=>import('../../components/VideoList/VideoList'));
 
-    // const [videos, setVideos] = useState<VideoProps[]>();
     const videos = useVideos(state => state.videos);
     const videosCarregados = useVideos(state => state.videosCarregados);
     const iniciaVideos = useVideos(state => state.iniciaVideos);
@@ -29,11 +29,9 @@ export const PaginaPrincipal = () => {
 
     const loadVideos = async () => {
         if (authContext.estaAutenticado) {
-            console.log('autenticado');
             iniciaFavoritos();
             iniciaVideos();
         } else {
-            console.log('não autenticado');
             iniciaVideos();
         }
     };
@@ -48,10 +46,8 @@ export const PaginaPrincipal = () => {
     }, [authContext.estaAutenticado]);
     
     useEffect(() => {
-        console.log('carregou alguém')
         if (authContext.estaAutenticado) {
             if (videosCarregados && favoritosCarregados ) {
-                console.log('carregou');
                 setCarregando(false);
             }
         } else {
