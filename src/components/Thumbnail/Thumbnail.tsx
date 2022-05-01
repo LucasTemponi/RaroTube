@@ -65,7 +65,7 @@ export const Thumbnail: React.FC<thumbnailProps> = props => {
         } ease-linear duration-300 w-[93vw]
           lg:w-[15.65vw] md:max-w-[22.35vw] sm:max-w-[30.3vw]  rounded-md shadow-md`}
       onClick={enterVideo} >
-  
+
       <div className='relative '>
         <span className=' absolute bottom-3 right-3 text-sm bg-black opacity-80 rounded-md px-1 text-white '>
           {props.video.duracao.replace('h', ':').replace('m', ':00')}
@@ -102,8 +102,8 @@ export const Thumbnail: React.FC<thumbnailProps> = props => {
         }
       </div>
 
-      <div className=' bg-white text-black truncate w-full rounded-b-md items-start'>
-        <h2 className=' 2xl:text-lg xl:text-lg lg:text-base md:text-base sm:text-base mb-2 pt-4 px-2'>
+      <div className='bg-white text-black w-full rounded-b-md items-start'>
+        <h2 className='truncate 2xl:text-lg xl:text-lg lg:text-base md:text-base sm:text-base mb-2 pt-4 px-2'>
           {props.video.nome}
         </h2>
       </div>
