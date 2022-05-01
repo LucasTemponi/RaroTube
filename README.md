@@ -47,7 +47,9 @@ Projeto final do curso de React da Raro Academy. O Raro Tube é um portal de ví
 - Excluir comentário
 
 
-### Navegação (sistemas de rotas para as páginas e página de não encontrada)
+### Navegação 
+- sistemas de rotas para as páginas
+- página de não encontrada
 
 &nbsp;
  
