@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import LazyThumbList from '../../components/LazyThumbList/LazyThumbList';
 import ListaComentarios from '../../components/ListaComentarios/ListaComentarios';
 import { VideoList } from '../../components/VideoList/VideoList';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer';
 import { VideoProps } from '../../components/VideoPlayer/VideoProps';
 import { useComentarios } from '../../hooks/useComentarios';
-import { useFavoritos } from '../../hooks/useFavoritos';
 import { useScroll } from '../../hooks/useScroll';
 import { useTimestamp } from '../../hooks/useTimestamp';
 import { useVideos } from '../../hooks/useVideos';
@@ -58,7 +58,7 @@ const VideoPage = () => {
 
   useEffect(() => {
 
-    const localizaIndexVideo = () => {
+    const buscaProximoVideo = () => {
       if (videosCarregados) {
         console.log(video?.id);
         const videoIndex = todosVideos.findIndex(
@@ -76,7 +76,7 @@ const VideoPage = () => {
     };
 
     timestamp(document.getElementById('VideoPrincipal') as HTMLVideoElement);
-    localizaIndexVideo();
+    buscaProximoVideo();
 
   }, [video, videosCarregados]);
 
@@ -104,11 +104,13 @@ const VideoPage = () => {
               <div ref={containerRefComentarios} className='h-10'></div>
             </div>
             <div className=' m-auto sm:ml-8'>
-              <VideoList
-                videos={recomendados?.slice(0, paginaRecomendados * 10)}
-                vertical
-              />
-              <div ref={containerRefRecomendados} className='h-10'></div>
+              {video && proximoVideo ? (
+                <VideoList
+                  videos={recomendados?.slice(0, paginaRecomendados * 10)}
+                  vertical
+                />
+              ) : (<LazyThumbList items={10} vertical />)}
+                <div ref={containerRefRecomendados} className='h-10'></div>
             </div>
           </div>
         </div>

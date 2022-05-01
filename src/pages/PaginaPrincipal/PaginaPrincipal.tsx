@@ -1,14 +1,12 @@
 import { useEffect, useRef, useState } from "react"
 import { FavoritosVazio } from "../../components/FavoritosVazio/FavoritosVazio"
+import LazyThumbList from "../../components/LazyThumbList/LazyThumbList";
 import { VideoList } from "../../components/VideoList/VideoList"
-import { VideoProps } from "../../components/VideoPlayer/VideoProps"
 
 import { useAuthContext } from '../../context/authContext';
 import { useFavoritos } from '../../hooks/useFavoritos';
 import { useScroll } from '../../hooks/useScroll';
 import { useVideos } from '../../hooks/useVideos';
-
-import { LazyPrincipal } from './LazyPagina';
 
 export const PaginaPrincipal = () => {
 
@@ -59,28 +57,30 @@ export const PaginaPrincipal = () => {
 
     return (
         <section className=' mt-2 max-w-[95vw] lg:max-w-[85vw] mx-auto'>
-            {carregando ? (
-                <LazyPrincipal />
-            ) : (
-                <>
-                    {authContext.estaAutenticado && (
-                        <article className=" mb-10 " >
-                            <h1 className=' font-extrabold underline decoration-raro-rosa text-4xl my-2 py-4 text-left text-raro-cobalto'>
-                                Vídeos favoritos
-                            </h1>
-                            {
-                                todosFavoritos.length === 0 ? <FavoritosVazio /> : <VideoList hover videos={todosFavoritos} />
-                            }
-                        </article>
-                    )}
-                    <article className=" mb-10 " >
-                        <h1 className=' font-extrabold underline decoration-raro-rosa text-4xl my-2 py-4 text-left text-raro-cobalto'>
-                            Adicionados recentemente
-                        </h1>
-                        <VideoList hover videos={videos?.slice(0, pagina * 20)} />
-                    </article>
-                </>
+            {authContext.estaAutenticado && (
+                <article className=" mb-10 " >
+                    <h1 className=' font-extrabold underline decoration-raro-rosa text-4xl my-2 py-4 text-left text-raro-cobalto'>
+                        Vídeos favoritos
+                    </h1>
+                    {
+                        carregando ?
+                            <LazyThumbList items={5} />
+                            :
+                            todosFavoritos.length === 0 ? <FavoritosVazio /> : <VideoList hover videos={todosFavoritos} />
+                    }
+                </article>
             )}
+            <article className=" mb-10 " >
+                <h1 className=' font-extrabold underline decoration-raro-rosa text-4xl my-2 py-4 text-left text-raro-cobalto'>
+                    Adicionados recentemente
+                </h1>
+                {
+                    carregando ?
+                        <LazyThumbList items={20} />
+                        :
+                        <VideoList hover videos={videos?.slice(0, pagina * 20)} />
+                }
+            </article>
             <div ref={containerRef} className='h-10' />
         </section>
     );
