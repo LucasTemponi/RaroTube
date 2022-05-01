@@ -94,7 +94,8 @@ export const Thumbnail: React.FC<thumbnailProps> = props => {
         </div>
         <div className=' bg-white truncate w-full rounded-b-md items-start justify-start'>
           <h2 className=' 2xl:text-xl xl:text-lg lg:text-base md:text-base sm:text-base py-4 px-2 text-black'>
-            {props.video.nome}
+            {/* {props.video.nome} */}
+            {props.video.nome.length >= 32 ? props.video.nome.slice(0, 30) + "..." : props.video.nome}
           </h2>
         </div>
       </div>
@@ -126,7 +127,8 @@ export const Thumbnail: React.FC<thumbnailProps> = props => {
         </div>
         <div className=' truncate w-full rounded-b-md items-start justify-start'>
           <h2 className=' 2xl:text-xl xl:text-lg lg:text-base md:text-base sm:text-base py-4 px-2 text-black'>
-            {props.video.nome}
+            {/* {props.video.nome} */}
+            {props.video.nome.length >= 32 ? props.video.nome.slice(0, 30) + "..." : props.video.nome}
           </h2>
           {/* <p>{props.video.dataPublicacao.toString()}</p> */}
         </div>
@@ -136,3 +138,4 @@ export const Thumbnail: React.FC<thumbnailProps> = props => {
 }
 
 export default Thumbnail
+
