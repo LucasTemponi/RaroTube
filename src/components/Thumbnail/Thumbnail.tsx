@@ -63,7 +63,7 @@ export const Thumbnail: React.FC<thumbnailProps> = props => {
     <article
       className={`flex flex-col bg-white items-center transform ${props.hover ? 'hover:scale-110' : ''
         } ease-linear duration-300 w-[93vw]
-          lg:w-[15.65vw] md:max-w-[22.35vw] sm:max-w-[30.3vw] mx-[0.66vw] my-4 rounded-md shadow-md`}
+          lg:w-[15.65vw] md:max-w-[22.35vw] sm:max-w-[30.3vw]  rounded-md shadow-md`}
       onClick={enterVideo} >
   
       <div className='relative '>
