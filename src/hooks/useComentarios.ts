@@ -9,6 +9,8 @@ type ComentariosHookProps = {
   atualizaEdicao: (id: string, texto: string) => void;
   editando: boolean;
   setEditando: (param: boolean) => void;
+  responder: boolean;
+  setResponder: (param: boolean) => void;
 };
 
 export const useComentarios = create<ComentariosHookProps>(set => ({
@@ -39,5 +41,9 @@ export const useComentarios = create<ComentariosHookProps>(set => ({
   editando: false,
   setEditando: param => {
     set({ editando: param });
+  },
+  responder: false,
+  setResponder: param => {
+    set({ responder: param });
   },
 }));
