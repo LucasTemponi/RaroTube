@@ -58,7 +58,7 @@ export const PaginaPrincipal = () => {
 
 
     return (
-        <section className=' my-auto mt-2 max-w-[95vw] lg:max-w-[85vw] mx-auto'>
+        <section className=' mt-2 max-w-[95vw] lg:max-w-[85vw] mx-auto'>
             {carregando ? (
                 <LazyPrincipal />
             ) : (

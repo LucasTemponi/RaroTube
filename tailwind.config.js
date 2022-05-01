@@ -11,6 +11,7 @@ module.exports = {
           rosa: '#f5487f',
           azulzinho: "#44c2fd",
         },
+        'black-rgba':'rgba(0, 0, 0, 0.54)'
       },
     },
   },

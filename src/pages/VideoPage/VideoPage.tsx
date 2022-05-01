@@ -93,8 +93,8 @@ const VideoPage = () => {
           ) : (
             <div className='mx-auto w-full aspect-video max-h-[80vh] bg-gradient-to-b from-black to-gray-800 ' />
           )}
-          <div className=' flex flex-col sm:flex-row justify-center mt-16 mx-10 '>
-            <div className=' w-3/4 '>
+          <div className=' flex flex-col sm:flex-row justify-center mt-16 sm:mx-10 '>
+            <div className=' sm:w-3/4 '>
               {comentarios && (
                 <ListaComentarios
                   videoId={video?.id}
@@ -103,7 +103,7 @@ const VideoPage = () => {
               )}
               <div ref={containerRefComentarios} className='h-10'></div>
             </div>
-            <div className='ml-8'>
+            <div className=' m-auto sm:ml-8'>
               <VideoList
                 videos={recomendados?.slice(0, paginaRecomendados * 10)}
                 vertical
