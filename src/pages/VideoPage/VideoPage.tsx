@@ -14,6 +14,7 @@ import apiClient from '../../services/api-client';
 const VideoPage = () => {
   const [recomendados, setRecomendados] = useState<VideoProps[]>();
   const [video, setVideo] = useState<VideoProps>();
+  const [carregando,setCarregando] = useState<boolean>(true);
   const [proximoVideo, setProximoVideo] = useState<VideoProps>();
   const { id } = useParams();
   const comentarios = useComentarios(state => state.comentarios);
@@ -47,13 +48,14 @@ const VideoPage = () => {
       console.log(response.data);
       iniciaComentarios(response.data);
     };
-
+    console.log('useEffect id')
     loadVideo();
     loadRecomendados();
     loadComentarios();
     if (!videosCarregados) {
       iniciaVideos();
     }
+    setCarregando(false);
   }, [id]);
 
   useEffect(() => {
@@ -74,11 +76,16 @@ const VideoPage = () => {
         console.log('todosVideos não carregado');
       }
     };
-
-    timestamp(document.getElementById('VideoPrincipal') as HTMLVideoElement);
+    console.log('useEffect video,videoCarregados')
     buscaProximoVideo();
+    
+  }, [video,videosCarregados]);
 
-  }, [video, videosCarregados]);
+  useEffect(() => {
+    console.log('useEffect video, proximoVideo')
+    timestamp(document.getElementById('VideoPrincipal') as HTMLVideoElement);
+    console.log('Teste',document.getElementById('VideoPrincipal'))
+  },[proximoVideo])
 
   return (
     <>
