@@ -84,7 +84,7 @@ const VideoPage = () => {
   return (
     <>
       <div className=' flex flex-col items-center '>
-        <div className=' 2xl:min-w-[80vw] min-w-full max-w-screen-2xl '>
+        <div className=' 2xl:min-w-[80vw] max-w-screen-2xl '>
           {video && proximoVideo ? (
             <VideoPlayer
               key={video.id}

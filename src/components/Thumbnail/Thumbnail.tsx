@@ -58,8 +58,8 @@ export const Thumbnail: React.FC<thumbnailProps> = props => {
     return (
       <div
         className={`flex flex-col items-center transform ${props.hover ? 'hover:scale-110' : ''
-          } ease-linear duration-300
-            2xl:max-w-[14vw] xl:max-w-[18vw] lg:max-w-[26vw] md:max-w-[42vw] sm:max-w-[45vw] mt-4 ml-2 mr-2 rounded-md shadow-md`}
+          } ease-linear duration-300 w-[93vw]
+          lg:w-[15.65vw] md:max-w-[22.35vw] sm:max-w-[30.3vw] mx-[0.66vw] my-4 rounded-md shadow-md`}
         onClick={enterVideo}
       >
         <div className='relative w-full h-full '>
@@ -94,10 +94,10 @@ export const Thumbnail: React.FC<thumbnailProps> = props => {
           </svg>
         </div>
         <div className=' bg-white truncate w-full rounded-b-md items-start justify-start'>
-          <h2 className=' 2xl:text-xl xl:text-lg lg:text-base md:text-base sm:text-base py-4 px-2 text-black'>
+          <h2 className=' 2xl:text-lg xl:text-lg lg:text-base md:text-base sm:text-base pt-4 px-2 text-black'>
             {props.video.nome}
           </h2>
-          <p className='px-2'>{formatarDataThumbnail(props.video.dataPublicacao.toString())}</p>
+          <p className='px-2 pb-2 text-sm '>{formatarDataThumbnail(props.video.dataPublicacao.toString())}</p>
         </div>
       </div>
     );
