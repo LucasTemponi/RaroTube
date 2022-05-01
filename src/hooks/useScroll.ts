@@ -6,6 +6,7 @@ export const useScroll = (scrollRef: MutableRefObject<Element | null>) => {
   useEffect(() => {
     const intersectionObserver = new IntersectionObserver((entries) => {
       if (entries.some((entry) => entry.isIntersecting)) {
+        console.log(pagina)
         setPagina((pagina)=>pagina + 1);
       }
     });

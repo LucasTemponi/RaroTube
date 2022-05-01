@@ -5,6 +5,7 @@ import { VideoList } from '../../components/VideoList/VideoList';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer';
 import { VideoProps } from '../../components/VideoPlayer/VideoProps';
 import { useComentarios } from '../../hooks/useComentarios';
+import { useFavoritos } from '../../hooks/useFavoritos';
 import { useScroll } from '../../hooks/useScroll';
 import { useTimestamp } from '../../hooks/useTimestamp';
 import { useVideos } from '../../hooks/useVideos';
@@ -25,6 +26,7 @@ const VideoPage = () => {
   const paginaRecomendados = useScroll(containerRefRecomendados);
 
   const todosVideos = useVideos(state => state.videos);
+  const videosCarregados = useVideos(state => state.videosCarregados);
   const iniciaVideos = useVideos(state => state.iniciaVideos);
 
   const timestamp = useTimestamp(state => state.setVideo);
@@ -48,18 +50,15 @@ const VideoPage = () => {
     loadVideo();
     loadRecomendados();
     loadComentarios();
-    if (!todosVideos.length) {
-      apiClient
-        .get(
-          '/videos?pagina=1&itensPorPagina=100&orderBy=dataPublicacao&orderDirection=DESC'
-        )
-        .then(response => iniciaVideos(response.data.reverse()));
+    if (!videosCarregados) {
+      iniciaVideos();
     }
   }, [id]);
 
   useEffect(() => {
+
     const localizaIndexVideo = () => {
-      if (todosVideos) {
+      if (videosCarregados) {
         console.log(video?.id);
         const videoIndex = todosVideos.findIndex(
           element => element.id === video?.id
@@ -79,7 +78,8 @@ const VideoPage = () => {
 
     timestamp(document.getElementById('VideoPrincipal') as HTMLVideoElement);
     localizaIndexVideo();
-  }, [video, todosVideos]);
+
+  }, [video, videosCarregados]);
 
   return (
     <>
