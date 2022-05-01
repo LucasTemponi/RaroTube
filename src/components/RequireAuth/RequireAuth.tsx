@@ -3,7 +3,7 @@ import { useAuthContext } from "../../context/authContext"
 
 export const RequireAuth = () => {
   const authContext = useAuthContext();
-  if (authContext.estaAutenticado()) {
+  if (authContext.estaAutenticado) {
     return <Outlet />
   }
   else {

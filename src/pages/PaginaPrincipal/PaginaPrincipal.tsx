@@ -1,77 +1,87 @@
 import { useEffect, useRef, useState } from "react"
+import { FavoritosVazio } from "../../components/FavoritosVazio/FavoritosVazio"
+import LazyThumbList from "../../components/LazyThumbList/LazyThumbList";
 import { VideoList } from "../../components/VideoList/VideoList"
-import { VideoProps } from "../../components/VideoPlayer/VideoProps"
 
-import { useAuthContext } from "../../context/authContext"
-import { useFavoritos } from "../../hooks/useFavoritos"
-import { useScroll } from "../../hooks/useScroll"
-import { useVideos } from "../../hooks/useVideos"
-
-import apiClient from "../../services/api-client";
-import { LazyPrincipal } from "./LazyPagina"
+import { useAuthContext } from '../../context/authContext';
+import { useFavoritos } from '../../hooks/useFavoritos';
+import { useScroll } from '../../hooks/useScroll';
+import { useVideos } from '../../hooks/useVideos';
 
 export const PaginaPrincipal = () => {
 
-    // const VideoList = lazy(()=>import('../../components/VideoList/VideoList'));
-
-    // const [videos, setVideos] = useState<VideoProps[]>();
     const videos = useVideos(state => state.videos);
+    const videosCarregados = useVideos(state => state.videosCarregados);
     const iniciaVideos = useVideos(state => state.iniciaVideos);
-    const [recomendados, setRecomendados] = useState<VideoProps[]>();
+
+    const iniciaFavoritos = useFavoritos(state => state.iniciaFavoritos);
+    const favoritosCarregados = useFavoritos(state => state.favoritosCarregados);
+    const todosFavoritos = useFavoritos(state => state.favoritos);
+
     const [carregando, setCarregando] = useState<boolean>(true);
     const authContext = useAuthContext();
 
-    const iniciaFavoritos = useFavoritos(state => state.iniciaFavoritos);
-    const todosFavoritos = useFavoritos(state => state.favoritos);
     const containerRef = useRef<HTMLDivElement | null>(null);
-    const pagina = useScroll(containerRef)
+    const pagina = useScroll(containerRef);
 
     const loadVideos = async () => {
-        setCarregando(true);
-        try {
-            if (authContext.estaAutenticado()) {
-                await Promise.all([
-                    apiClient.get('/videos').then(response => iniciaVideos(response.data.reverse())),
-                    apiClient.get('/videos/favoritos').then(response => iniciaFavoritos(response.data)),
-                ]);
-            } else {
-                await apiClient.get('/videos').then(response => iniciaVideos(response.data.reverse()));
-            }
-            setCarregando(false);
-        } catch (e) {
-            console.log(e)
+        if (authContext.estaAutenticado) {
+            iniciaFavoritos();
+            iniciaVideos();
+        } else {
+            iniciaVideos();
         }
-    }
+    };
 
     useEffect(() => {
-        if (videos.length === 0 || todosFavoritos.length === 0) {
-            loadVideos()
+        if (!videosCarregados || !favoritosCarregados) {
+            loadVideos();
         } else {
-            setCarregando(false);
+            setCarregando(false)
+            loadVideos();
         }
+    }, [authContext.estaAutenticado]);
 
-        // setTimeout(()=>setCarregando(false),5000)
-    }, [])
+    useEffect(() => {
+        if (authContext.estaAutenticado) {
+            if (videosCarregados && favoritosCarregados) {
+                setCarregando(false);
+            }
+        } else {
+            if (videosCarregados) {
+                setCarregando(false);
+            }
+        }
+    }, [videosCarregados, favoritosCarregados]);
+
 
     return (
-        carregando ? <LazyPrincipal /> :
-            <>
-                <div className="4xl:max-w-[70vw] xl:max-w-[80vw] lg:w-[85vw] md:w-[90vw] sm:w-[95vw] m-auto" >
-                </div>
+        <section className=' mt-2 max-w-[95vw] lg:max-w-[85vw] mx-auto'>
+            {authContext.estaAutenticado && (
+                <article className=" mb-10 " >
+                    <h1 className=' font-extrabold underline decoration-raro-rosa text-4xl my-2 py-4 text-left text-raro-cobalto'>
+                        Vídeos favoritos
+                    </h1>
+                    {
+                        carregando ?
+                            <LazyThumbList items={5} />
+                            :
+                            todosFavoritos.length === 0 ? <FavoritosVazio /> : <VideoList hover videos={todosFavoritos} />
+                    }
+                </article>
+            )}
+            <article className=" mb-10 " >
+                <h1 className=' font-extrabold underline decoration-raro-rosa text-4xl my-2 py-4 text-left text-raro-cobalto'>
+                    Adicionados recentemente
+                </h1>
                 {
-                    authContext.estaAutenticado() &&
-                    (<>
-                        <h1 className=" font-extrabold underline decoration-raro-rosa text-4xl m-4 mt-12 text-left " >Vídeos favoritos</h1>
-                        <VideoList videos={todosFavoritos} />
-
-                    </>)
+                    carregando ?
+                        <LazyThumbList items={20} />
+                        :
+                        <VideoList hover videos={videos?.slice(0, pagina * 20)} />
                 }
-                <h1 className=" font-extrabold underline decoration-raro-oceano text-4xl m-4 mt-12 text-left">Adicionados recentemente</h1>
-                <VideoList videos={videos?.slice(0, 10)} />
-                <h1 className=" font-extrabold underline decoration-raro-violeta text-4xl m-4 mt-12 text-left">Recomendados</h1>
-                <VideoList videos={videos?.slice(0, pagina * 15)} />
-
-                <div ref={containerRef} className="h-10" />
-            </>
-    )
-}
+            </article>
+            <div ref={containerRef} className='h-10' />
+        </section>
+    );
+};

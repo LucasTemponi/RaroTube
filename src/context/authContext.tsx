@@ -12,7 +12,7 @@ export type AuthContextProps = {
     nome: string,
     foto: string
   ) => void;
-  estaAutenticado: () => boolean;
+  estaAutenticado: boolean;
   deslogarUsuario: () => void;
 };
 
@@ -22,7 +22,7 @@ const AuthContext = createContext<AuthContextProps>({
   nome: '',
   id: '',
   autentica: (id: string, email: string, token: string, nome: string) => {},
-  estaAutenticado: () => false,
+  estaAutenticado: false,
   deslogarUsuario: () => {},
 });
 
@@ -82,9 +82,7 @@ export const AuthContextProvider: React.FC<Props> = ({ children }) => {
     localStorage.removeItem('foto');
   };
 
-  const estaAutenticado = () => {
-    return token !== null && token !== '';
-  };
+  const estaAutenticado = (token !== null && token !== '');
 
   return (
     <AuthContext.Provider

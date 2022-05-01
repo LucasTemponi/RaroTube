@@ -5,22 +5,46 @@ import { VideoProps } from '../components/VideoPlayer/VideoProps'
 
 type favoritosProps = {
     favoritos:VideoProps[],
-    iniciaFavoritos: (todosFavoritos: VideoProps[]) => void,
+    favoritosCarregados:boolean,
+    iniciaFavoritos: () => void,
     adicionaFavorito: (VideoId: VideoProps) => void,
     removeFavorito: (VideoId: VideoProps) => void,
 }
 
 export const useFavoritos = create<favoritosProps>((set) => ({
     favoritos: [],
-    iniciaFavoritos: (todosFavoritos: VideoProps[]) =>{
-        set({favoritos: todosFavoritos})
+    favoritosCarregados: false,
+    iniciaFavoritos: async () =>{
+        try{
+            const response = await apiClient.get('/videos/favoritos')
+            set({favoritos: response.data, favoritosCarregados: true})
+        } catch(e){
+            alert('Erro ao carregar os videos. Tente novamente mais tarde.')
+        }        
     },
     adicionaFavorito: (Video) => { 
-        apiClient.post(`/Videos/${Video.id}/favoritos`)
-        set((state) => ({favoritos: [...state.favoritos, Video]})
-    )},
+        try{
+            apiClient.post(`/Videos/${Video.id}/favoritos`)
+            console.log('adicionado')
+            set((state) => ({favoritos: [...state.favoritos, Video]}))
+        } catch(e){
+            console.log(e)
+            window.alert('Erro ao favoritar o video. Tente novamente mais tarde.')
+        }
+    },
     removeFavorito: (Video) => {
-        apiClient.delete(`/Videos/${Video.id}/favoritos`)
-        set((state) => ({favoritos: state.favoritos.filter((f) => f.id !== Video.id)})
-    )},
+        try{
+            apiClient.delete(`/Videos/${Video.id}/favoritos`)
+            console.log('removido')
+            set((state) => ({favoritos: state.favoritos.filter((f) => f.id !== Video.id)}))
+        } catch(e){
+            console.log(e)
+            window.alert('Erro ao remover favorito. Tente novamente mais tarde.')
+        }
+    },
 }))
+
+
+
+
+

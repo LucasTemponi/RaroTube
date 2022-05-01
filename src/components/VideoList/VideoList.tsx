@@ -7,11 +7,11 @@ export const VideoList:React.FC<videoListProps> = (videoList) => {
 
     return(
         
-        <ul className={`flex flex-${ videoList.vertical ? 'col' : 'row'} flex-wrap justify-center`} >
+        <ul className={`flex flex-${ videoList.vertical ? 'col justify-center' : 'row '} max-w-[95vw] lg:max-w-[85vw] mx-auto flex-wrap justify-start`} >
             {videoList.videos?.map((video) => {
                 return(
-                    <li>
-                        <Thumbnail key={video.id} video={video} hover={true} />
+                    <li className={videoList.vertical ? 'my-4' : 'mx-[0.66vw] my-4'} >
+                        <Thumbnail key={video.id} video={video} hover={videoList.hover} />
                     </li>
                 )
             })}

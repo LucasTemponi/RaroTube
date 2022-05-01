@@ -38,7 +38,7 @@ export const Login = (props: loginProps) => {
               <Link to = {`/cadastro`}>
               <a
                 href='#'
-                className='font-medium text-[#4E47C2] hover:text-[#7A75D1]'
+                className='font-medium text-raro-oceano hover:text-raro-rosa'
               >
                 Clique aqui e faça seu cadastro.
               </a>
@@ -90,7 +90,7 @@ export const Login = (props: loginProps) => {
               <Link to = {`/solicitarcodigo`}>
                 <a
                   href='#'
-                  className='font-medium text-[#4E47C2] hover:text-[#7A75D1]'
+                  className='font-medium text-raro-oceano hover:text-raro-rosa'
                 >
                   Esqueceu sua senha?
                 </a>
