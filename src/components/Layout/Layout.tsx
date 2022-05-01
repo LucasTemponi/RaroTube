@@ -1,12 +1,11 @@
-import { Outlet } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
+import { Outlet } from 'react-router-dom';
+import Navbar from '../Navbar/Navbar';
 
 export const Layout = () => {
-
   return (
     <>
       <Navbar>
-        <main className=" w-full xl:relative absolute " >
+        <main className=' w-full pt-16 '>
           <Outlet />
         </main>
       </Navbar>

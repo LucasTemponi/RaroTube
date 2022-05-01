@@ -11,9 +11,7 @@ export type Props = {
 };
 
 const Navbar: React.FC<Props> = ({ children }) => {
-
   const [isOpen, setIsOpen] = useState(false);
-
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -21,9 +19,12 @@ const Navbar: React.FC<Props> = ({ children }) => {
 
   return (
     <>
-      <header className='flex flex-col sm:justify-between sm:flex-row z-20 bg-gray-50 px-6 py-4 w-full'>
+      <header className='flex flex-col fixed sm:justify-between sm:flex-row z-20 bg-gray-50 px-6 py-4 w-full'>
         <div className='flex items-center sm:mx-0 mx-auto space-x-5 '>
-          <div className='cursor-pointer absolute sm:relative left-10 sm:left-0 ' onClick={handleClick}>
+          <div
+            className='cursor-pointer absolute sm:relative left-10 sm:left-0 '
+            onClick={handleClick}
+          >
             <svg
               xmlns='http://www.w3.org/2000/svg'
               aria-hidden='true'
@@ -38,7 +39,6 @@ const Navbar: React.FC<Props> = ({ children }) => {
                 d='M220 128a4 4 0 0 1-4 4H40a4 4 0 0 1 0-8h176a4 4 0 0 1 4 4ZM40 68h176a4 4 0 0 0 0-8H40a4 4 0 0 0 0 8Zm176 120H40a4 4 0 0 0 0 8h176a4 4 0 0 0 0-8Z'
               />
             </svg>
-
           </div>
           <Link to={'/'} className='flex items-center h-12 w-32'>
             <Logo />
@@ -49,10 +49,7 @@ const Navbar: React.FC<Props> = ({ children }) => {
         </div>
       </header>
 
-        <SideBar isOpen={isOpen}>         
-          {children}
-        </SideBar>
-
+      <SideBar isOpen={isOpen}>{children}</SideBar>
     </>
   );
 };
