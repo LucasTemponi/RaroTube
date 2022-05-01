@@ -1,3 +1,9 @@
+![issues](https://img.shields.io/github/issues-closed-raw/rarolabs/raro-academy-react-grupo-3)
+![pull requests](https://img.shields.io/github/issues-pr-closed/rarolabs/raro-academy-react-grupo-3?label=pull%20requests)
+![contribuidores](https://img.shields.io/github/contributors/rarolabs/raro-academy-react-grupo-3?label=contribuidores)
+
+&nbsp;
+
 <div align="center">
 <img src="./src/assets/Logo.svg" alt="Logo" width="300" height="90">  
 </div>
@@ -5,10 +11,16 @@
 
 #  Projeto Raro Tube
 
-Projeto final do curso de React Raro Academy, visa atender as expectativas dos alunos, disponibilizando vídeos das aulas gravadas durante a semana no portal .  **tendo vídeos públicos e vídeos privados.**
+Projeto final do curso de React da Raro Academy. O Raro Tube é um portal de vídeos, direcionados a alunos contendo vídeos públicos e vídeos privados.  
+
+&nbsp;
 
 ##  **Funcionalidades**
 
+### Layout
+- Header
+- Menu (autenticado e não autenticado)
+- Conteúdo
 
 ### Home não autenticada
 - Lista de vídeos públicos
@@ -34,12 +46,10 @@ Projeto final do curso de React Raro Academy, visa atender as expectativas dos a
 - Adicionar comentário
 - Excluir comentário
 
-### Layout
-- Header
-- Menu (autenticado e não autenticado)
-- Conteúdo
 
 ### Navegação (sistemas de rotas para as páginas e página de não encontrada)
+
+&nbsp;
  
 ##  **Instalando e executando o projeto**
 
@@ -66,7 +76,7 @@ Execute a aplicação em modo de desenvolvimento
  ```bash
 npm start
  ```
-
+&nbsp;
 
  ##  **Tecnologias**
 
