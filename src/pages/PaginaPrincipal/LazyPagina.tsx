@@ -7,7 +7,7 @@ export const LazyPrincipal = () => {
 
     return (
         <>
-            <div className=" my-auto 4xl:max-w-[70vw] xl:max-w-[80vw] lg:w-[85vw] md:w-[90vw] sm:w-[95vw] m-auto" >
+            <div className="my-auto max-w-[95vw] lg:max-w-[85vw] mx-auto" >
             {
                 authContext.estaAutenticado &&
                 (<>
@@ -18,8 +18,6 @@ export const LazyPrincipal = () => {
             }
             <h1 className=" font-extrabold underline decoration-raro-rosa text-2xl  ml-7 py-4 text-left text-raro-cobalto">Adicionados recentemente</h1>
             <LazyThumbList items={10} />
-            <h1 className=" font-extrabold underline decoration-raro-rosa text-2xl  ml-7 py-4 text-left text-raro-cobalto">Recomendados</h1>
-            <LazyThumbList items={15} />
             </div>
         </>
     )
