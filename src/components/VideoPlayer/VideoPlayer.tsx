@@ -10,17 +10,17 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = props => {
   const [favorite, setFavorite] = useState(false);
   const [videoAcabando, setVideoAcabando] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const todosFavoritos = useFavoritos(state=>state.favoritos);
-  const favoritosCarregados = useFavoritos(state=>state.favoritosCarregados);
-  const removeFavorito = useFavoritos(state=>state.removeFavorito);
-  const adicionaFavorito = useFavoritos(state=>state.adicionaFavorito);
+  const todosFavoritos = useFavoritos(state => state.favoritos);
+  const favoritosCarregados = useFavoritos(state => state.favoritosCarregados);
+  const removeFavorito = useFavoritos(state => state.removeFavorito);
+  const adicionaFavorito = useFavoritos(state => state.adicionaFavorito);
   // const navigate = useNavigate();
   // const [timer,setTimer] = useState<number>(0);
   // const setTimeoutId = useRef(0);
 
   const favoriteVideo = () => {
     if (favorite) {
-      removeFavorito(props.video);      
+      removeFavorito(props.video);
     } else {
       adicionaFavorito(props.video);
     }
@@ -40,16 +40,14 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = props => {
     let isFavorite = todosFavoritos.filter(
       favorito => favorito.id === props.video.id);
     isFavorite.length > 0 ? setFavorite(true) : setFavorite(false);
-  },[todosFavoritos]);
+  }, [todosFavoritos]);
 
   return (
-    <div className='w-full' >
-      <div className={`transform m-auto relative `}>
-        {videoAcabando && <NextUp {...props.proximoVideo} />       }
-        <video ref={videoRef} id="VideoPrincipal" className='w-full h-full' title={props.video.nome} controls onTimeUpdate={handleOnTimeUpdate}>
-          <source src={props.video.url} />
-        </video>
-      </div>
+    <>
+      {videoAcabando && <NextUp {...props.proximoVideo} />}
+      <video ref={videoRef} id="VideoPrincipal" className='w-full max-h-[80vh]' title={props.video.nome} controls onTimeUpdate={handleOnTimeUpdate}>
+        <source src={props.video.url} />
+      </video>
       <div className='w-14/12 mx-8 mt-8'>
         <div className='flex flex-row justify-items-start mt-2 mb-4'>
           <h1 className='w-2/3'>{props.video.nome}</h1>
@@ -73,6 +71,6 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = props => {
           <p>{BuscaTimestamps(props.video.descricao)}</p>
         </div>
       </div>
-    </div>
+      </>
   );
 };
