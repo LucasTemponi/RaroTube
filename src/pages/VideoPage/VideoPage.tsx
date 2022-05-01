@@ -44,6 +44,7 @@ const VideoPage = () => {
 
     const loadComentarios = async () => {
       const response = await apiClient.get(`/videos/${id}/comentarios`);
+      console.log(response.data);
       iniciaComentarios(response.data);
     };
 
@@ -65,10 +66,8 @@ const VideoPage = () => {
         );
         console.log(videoIndex);
         if (videoIndex >= 0) {
-          console.log(videoIndex, '>=0');
           setProximoVideo(todosVideos.slice(videoIndex - 1)[0]);
         } else {
-          console.log(videoIndex, '<0');
           setProximoVideo(todosVideos.slice(-1)[0]);
         }
       } else {

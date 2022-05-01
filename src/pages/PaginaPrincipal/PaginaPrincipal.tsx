@@ -23,7 +23,6 @@ export const PaginaPrincipal = () => {
     const [carregando, setCarregando] = useState<boolean>(true);
     const authContext = useAuthContext();
 
-
     const containerRef = useRef<HTMLDivElement | null>(null);
     const pagina = useScroll(containerRef);
 
@@ -37,17 +36,17 @@ export const PaginaPrincipal = () => {
     };
 
     useEffect(() => {
-            if ( !videosCarregados || !favoritosCarregados) {
-                loadVideos();
-            } else {
-                setCarregando(false)
-                loadVideos();
-            }
+        if (!videosCarregados || !favoritosCarregados) {
+            loadVideos();
+        } else {
+            setCarregando(false)
+            loadVideos();
+        }
     }, [authContext.estaAutenticado]);
-    
+
     useEffect(() => {
         if (authContext.estaAutenticado) {
-            if (videosCarregados && favoritosCarregados ) {
+            if (videosCarregados && favoritosCarregados) {
                 setCarregando(false);
             }
         } else {
@@ -55,15 +54,15 @@ export const PaginaPrincipal = () => {
                 setCarregando(false);
             }
         }
-    },[videosCarregados,favoritosCarregados]);
+    }, [videosCarregados, favoritosCarregados]);
 
 
     return (
-        carregando ? (
+        <div className=' my-auto max-w-[95vw] lg:max-w-[85vw] mx-auto'>
+            {carregando ? (
             <LazyPrincipal />
-        ) : (
-        <>
-            <div className=' my-auto max-w-[95vw] lg:max-w-[85vw] mx-auto'>
+            ) : (
+            <>
                 {authContext.estaAutenticado && (
                     <>
                         <h1 className=' font-extrabold underline decoration-raro-rosa text-2xl ml-7 py-4 text-left text-raro-cobalto'>
@@ -78,9 +77,9 @@ export const PaginaPrincipal = () => {
                     Adicionados recentemente
                 </h1>
                 <VideoList hover videos={videos?.slice(0, pagina * 10)} />
-
-                <div ref={containerRef} className='h-10' />
-            </div>
-        </>
-    ));    
+            </>
+            )}
+            <div ref={containerRef} className='h-10' />
+        </div>
+    );    
 };
