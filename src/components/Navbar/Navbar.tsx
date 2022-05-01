@@ -21,7 +21,7 @@ const Navbar: React.FC<Props> = ({ children }) => {
 
   return (
     <>
-      <header className='flex items-center relative sm:justify-between flex-col sm:flex-row fixed z-20 bg-gray-50 px-6 py-4 w-full'>
+      <header className='flex flex-col sm:justify-between sm:flex-row z-20 bg-gray-50 px-6 py-4 w-full'>
         <div className='flex items-center space-x-5 '>
           <div className='cursor-pointer absolute sm:relative left-10 sm:left-0 ' onClick={handleClick}>
             <svg
@@ -49,13 +49,10 @@ const Navbar: React.FC<Props> = ({ children }) => {
         </div>
       </header>
 
-      <div className='flex flex-row z-10'>
-        <SideBar isOpen={isOpen}>
-          <div className='w-full'>
-            <div className='w-full '>{children}</div>
-          </div>
+        <SideBar isOpen={isOpen}>         
+          {children}
         </SideBar>
-      </div>
+
     </>
   );
 };

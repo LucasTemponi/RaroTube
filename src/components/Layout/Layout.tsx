@@ -6,7 +6,7 @@ export const Layout = () => {
   return (
     <>
       <Navbar>
-        <main>
+        <main className=" w-full xl:relative absolute " >
           <Outlet />
         </main>
       </Navbar>

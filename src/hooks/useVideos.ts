@@ -13,7 +13,7 @@ export const useVideos = create<videosHookProps>((set) => ({
     videosCarregados: false,
     iniciaVideos: async () =>{
         try{
-            const response = await apiClient.get('/videos?pagina=1&itensPorPagina=100&orderBy=dataPublicacao&orderDirection=DESC')
+            const response = await apiClient.get('/videos?pagina=1&itensPorPagina=100&orderBy=createdAt&orderDirection=DESC')
             set({videos: response.data, videosCarregados: true})
         } catch(e){
             alert('Erro ao carregar os videos. Tente novamente mais tarde.')
