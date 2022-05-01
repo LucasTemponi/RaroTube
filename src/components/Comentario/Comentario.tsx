@@ -5,6 +5,7 @@ import { useAuthContext } from '../../context/authContext';
 import { useComentarios } from '../../hooks/useComentarios';
 import { BuscaTimestamps } from '../../helpers/BuscaTimestamps';
 import EditarComentario from '../EditarComentario/EditarComentario';
+import AdicionarComentario from '../AdicionarComentario/AdicionarComentario';
 
 const Comentario: React.FC<ComentarioProps> = ({
   videoId,
@@ -32,12 +33,24 @@ const Comentario: React.FC<ComentarioProps> = ({
   const comentarios = useComentarios(state => state.comentarios);
   const [comentarioAtual, setComentarioAtual] = useState('');
 
-  function handleEdit() {
-    setEditando(true);
+  const responder = useComentarios(state => state.responder);
+  const setResponder = useComentarios(state => state.setResponder);
+
+  const acharComentario = () => {
     const achaComentario = comentarios.filter(
       comentario => comentario.id === id
     );
     setComentarioAtual(achaComentario[0].id);
+  };
+
+  const handleResponder = () => {
+    acharComentario();
+    setResponder(true);
+  };
+
+  function handleEdit() {
+    setEditando(true);
+    acharComentario();
   }
 
   function handleExcluir() {
@@ -193,6 +206,14 @@ const Comentario: React.FC<ComentarioProps> = ({
                 </button>
               </div>
               <div className='space-x-2 pr-2'>
+                <button
+                  onClick={handleResponder}
+                  className={`
+                  text-green-400 text-xs
+                        `}
+                >
+                  Responder
+                </button>
                 {editavel && (
                   <button
                     onClick={handleEdit}
@@ -218,6 +239,15 @@ const Comentario: React.FC<ComentarioProps> = ({
           </div>
         </div>
       )}
+      <div>
+        {responder && comentarioAtual ? (
+          <div className='-mt-10'>
+            <AdicionarComentario />
+          </div>
+        ) : (
+          <></>
+        )}
+      </div>
     </>
   );
 };

@@ -11,6 +11,7 @@ const AdicionarComentario: React.FC = () => {
   const [mostraBotao, setMostraBotao] = useState(false);
 
   const addComentario = useComentarios(state => state.addComentarios);
+  const setResponder = useComentarios(state => state.setResponder);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -18,6 +19,7 @@ const AdicionarComentario: React.FC = () => {
     const url = `/videos/${id}/comentarios`;
     const response = await apiClient.post(url, { texto });
     setTexto('');
+    setResponder(false);
     addComentario(response.data);
     return response;
   }
