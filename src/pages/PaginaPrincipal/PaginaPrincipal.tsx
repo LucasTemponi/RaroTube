@@ -69,7 +69,9 @@ export const PaginaPrincipal = () => {
                         <h1 className=' font-extrabold underline decoration-raro-rosa text-2xl ml-7 py-4 text-left text-raro-cobalto'>
                             Vídeos favoritos
                         </h1>
-                        <VideoList hover videos={todosFavoritos} />
+                        {
+                            todosFavoritos.length === 0 ? <FavoritosVazio /> : <VideoList hover videos={todosFavoritos} />
+                        }
                     </>
                 )}
                 <h1 className=' font-extrabold underline decoration-raro-rosa text-2xl  ml-7 py-4 text-left text-raro-cobalto'>
