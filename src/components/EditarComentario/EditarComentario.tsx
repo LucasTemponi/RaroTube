@@ -17,7 +17,7 @@ const EditarComentario: React.FC<EditarComentarioProps> = ({
   const { foto } = useAuthContext();
   const { id } = useParams();
   const atualizaEdicao = useComentarios(state => state.atualizaEdicao);
-  const setEditando = useComentarios(state => state.setEditando);
+  const setEditando = useComentarios(state => state.setIdEditando);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,7 +25,7 @@ const EditarComentario: React.FC<EditarComentarioProps> = ({
     await apiClient.patch(url, { texto: textoEdit });
     setTextoEdit('');
     atualizaEdicao(idComentario, textoEdit);
-    setEditando(false);
+    setEditando('');
   };
 
   return (

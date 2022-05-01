@@ -26,8 +26,8 @@ const Comentario: React.FC<ComentarioProps> = ({
   const [editavel, setEditavel] = useState(false);
   const [exclui, setExclui] = useState(false);
   const auth = useAuthContext();
-  const setEditando = useComentarios(state => state.setEditando);
-  const editando = useComentarios(state => state.editando);
+  const setIdEditando = useComentarios(state => state.setIdEditando);
+  const idEditando = useComentarios(state => state.idEditando);
   const removeComentario = useComentarios(state => state.removeComentario);
   const textoFormatado = BuscaTimestamps(texto);
   const comentarios = useComentarios(state => state.comentarios);
@@ -49,7 +49,7 @@ const Comentario: React.FC<ComentarioProps> = ({
   };
 
   function handleEdit() {
-    setEditando(true);
+    setIdEditando(id);
     acharComentario();
   }
 
@@ -138,7 +138,7 @@ const Comentario: React.FC<ComentarioProps> = ({
 
   return (
     <>
-      {editando && comentarioAtual ? (
+      {(idEditando === id) && comentarioAtual ? (
         <EditarComentario texto={texto} idComentario={id} />
       ) : (
         <div className='flex max-w-full'>
@@ -163,9 +163,8 @@ const Comentario: React.FC<ComentarioProps> = ({
                 <button>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
-                    className={`h-4 w-4 ${
-                      like ? 'fill-raro-oceano' : 'fill-transparent'
-                    }`}
+                    className={`h-4 w-4 ${like ? 'fill-raro-oceano' : 'fill-transparent'
+                      }`}
                     fill='none'
                     viewBox='0 0 24 24'
                     stroke='currentColor'
@@ -185,9 +184,8 @@ const Comentario: React.FC<ComentarioProps> = ({
                 <button>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
-                    className={`h-4 w-4 ${
-                      dislike ? 'fill-red-700' : 'fill-transparent'
-                    }`}
+                    className={`h-4 w-4 ${dislike ? 'fill-red-700' : 'fill-transparent'
+                      }`}
                     fill='none'
                     viewBox='0 0 24 24'
                     stroke='currentColor'

@@ -7,8 +7,8 @@ type ComentariosHookProps = {
   addComentarios: (comentario: ComentarioProps) => void;
   removeComentario: (id: string) => void;
   atualizaEdicao: (id: string, texto: string) => void;
-  editando: boolean;
-  setEditando: (param: boolean) => void;
+  idEditando: string;
+  setIdEditando: (param: string) => void;
   responder: boolean;
   setResponder: (param: boolean) => void;
 };
@@ -38,9 +38,9 @@ export const useComentarios = create<ComentariosHookProps>(set => ({
       };
     });
   },
-  editando: false,
-  setEditando: param => {
-    set({ editando: param });
+  idEditando: '',
+  setIdEditando: param => {
+    set({ idEditando: param });
   },
   responder: false,
   setResponder: param => {
