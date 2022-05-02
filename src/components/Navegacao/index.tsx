@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../context/authContext';
+import Toggle from '../Toggle/Toggle';
 
 export const Navegacao = () => {
   const { estaAutenticado, deslogarUsuario } = useAuthContext();
@@ -20,27 +21,30 @@ export const Navegacao = () => {
     return (
       <>
         <div className=' relative inline-block text-left dropdown z-20'>
-          <button
-            className='flex items-center font-bold underline decoration-raro-rosa dark:text-gray-100 px-4 py-2 text-lg text-raro-cobalto hover:text-raro-rosa'
-            onClick={() => setIsOpen(!isOpen)}
-            type='button'
-            aria-haspopup='true'
-            aria-expanded='true'
-            aria-controls='headlessui-menu-items-117'
-          >
-            <p className='truncate '>{nomeUsuario}</p>
-            <svg
-              className='w-5 h-5 ml-2 -mr-1'
-              viewBox='0 0 20 20'
-              fill='currentColor'
+          <div className='flex'>
+            <Toggle />
+            <button
+              className='flex items-center font-bold underline decoration-raro-rosa dark:text-gray-100 px-4 py-2 text-lg text-raro-cobalto hover:text-raro-rosa'
+              onClick={() => setIsOpen(!isOpen)}
+              type='button'
+              aria-haspopup='true'
+              aria-expanded='true'
+              aria-controls='headlessui-menu-items-117'
             >
-              <path
-                fill-rule='evenodd'
-                d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                clip-rule='evenodd'
-              ></path>
-            </svg>
-          </button>
+              <p className='truncate '>{nomeUsuario}</p>
+              <svg
+                className='w-5 h-5 ml-2 -mr-1'
+                viewBox='0 0 20 20'
+                fill='currentColor'
+              >
+                <path
+                  fill-rule='evenodd'
+                  d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
+                  clip-rule='evenodd'
+                ></path>
+              </svg>
+            </button>
+          </div>
           {isOpen && (
             <div className=' invisible  dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95'>
               <div
