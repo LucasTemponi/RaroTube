@@ -1,7 +1,6 @@
-
-import { ReactNode, useEffect, useState } from "react";
-import { useVideos } from "../../hooks/useVideos";
-import { SemanaSideBar } from "../SemanaSideBar/SemanaSideBar";
+import { ReactNode, useEffect, useState } from 'react';
+import { useVideos } from '../../hooks/useVideos';
+import { SemanaSideBar } from '../SemanaSideBar/SemanaSideBar';
 
 export type Props = {
   isOpen?: boolean;
@@ -9,13 +8,10 @@ export type Props = {
 };
 
 export const SideBar: React.FC<Props> = ({ children, isOpen }) => {
-
-    const topicos = useVideos(state => state.topicos);
+  const topicos = useVideos(state => state.topicos);
 
   const [animation, setAnimation] = useState('');
   const [closeSidebar, setCloseSidebar] = useState(isOpen);
-
-
 
   useEffect(() => {
     if (isOpen) {
@@ -40,7 +36,7 @@ export const SideBar: React.FC<Props> = ({ children, isOpen }) => {
           >
             {Object.keys(topicos).length ? (
               Object.keys(topicos).map(semana => (
-                <SemanaSideBar semana={semana} videos={topico[semana]} />
+                <SemanaSideBar semana={semana} videos={topicos[semana]} />
               ))
             ) : (
               <div className='py-2 overflow-auto px-3 bg-gray-50'>
