@@ -3,6 +3,8 @@ import { BuscaTimestamps } from '../../helpers/BuscaTimestamps';
 import { VideoPlayerProps } from './VideoPlayerProps';
 import { NextUp } from '../NextUp/NextUP';
 import { useFavoritos } from '../../hooks/useFavoritos';
+import { Estrelinha } from '../Estrelinha/Estrelinha';
+
 
 export const VideoPlayer: React.FC<VideoPlayerProps> = props => {
   const [favorite, setFavorite] = useState(false);
@@ -59,6 +61,8 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = props => {
           <h1 className='w-2/3 dark:text-gray-100 text-sm md:text-base'>
             {props.video.nome}
           </h1>
+          {/* Esse componente aqui simplesmente não quer funcionar.
+           <Estrelinha favorite={favorite} favoriteVideo={favoriteVideo} /> */}
           <svg
             xmlns='http://www.w3.org/2000/svg'
             className={`h-6 w-6  ${
