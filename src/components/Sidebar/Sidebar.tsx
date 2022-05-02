@@ -40,7 +40,7 @@ export const SideBar: React.FC<Props> = ({ children, isOpen }) => {
           >
             {Object.keys(topicos).length ? (
               Object.keys(topicos).map(semana => (
-                <SemanaSideBar semana={semana} videos={topico[semana]} />
+                <SemanaSideBar semana={semana} videos={topicos[semana]} />
               ))
             ) : (
               <div className='py-2 overflow-auto px-3 bg-gray-50'>

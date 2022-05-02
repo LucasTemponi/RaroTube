@@ -32,7 +32,7 @@ const VideoPage = () => {
 
   const timestamp = useTimestamp(state => state.setVideo);
 
-  useMemo(() => {
+  useEffect(() => {
     const loadRecomendados = async () => {
       const response = await apiClient.get(`/videos/${id}/recomendacoes`);
       setRecomendados(response.data);
@@ -48,6 +48,7 @@ const VideoPage = () => {
       console.log(response.data);
       iniciaComentarios(response.data);
     };
+    setCarregando(true);
     console.log(id)
     loadVideo();
     loadRecomendados();
