@@ -1,8 +1,6 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/Logo.svg';
-import { useVideos } from '../../hooks/useVideos';
-import apiClient from '../../services/api-client';
 import { Navegacao } from '../Navegacao';
 import { SideBar } from '../Sidebar/Sidebar';
 
