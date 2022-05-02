@@ -81,7 +81,7 @@ export const CodigoDeRecuperarSenha = () => {
         </div>
         <div
           className={`flex items-center justify-end h-5 ${
-            erro ? 'visible' : 'invvisible'
+            erro ? 'visible' : 'invisible'
           }`}
         >
           <span className='font-small text-sm text-[#FF0000]'>{erro}</span>
