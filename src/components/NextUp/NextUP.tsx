@@ -39,8 +39,8 @@ export const NextUp: React.FC<VideoProps> = (video) => {
     }, [timer,timerCancelado]);
 
     return (
-        <div className=' flex flex-col justify-center items-center w-full h-full absolute bg-gray-800 bg-opacity-80 ' >
-            <div className=" z-10 items-center mx-auto " >
+        <div className=' flex flex-col justify-center items-center absolute w-full h-full bg-gray-800 bg-opacity-80 ' >
+            <div className="items-center mx-auto " >
                 <Thumbnail hover video={video} />
             </div>
             { timerCancelado ? <div className=" relative w-36 h-10 mt-4" ></div> : 

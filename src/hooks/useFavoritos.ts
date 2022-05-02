@@ -25,20 +25,16 @@ export const useFavoritos = create<favoritosProps>((set) => ({
     adicionaFavorito: (Video) => { 
         try{
             apiClient.post(`/Videos/${Video.id}/favoritos`)
-            console.log('adicionado')
             set((state) => ({favoritos: [...state.favoritos, Video]}))
         } catch(e){
-            console.log(e)
             window.alert('Erro ao favoritar o video. Tente novamente mais tarde.')
         }
     },
     removeFavorito: (Video) => {
         try{
             apiClient.delete(`/Videos/${Video.id}/favoritos`)
-            console.log('removido')
             set((state) => ({favoritos: state.favoritos.filter((f) => f.id !== Video.id)}))
         } catch(e){
-            console.log(e)
             window.alert('Erro ao remover favorito. Tente novamente mais tarde.')
         }
     },
