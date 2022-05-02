@@ -45,7 +45,7 @@ const Comentario: React.FC<ComentarioProps> = ({
 
   const handleResponder = () => {
     acharComentario();
-    setResponder(true);
+    setResponder(!responder);
   };
 
   function handleEdit() {
@@ -210,14 +210,16 @@ const Comentario: React.FC<ComentarioProps> = ({
                 </button>
               </div>
               <div className='space-x-2 pr-2'>
-                <button
-                  onClick={handleResponder}
-                  className={`
+                {auth.id && (
+                  <button
+                    onClick={handleResponder}
+                    className={`
                   text-green-400 text-xs
                         `}
-                >
-                  Responder
-                </button>
+                  >
+                    Responder
+                  </button>
+                )}
                 {editavel && (
                   <button
                     onClick={handleEdit}
