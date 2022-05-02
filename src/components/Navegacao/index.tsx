@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../context/authContext';
 import Toggle from '../Toggle/Toggle';
 
+
 export const Navegacao = () => {
   const { estaAutenticado, deslogarUsuario } = useAuthContext();
   const navigate = useNavigate();

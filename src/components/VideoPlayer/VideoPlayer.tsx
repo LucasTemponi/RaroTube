@@ -12,9 +12,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = props => {
   const favoritosCarregados = useFavoritos(state => state.favoritosCarregados);
   const removeFavorito = useFavoritos(state => state.removeFavorito);
   const adicionaFavorito = useFavoritos(state => state.adicionaFavorito);
-  // const navigate = useNavigate();
-  // const [timer,setTimer] = useState<number>(0);
-  // const setTimeoutId = useRef(0);
+  
 
   const favoriteVideo = () => {
     if (favorite) {

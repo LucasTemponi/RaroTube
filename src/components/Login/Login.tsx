@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import CapeloFbranco from '../../assets/CapeloFbranco';
-import apiClient from '../../services/api-client';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 
@@ -13,8 +12,6 @@ type loginProps = {
 export const Login = (props: loginProps) => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const [erro, setErro] = useState('');
-  const navigate = useNavigate();
 
   function autenticaUsuario(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();

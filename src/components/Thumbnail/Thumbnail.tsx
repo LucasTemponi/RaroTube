@@ -3,7 +3,6 @@ import { useFavoritos } from '../../hooks/useFavoritos';
 import { thumbnailProps } from './ThumbnailProps';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../context/authContext';
-import { formatarDataThumbnail } from '../../helpers/formatarData';
 
 export const Thumbnail: React.FC<thumbnailProps> = props => {
   const videoRef = useRef<HTMLVideoElement>(null);
