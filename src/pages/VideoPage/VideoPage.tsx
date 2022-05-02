@@ -34,7 +34,7 @@ const VideoPage = () => {
 
   useEffect(() => {
     const loadRecomendados = async () => {
-      const response = await apiClient.get(`/videos/${id}/recomendacoes`);
+      const response = await apiClient.get(`/videos/${id}/recomendacoes?itensPorPagina=100`);
       setRecomendados(response.data);
     };
 
@@ -96,8 +96,8 @@ const VideoPage = () => {
               video={video}
               proximoVideo={proximoVideo}
             />
-          ) : (
-            <div className='mx-auto w-full aspect-video max-h-[80vh] bg-gradient-to-b from-black to-gray-800 ' />
+            ) : (
+              <div className='mx-auto w-full aspect-video max-h-[80vh] bg-gradient-to-b from-black to-gray-800 ' />
           )}
           <div className=' flex flex-col sm:flex-row justify-center mt-16 sm:mx-10 '>
             <div className=' sm:w-3/4 '>
@@ -110,6 +110,7 @@ const VideoPage = () => {
               <div ref={containerRefComentarios} className='h-10'></div>
             </div>
             <div className=' m-auto sm:ml-8'>
+              <h2 className=' text-raro-cobalto font-bold ' >Recomendados</h2>
               {!carregando ? (
                 <VideoList
                   videos={recomendados?.slice(0, paginaRecomendados * 10)}
