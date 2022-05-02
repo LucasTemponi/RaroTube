@@ -45,7 +45,7 @@ const Comentario: React.FC<ComentarioProps> = ({
 
   const handleResponder = () => {
     acharComentario();
-    setResponder(true);
+    setResponder(!responder);
   };
 
   function handleEdit() {
@@ -138,7 +138,7 @@ const Comentario: React.FC<ComentarioProps> = ({
 
   return (
     <>
-      {(idEditando === id) && comentarioAtual ? (
+      {idEditando === id && comentarioAtual ? (
         <EditarComentario texto={texto} idComentario={id} />
       ) : (
         <div className='flex max-w-full'>
@@ -149,12 +149,12 @@ const Comentario: React.FC<ComentarioProps> = ({
               alt='Foto do usuário'
             />
           </div>
-          <div className='w-full p-2 flex-grow'>
-            <p className=' text-justify pl-2 font-semibold text-sm leading-4'>
+          <div className='w-full p-2 flex-grow '>
+            <p className=' text-justify pl-2 font-semibold dark:text-raro-violeta text-sm leading-4'>
               {aluno.nome}
             </p>
             <div className='mb-2'>
-              <p className=' text-justify h-auto resize-y w-full p-2 text-sm leading-normal'>
+              <p className=' text-justify h-auto resize-y w-full p-2 text-sm leading-normal dark:text-gray-100'>
                 {textoFormatado}
               </p>
             </div>
@@ -163,8 +163,11 @@ const Comentario: React.FC<ComentarioProps> = ({
                 <button>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
-                    className={`h-4 w-4 ${like ? 'fill-raro-oceano' : 'fill-transparent'
-                      }`}
+                    className={`h-4 w-4 dark:stroke-gray-200 ${
+                      like
+                        ? 'fill-raro-cobalto dark:fill-gray-200'
+                        : 'fill-transparent'
+                    }`}
                     fill='none'
                     viewBox='0 0 24 24'
                     stroke='currentColor'
@@ -177,15 +180,18 @@ const Comentario: React.FC<ComentarioProps> = ({
                       d='M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5'
                     />
                   </svg>
-                  <span className='leading-normal text-xs'>
+                  <span className='leading-normal text-xs dark:text-gray-400'>
                     {votes.upVotes}
                   </span>
                 </button>
                 <button>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
-                    className={`h-4 w-4 ${dislike ? 'fill-red-700' : 'fill-transparent'
-                      }`}
+                    className={`h-4 w-4 dark:stroke-gray-200 ${
+                      dislike
+                        ? 'fill-red-700 dark:fill-gray-200'
+                        : 'fill-transparent'
+                    }`}
                     fill='none'
                     viewBox='0 0 24 24'
                     stroke='currentColor'
@@ -198,20 +204,22 @@ const Comentario: React.FC<ComentarioProps> = ({
                       d='M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.096c.5 0 .905-.405.905-.904 0-.715.211-1.413.608-2.008L17 13V4m-7 10h2m5-10h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5'
                     />
                   </svg>
-                  <span className='leading-normal text-xs'>
+                  <span className='leading-normal text-xs dark:text-gray-400'>
                     {votes.downVotes}
                   </span>
                 </button>
               </div>
               <div className='space-x-2 pr-2'>
-                <button
-                  onClick={handleResponder}
-                  className={`
+                {auth.id && (
+                  <button
+                    onClick={handleResponder}
+                    className={`
                   text-green-400 text-xs
                         `}
-                >
-                  Responder
-                </button>
+                  >
+                    Responder
+                  </button>
+                )}
                 {editavel && (
                   <button
                     onClick={handleEdit}

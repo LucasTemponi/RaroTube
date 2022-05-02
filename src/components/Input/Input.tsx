@@ -1,4 +1,4 @@
-import React, { HTMLInputTypeAttribute } from "react";
+import React, { HTMLInputTypeAttribute } from 'react';
 
 export type InputProps = {
   name: string;
@@ -7,9 +7,10 @@ export type InputProps = {
   type: HTMLInputTypeAttribute | 'textarea';
   required?: boolean;
   value: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
-
-}
+  onChange?:
+    | React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
+    | undefined;
+};
 
 export const Input: React.FC<InputProps> = ({
   name,
@@ -18,45 +19,40 @@ export const Input: React.FC<InputProps> = ({
   type,
   required = false,
   value,
-  onChange
+  onChange,
 }) => {
   const inputClassNames = `
-    className="appearance-none rounded-md relative block w-full px-3 py-2 mt-4 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+    className="appearance-none dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600 rounded-md relative block w-full px-3 py-2 mt-4 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
   `;
-
 
   return (
     <>
-      <label htmlFor={name} className="sr-only">
+      <label htmlFor={name} className='sr-only'>
         {label}
       </label>
-      {
-        type === 'textarea' ?
-          (
-            <textarea
-              id={name}
-              rows={2}
-              name={name}
-              placeholder={placeholder}
-              required={required}
-              className={inputClassNames}
-              value={value}
-              onChange={onChange}
-            />
-          ) :
-          (
-            <input
-              id={name}
-              type={type}
-              name={name}
-              placeholder={placeholder}
-              className={`${inputClassNames} resize-none`}
-              required={required}
-              value={value}
-              onChange={onChange}
-            />
-          )
-      }
+      {type === 'textarea' ? (
+        <textarea
+          id={name}
+          rows={2}
+          name={name}
+          placeholder={placeholder}
+          required={required}
+          className={inputClassNames}
+          value={value}
+          onChange={onChange}
+        />
+      ) : (
+        <input
+          id={name}
+          type={type}
+          name={name}
+          placeholder={placeholder}
+          className={`${inputClassNames} resize-none`}
+          required={required}
+          value={value}
+          onChange={onChange}
+        />
+      )}
     </>
   );
 };

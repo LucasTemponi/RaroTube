@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ReactComponent as Logo } from '../../assets/Logo.svg';
+import Logo from '../../assets/Logo1';
 import { Navegacao } from '../Navegacao';
 import { SideBar } from '../Sidebar/Sidebar';
 
@@ -17,12 +17,9 @@ const Navbar: React.FC<Props> = ({ children }) => {
 
   return (
     <>
-      <header className='flex flex-col fixed sm:justify-between sm:flex-row z-20 bg-gray-50 px-6 py-4 w-full'>
-        <div className='flex items-center sm:mx-0 mx-auto space-x-5 '>
-          <div
-            className='cursor-pointer absolute sm:relative left-10 sm:left-0 '
-            onClick={handleClick}
-          >
+      <header className='flex flex-row fixed justify-between z-20 bg-gray-50 dark:bg-gray-900 px-6 py-4 w-full'>
+        <div className='flex items-center space-x-12 md:space-x-5'>
+          <div className='cursor-pointer relative' onClick={handleClick}>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               aria-hidden='true'
@@ -34,6 +31,7 @@ const Navbar: React.FC<Props> = ({ children }) => {
             >
               <path
                 fill='#343090'
+                className='dark:fill-gray-100'
                 d='M220 128a4 4 0 0 1-4 4H40a4 4 0 0 1 0-8h176a4 4 0 0 1 4 4ZM40 68h176a4 4 0 0 0 0-8H40a4 4 0 0 0 0 8Zm176 120H40a4 4 0 0 0 0 8h176a4 4 0 0 0 0-8Z'
               />
             </svg>
@@ -42,7 +40,7 @@ const Navbar: React.FC<Props> = ({ children }) => {
             <Logo />
           </Link>
         </div>
-        <div className='flex items-center space-x-2 font-bold'>
+        <div className='flex space-x-2 font-bold'>
           <Navegacao />
         </div>
       </header>
