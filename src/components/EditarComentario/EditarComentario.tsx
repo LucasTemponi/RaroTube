@@ -40,7 +40,7 @@ const EditarComentario: React.FC<EditarComentarioProps> = ({
       <form action='' className='w-full p-4' onSubmit={handleSubmit}>
         <div className='mb-2'>
           <textarea
-            className='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-raro-cobalto peer '
+            className='block py-2.5 px-0 w-full text-sm dark:text-gray-100 text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-raro-cobalto peer '
             name='comentario'
             placeholder='Adicione seu  comentário...'
             rows={1}
