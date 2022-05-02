@@ -42,7 +42,7 @@ describe('Página - Alterar Senha', () => {
             setValorInput(input, novaSenha);
             setValorInput(inputSecundario, senhaConfirmacao);
             botao.click();
-           
+
             expect(await screen.findByText(mensagemDeValidacao)).toBeInTheDocument()
         });
 
@@ -58,23 +58,24 @@ describe('Página - Alterar Senha', () => {
             const senhaConfirmacao = screen.getByPlaceholderText('Confirmar Senha');
             const botao = screen.getByText('Alterar');
             const dados = {
-              codigo:'abcd',
-              novaSenha: '12345',
+                codigo: 'abcd',
+                novaSenha: '12345',
             };
-        
+
             // construcao
             setValorInput(codigo, dados.codigo);
             setValorInput(novaSenha, dados.novaSenha);
             setValorInput(senhaConfirmacao, dados.novaSenha);
             botao.click();
-        
+
             // asserts
             expect(apiClient.patch).toHaveBeenCalledWith(
-              expect.stringContaining('/auth/recuperar-senha'),
-              dados
+                expect.stringContaining('/auth/recuperar-senha'),
+                dados
             );
             expect(await screen.findByText('Senha Alterada com sucesso!')).toBeInTheDocument()
-          });
+        });
+
 
     })
 
