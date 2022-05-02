@@ -58,7 +58,9 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = props => {
       </div>
       <div className='w-14/12 mx-8 mt-8'>
         <div className='flex flex-row justify-between mt-2 mb-4'>
-          <h1 className='w-2/3 dark:text-gray-100'>{props.video.nome}</h1>
+          <h1 className='w-2/3 dark:text-gray-100 text-sm md:text-base'>
+            {props.video.nome}
+          </h1>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             className={`h-6 w-6  ${
@@ -77,7 +79,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = props => {
         </div>
         <hr className='border-raro-rosa' />
         <div className='mt-6'>
-          <p className='dark:text-gray-100'>
+          <p className='dark:text-gray-100 text-sm md:text-base'>
             {BuscaTimestamps(props.video.descricao)}
           </p>
         </div>

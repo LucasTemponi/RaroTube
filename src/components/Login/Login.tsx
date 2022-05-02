@@ -26,9 +26,9 @@ export const Login = (props: loginProps) => {
       <div className='min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
         <div className='max-w-md w-full shadow-lg  px-8 py-16 rounded-lg space-y-8'>
           <div>
-            <div className='mx-auto h-12 w-40 flex items-center'>
+            <Link to={'/'} className='mx-auto h-12 w-40 flex items-center'>
               <CapeloFbranco />
-            </div>
+            </Link>
             <h2 className='mt-6 text-center text-2xl font-bold text-raro-cobalto dark:text-raro-violeta'>
               Faça Login em sua conta
             </h2>

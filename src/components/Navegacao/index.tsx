@@ -20,9 +20,8 @@ export const Navegacao = () => {
   if (estaAutenticado) {
     return (
       <>
-        <div className=' relative inline-block text-left dropdown z-20'>
+        <div className=' relative inline-block text-left dropdown z-20 left-5 md:left-0'>
           <div className='flex'>
-            <Toggle />
             <button
               className='flex items-center font-bold underline decoration-raro-rosa dark:text-gray-100 px-4 py-2 text-lg text-raro-cobalto hover:text-raro-rosa'
               onClick={() => setIsOpen(!isOpen)}
@@ -57,21 +56,22 @@ export const Navegacao = () => {
                   <p className=' text-base leading-5 dark:text-white'>
                     Logado por
                   </p>
-                  <p className='text-lg sm:text-base font-medium leading-5 text-raro-cobalto truncate'>
+                  <p className='text-lg sm:text-base dark:text-raro-violeta font-medium leading-5 text-raro-cobalto truncate'>
                     {emailUsuario}
                   </p>
                 </div>
                 <div className='py-1'>
+                  <Toggle />
                   <Link to={`/solicitarcodigo`}>
                     <button
-                      className='text-raro-cobalto flex justify-between dark:text-white w-full px-4 py-2 z-1 text-lg sm:text-base leading-5 text-left hover:text-raro-rosa'
+                      className='text-raro-cobalto flex justify-between dark:text-white w-full px-4 py-2 z-1 text-lg sm:text-base leading-5 text-left dark:hover:text-raro-rosa hover:text-raro-rosa'
                       role='menuitem'
                     >
                       Alterar senha
                     </button>
                   </Link>
                   <button
-                    className='text-raro-cobalto flex dark:text-white justify-between w-full px-4 py-2 z-2 text-lg sm:text-base leading-5 text-left hover:text-raro-rosa'
+                    className='text-raro-cobalto flex dark:text-white justify-between w-full px-4 py-2 z-2 text-lg sm:text-base leading-5 text-left hover:text-raro-rosa dark:hover:text-raro-rosa'
                     role='menuitem'
                     onClick={() => logout()}
                   >
@@ -86,12 +86,12 @@ export const Navegacao = () => {
     );
   }
   return (
-    <>
+    <div className='flex flex-row space-x-4'>
       <button
         onClick={() => {
           navigate('/login');
         }}
-        className='font-bold underline decoration-raro-rosa px-4 py-2 text-lg text-raro-cobalto hover:text-raro-rosa dark:text-gray-100'
+        className='font-bold underline  text-xs md:text-lg dark:hover:text-raro-rosa decoration-raro-rosa px-2 py-2  text-raro-cobalto hover:text-raro-rosa dark:text-gray-100'
       >
         Login
       </button>
@@ -99,10 +99,10 @@ export const Navegacao = () => {
         onClick={() => {
           navigate('/cadastro');
         }}
-        className='font-bold underline decoration-raro-rosa px-4 py-2 text-lg text-raro-cobalto hover:text-raro-rosa dark:text-gray-100'
+        className='font-bold underline text-xs md:text-lg dark:hover:text-raro-rosa decoration-raro-rosa px-1 py-1  text-raro-cobalto hover:text-raro-rosa dark:text-gray-100'
       >
         Cadastre-se
       </button>
-    </>
+    </div>
   );
 };

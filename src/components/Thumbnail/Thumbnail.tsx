@@ -60,7 +60,7 @@ export const Thumbnail: React.FC<thumbnailProps> = props => {
 
   return (
     <article
-      className={`flex flex-col bg-white items-center transform ${
+      className={`flex cursor-pointer flex-col bg-white items-center transform ${
         props.hover ? 'hover:scale-110' : ''
       } ease-linear duration-300 w-[93vw]
           lg:w-[15.65vw] md:max-w-[22.35vw] sm:max-w-[30.3vw]  rounded-md shadow-md`}
@@ -103,8 +103,8 @@ export const Thumbnail: React.FC<thumbnailProps> = props => {
         )}
       </div>
 
-      <div className='bg-white text-black w-full rounded-b-md items-end'>
-        <h2 className='truncate 2xl:text-lg xl:text-lg text-base mb-2 pt-4 px-2'>
+      <div className='bg-white dark:bg-raro-violeta text-black w-full rounded-b-md items-end'>
+        <h2 className='truncate 2xl:text-lg xl:text-lg dark:text-gray-100 text-base mb-2 pt-4 px-2'>
           {props.video.nome}
         </h2>
       </div>
