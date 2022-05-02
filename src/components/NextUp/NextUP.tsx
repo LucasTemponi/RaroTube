@@ -10,7 +10,6 @@ export const NextUp: React.FC<VideoProps> = (video) => {
     const navigate = useNavigate();
 
     const handleTimer = () => {
-        console.log(timer);
         if (timer < 5) {
             setTimeoutId.current = window.setTimeout(() => {
                 setTimer(timer + 0.01667);

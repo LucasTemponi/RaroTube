@@ -14,7 +14,6 @@ export const useTimestamp = create<VideoTimeProps>(set => ({
   setTempo: (tempo) => set((state) => {
     if (state.video) {
       state.video.currentTime = tempo;
-      console.log(state.video)
       state.video.scrollIntoView({ behavior: 'smooth' });
     }
     return { };

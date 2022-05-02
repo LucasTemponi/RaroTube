@@ -34,8 +34,6 @@ export const PaginaPrincipal = () => {
     };
 
     useEffect(() => {
-        console.log('useEffect estaAutenticado')
-        console.log(estaAutenticado );
         if (!videosCarregados || !favoritosCarregados) {
             loadVideos();
         } else {

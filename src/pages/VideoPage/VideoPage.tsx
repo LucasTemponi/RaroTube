@@ -44,7 +44,6 @@ const VideoPage = () => {
     const loadVideo = async () => {
       try{
         const response = await apiClient.get(`/videos/${id}`);
-        console.log(response.data)
         setVideo(response.data);
       }  catch(error: any) {
         if (error.response.status === 401 || error.response.status === 404) {
@@ -57,11 +56,10 @@ const VideoPage = () => {
 
     const loadComentarios = async () => {
       const response = await apiClient.get(`/videos/${id}/comentarios`);
-      console.log(response.data);
       iniciaComentarios(response.data);
     };
+
     setCarregando(true);
-    console.log(id)
     loadVideo();
     loadRecomendados();
     loadComentarios();
@@ -93,6 +91,7 @@ const VideoPage = () => {
   }, [video,videosCarregados]);
 
   useEffect(() => {
+
     if (!carregando){
       timestamp(document.getElementById('VideoPrincipal') as HTMLVideoElement);
     }

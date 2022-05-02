@@ -45,30 +45,17 @@ export const AuthContextProvider: React.FC<Props> = ({ children }) => {
     const nomeInLocalStorage = localStorage.getItem('nome');
     const idInLocalStorage = localStorage.getItem('id');
 
-    console.log(
-      '\ntokenInLocalStorage: ',
-      !!tokenInLocalStorage,
-      '\nfotoInLocalStorage: ',
-      !!fotoInLocalStorage,
-      '\nnomeInLocalStorage: ',
-      !!nomeInLocalStorage,
-      '\nidInLocalStorage: ',
-      !!idInLocalStorage
-    )
-
     if (
       tokenInLocalStorage &&
       fotoInLocalStorage &&
       nomeInLocalStorage &&
       idInLocalStorage
     ) {
-      console.log('setando')
       setAutenticado(true);
       setToken(tokenInLocalStorage);
       setFoto(fotoInLocalStorage);
       setNome(nomeInLocalStorage);
       setId(idInLocalStorage);
-
     }
   }, []);
 
