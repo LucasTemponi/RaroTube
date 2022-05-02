@@ -4,9 +4,7 @@ import { VideoPlayerProps } from './VideoPlayerProps';
 import { NextUp } from '../NextUp/NextUP';
 import { useFavoritos } from '../../hooks/useFavoritos';
 
-
 export const VideoPlayer: React.FC<VideoPlayerProps> = props => {
-
   const [favorite, setFavorite] = useState(false);
   const [videoAcabando, setVideoAcabando] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -28,35 +26,44 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = props => {
 
   const handleOnTimeUpdate = () => {
     if (videoRef.current) {
-      if (videoRef.current?.currentTime >= (videoRef.current.duration - 2)) {
+      if (videoRef.current?.currentTime >= videoRef.current.duration - 2) {
         setVideoAcabando(true);
       } else {
         setVideoAcabando(false);
       }
     }
-  }
+  };
 
   useEffect(() => {
     let isFavorite = todosFavoritos.filter(
-      favorito => favorito.id === props.video.id);
+      favorito => favorito.id === props.video.id
+    );
     isFavorite.length > 0 ? setFavorite(true) : setFavorite(false);
   }, [todosFavoritos]);
 
   return (
     <>
-      <div className="w-full h-full relative ">
-      {videoAcabando && <NextUp {...props.proximoVideo} />}
-      <video ref={videoRef} id="VideoPrincipal" className='w-full max-h-[80vh]' title={props.video.nome} controls onTimeUpdate={handleOnTimeUpdate}>
-        <source src={props.video.url} />
-      </video>
+      <div className='w-full h-full relative '>
+        {videoAcabando && <NextUp {...props.proximoVideo} />}
+        <video
+          ref={videoRef}
+          id='VideoPrincipal'
+          className='w-full max-h-[80vh]'
+          title={props.video.nome}
+          controls
+          onTimeUpdate={handleOnTimeUpdate}
+        >
+          <source src={props.video.url} />
+        </video>
       </div>
       <div className='w-14/12 mx-8 mt-8'>
-        <div className='flex flex-row justify-items-start mt-2 mb-4'>
-          <h1 className='w-2/3'>{props.video.nome}</h1>
+        <div className='flex flex-row justify-between mt-2 mb-4'>
+          <h1 className='w-2/3 dark:text-gray-100'>{props.video.nome}</h1>
           <svg
             xmlns='http://www.w3.org/2000/svg'
-            className={`h-6 w-6  ${favorite ? 'fill-amber-300' : 'fill-gray-100 hover:fill-amber-100'
-              } content-center`}
+            className={`h-6 w-6  ${
+              favorite ? 'fill-amber-300' : 'fill-gray-100 hover:fill-amber-100'
+            } content-center`}
             fill='none'
             viewBox='0 0 24 24'
             onClick={favoriteVideo}
@@ -70,7 +77,9 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = props => {
         </div>
         <hr className='border-raro-rosa' />
         <div className='mt-6'>
-          <p>{BuscaTimestamps(props.video.descricao)}</p>
+          <p className='dark:text-gray-100'>
+            {BuscaTimestamps(props.video.descricao)}
+          </p>
         </div>
       </div>
     </>

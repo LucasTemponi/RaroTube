@@ -14,7 +14,7 @@ import apiClient from '../../services/api-client';
 const VideoPage = () => {
   const [recomendados, setRecomendados] = useState<VideoProps[]>();
   const [video, setVideo] = useState<VideoProps>();
-  const [carregando,setCarregando] = useState<boolean>(true);
+  const [carregando, setCarregando] = useState<boolean>(true);
   const [proximoVideo, setProximoVideo] = useState<VideoProps>();
   const { id } = useParams();
   const comentarios = useComentarios(state => state.comentarios);
@@ -34,7 +34,9 @@ const VideoPage = () => {
 
   useEffect(() => {
     const loadRecomendados = async () => {
-      const response = await apiClient.get(`/videos/${id}/recomendacoes?itensPorPagina=100`);
+      const response = await apiClient.get(
+        `/videos/${id}/recomendacoes?itensPorPagina=100`
+      );
       setRecomendados(response.data);
     };
 
@@ -49,7 +51,7 @@ const VideoPage = () => {
       iniciaComentarios(response.data);
     };
     setCarregando(true);
-    console.log(id)
+    console.log(id);
     loadVideo();
     loadRecomendados();
     loadComentarios();
@@ -59,7 +61,6 @@ const VideoPage = () => {
   }, [id]);
 
   useEffect(() => {
-
     const buscaProximoVideo = () => {
       if (videosCarregados) {
         const videoIndex = todosVideos.findIndex(
@@ -74,17 +75,17 @@ const VideoPage = () => {
       }
     };
 
-    if (video && videosCarregados){
+    if (video && videosCarregados) {
       buscaProximoVideo();
       setCarregando(false);
-    }    
-  }, [video,videosCarregados]);
+    }
+  }, [video, videosCarregados]);
 
   useEffect(() => {
-    if (!carregando){
+    if (!carregando) {
       timestamp(document.getElementById('VideoPrincipal') as HTMLVideoElement);
     }
-  },[carregando])
+  }, [carregando]);
 
   return (
     <>
@@ -96,8 +97,8 @@ const VideoPage = () => {
               video={video}
               proximoVideo={proximoVideo}
             />
-            ) : (
-              <div className='mx-auto w-full aspect-video max-h-[80vh] bg-gradient-to-b from-black to-gray-800 ' />
+          ) : (
+            <div className='mx-auto w-full aspect-video max-h-[80vh] bg-gradient-to-b from-black to-gray-800 ' />
           )}
           <div className=' flex flex-col sm:flex-row justify-center mt-16 sm:mx-10 '>
             <div className=' sm:w-3/4 '>
@@ -110,14 +111,18 @@ const VideoPage = () => {
               <div ref={containerRefComentarios} className='h-10'></div>
             </div>
             <div className=' m-auto sm:ml-8'>
-              <h2 className=' text-raro-cobalto font-bold ' >Recomendados</h2>
+              <h2 className=' text-raro-cobalto font-bold dark:text-gray-100'>
+                Recomendados
+              </h2>
               {!carregando ? (
                 <VideoList
                   videos={recomendados?.slice(0, paginaRecomendados * 10)}
                   vertical
                 />
-              ) : (<LazyThumbList items={10} vertical />)}
-                <div ref={containerRefRecomendados} className='h-10'></div>
+              ) : (
+                <LazyThumbList items={10} vertical />
+              )}
+              <div ref={containerRefRecomendados} className='h-10'></div>
             </div>
           </div>
         </div>

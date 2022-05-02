@@ -1,8 +1,6 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ReactComponent as Logo } from '../../assets/Logo.svg';
-import { useVideos } from '../../hooks/useVideos';
-import apiClient from '../../services/api-client';
+import Logo from '../../assets/Logo1';
 import { Navegacao } from '../Navegacao';
 import { SideBar } from '../Sidebar/Sidebar';
 
@@ -19,7 +17,7 @@ const Navbar: React.FC<Props> = ({ children }) => {
 
   return (
     <>
-      <header className='flex flex-col fixed sm:justify-between sm:flex-row z-20 bg-gray-50 px-6 py-4 w-full'>
+      <header className='flex flex-col fixed sm:justify-between sm:flex-row z-20 bg-gray-50 dark:bg-gray-800 px-6 py-4 w-full'>
         <div className='flex items-center sm:mx-0 mx-auto space-x-5 '>
           <div
             className='cursor-pointer absolute sm:relative left-10 sm:left-0 '
@@ -36,6 +34,7 @@ const Navbar: React.FC<Props> = ({ children }) => {
             >
               <path
                 fill='#343090'
+                className='dark:fill-white'
                 d='M220 128a4 4 0 0 1-4 4H40a4 4 0 0 1 0-8h176a4 4 0 0 1 4 4ZM40 68h176a4 4 0 0 0 0-8H40a4 4 0 0 0 0 8Zm176 120H40a4 4 0 0 0 0 8h176a4 4 0 0 0 0-8Z'
               />
             </svg>

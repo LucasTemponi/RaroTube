@@ -37,9 +37,9 @@ const AdicionarComentario: React.FC = () => {
         <form action='' className='w-full p-4' onSubmit={handleSubmit}>
           <div className='mb-2'>
             <textarea
-              className='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-raro-cobalto peer '
+              className='block py-2.5 px-0 w-full text-sm dark:text-gray-100 text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-raro-cobalto peer '
               name='comentario'
-              placeholder='Adicione seu  comentário...'
+              placeholder='Adicione seu comentário...'
               rows={1}
               value={texto}
               onChange={e => setTexto(e.target.value)}
@@ -52,14 +52,14 @@ const AdicionarComentario: React.FC = () => {
             }`}
           >
             <button
-              className='px-3 py-2 w-24 text-sm text-blue-100 border border-raro-oceano bg-raro-oceano rounded-md disabled:bg-gray-300 disabled:border-gray-300 transition-all duration-[4000] delay-[4000] ease-out'
+              className='px-3 py-2 w-24 text-sm disabled:dark:bg-gray-600 dark:text-gray-100 disabled:dark:border-gray-600 text-blue-100 border border-raro-oceano bg-raro-oceano rounded-md disabled:bg-gray-300 disabled:border-gray-300 transition-all duration-[4000] delay-[4000] ease-out'
               type='submit'
               disabled={!texto}
             >
               Comentar
             </button>
             <button
-              className='px-3 py-2 w-24 text-sm text-blue-600 border border-raro-oceano disabled:bg-gray-300 disabled:border-gray-300 disabled:text-blue-100 rounded-md'
+              className='px-3 py-2 w-24 text-sm disabled:dark:bg-gray-600 dark:text-gray-100 disabled:dark:border-gray-600 text-blue-600 border border-raro-oceano disabled:bg-gray-300 disabled:border-gray-300 disabled:text-blue-100 rounded-md'
               onClick={e => {
                 e.preventDefault();
                 setTexto('');
