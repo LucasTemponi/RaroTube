@@ -54,7 +54,7 @@ export const PaginaPrincipal = () => {
   }, [videosCarregados, favoritosCarregados]);
 
   return (
-    <section className=' mt-2 max-w-[95vw] lg:max-w-[85vw] mx-auto'>
+    <section className=' mt-2 max-w-[95vw] lg:max-w-[85vw] mx-auto min-h-screen'>
       {authContext.estaAutenticado && (
         <article className=' mb-10 pt-10 md:pt-4'>
           <h1 className=' font-extrabold underline decoration-raro-rosa md:text-3xl xl:text-4xl my-2 py-4 text-left text-raro-cobalto dark:text-raro-violeta'>
