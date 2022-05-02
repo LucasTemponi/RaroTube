@@ -34,12 +34,10 @@ export const SideBar: React.FC<Props> = ({ children, isOpen }) => {
           <div 
             className={`flex flex-col fixed pt-20 z-10 overflow-auto w-full xl:w-64 h-screen xl:bg-gray-50 bg-gray-50 transition-all duration-200 ease-linear ${animation} `}
           >
-            {Object.keys(topicos).length ? (
-              Object.keys(topicos).map(semana => (
-                <SemanaSideBar semana={semana} videos={topicos[semana]} />
-              ))
-            ) : (
-              <div className='py-2 overflow-auto px-3 bg-gray-50'>
+
+            {Object.keys(topicos).length <= 1 ? (
+            <>
+              <div className=' py-2 mb-4 overflow-auto px-3 bg-gray-50'>
                 <ul className=' space-y-2 items-center '>
                   <div className='text-center'>
                     <span className='items-center pl-4 w-full text-base font-bold text-gray-700 rounded-lg '>
@@ -72,7 +70,17 @@ export const SideBar: React.FC<Props> = ({ children, isOpen }) => {
                   </a>
                 </ul>
               </div>
-            )}
+              <hr className=' border-raro-rosa w-3/4 mx-auto ' />
+              <h3 className=' mt-6 font-bold mx-auto ' >Vídeos públicos</h3>
+              </> )
+              : (
+                <h3 className='mx-auto mt-6 font-bold  ' >Meu curso</h3>
+              )
+            }
+            { Object.keys(topicos).map(semana => (
+                <SemanaSideBar semana={semana} videos={topicos[semana]} />
+            ))}
+
           </div>
           <div
             className={`w-80 transition-all duration-400 ease-in-out ${animation}`}
