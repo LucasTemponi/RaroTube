@@ -35,16 +35,15 @@ export const SideBar: React.FC<Props> = ({ children, isOpen }) => {
           <div
             className={`flex flex-col fixed pt-20 z-10 w-full overflow-auto bg-black-rgba xl:w-64 h-auto xl:bg-gray-50 bg-gray-50 transition-all duration-200 ease-linear ${animation} `}
           >
-            {Object.keys(topicos).length ? (
-              Object.keys(topicos).map(semana => (
-                <SemanaSideBar semana={semana} videos={topicos[semana]} />
-              ))
-            ) : (
-              <div className='py-12 md:py-8 xl:py-6 overflow-auto px-3 bg-gray-50 dark:bg-gray-800'>
-                <ul className='flex flex-col space-y-2  items-left'>
-                  <p className='pl-4 text-base font-bold text-gray-700 rounded-lg dark:text-gray-100'>
-                    Não é nosso aluno?
-                  </p>
+
+            {Object.keys(topicos).length <= 1 ? (
+            <>
+              <div className=' py-12 md:py-8 xl:py-6 overflow-auto px-3 bg-gray-50 dark:bg-gray-800 '>
+                <ul className=' flex flex-col space-y-2  items-left '>
+                    <p className='pl-4 text-base font-bold text-gray-700 rounded-lg dark:text-gray-100 '>
+                      Não é nosso aluno?
+                    </p>
+
                   <a
                     className='flex items-center p-2 hover:bg-blue-100 rounded-lg cursor-pointer'
                     href='https://www.raroacademy.com.br/'
@@ -72,7 +71,16 @@ export const SideBar: React.FC<Props> = ({ children, isOpen }) => {
                   </a>
                 </ul>
               </div>
-            )}
+              <hr className=' border-raro-rosa w-3/4 mx-auto ' />
+              <h3 className=' mt-6 font-bold mx-auto ' >Vídeos públicos</h3>
+              </> )
+              : (
+                <h3 className='mx-auto mt-6 font-bold  ' >Meu curso</h3>
+              )
+            }
+            { Object.keys(topicos).map(semana => (
+                <SemanaSideBar semana={semana} videos={topicos[semana]} />
+            ))}
             <div className='items-center'>
               <Toggle />
             </div>
