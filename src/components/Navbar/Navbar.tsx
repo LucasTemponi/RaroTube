@@ -17,7 +17,7 @@ const Navbar: React.FC<Props> = ({ children }) => {
 
   return (
     <>
-      <header className='flex flex-row fixed justify-between z-20 bg-gray-50 dark:bg-gray-800 px-6 py-4 w-full'>
+      <header className='flex flex-row fixed justify-between z-20 bg-gray-50 dark:bg-gray-900 px-6 py-4 w-full'>
         <div className='flex items-center space-x-12 md:space-x-5'>
           <div className='cursor-pointer relative' onClick={handleClick}>
             <svg

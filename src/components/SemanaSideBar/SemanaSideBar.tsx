@@ -11,7 +11,7 @@ export const SemanaSideBar: React.FC<SemanaSideBarProps> = semana => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className=' md:w-1/2 xl:w-full z-20 opacity-100 py-2 px-3 bg-gray-50 dark:bg-gray-800'>
+    <div className=' md:w-1/2 xl:w-full z-20 opacity-100 py-2 px-3 bg-gray-50 dark:bg-gray-900'>
       <ul className='  space-y-2 items-center'>
         <li className='flex items-center p-2 hover:bg-blue-100 dark:hover:bg-gray-700 rounded-lg'>
           <svg
