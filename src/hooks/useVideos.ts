@@ -24,9 +24,9 @@ export const useVideos = create<videosHookProps>((set,get) => ({
 
             const semanas: semanasProps = {}
             todosVideos.forEach( video => {
-                if (video.topico !== 'aulão') {
+                // if (video.topico !== 'aulão') {
                     semanas[video.topico] ? semanas[video.topico].push(video) : semanas[video.topico] = [video]
-                }
+                // }
             })
             return semanas
         }
