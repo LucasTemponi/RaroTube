@@ -62,7 +62,7 @@ export const Navegacao = () => {
                   </p>
                 </div>
                 <div className='py-1'>
-                  <Toggle />
+                  {/* <Toggle /> */}
                   <Link to={`/solicitarcodigo`}>
                     <button
                       className='text-raro-cobalto flex justify-between dark:text-white w-full px-4 py-2 z-1 text-lg sm:text-base leading-5 text-left dark:hover:text-raro-rosa hover:text-raro-rosa'

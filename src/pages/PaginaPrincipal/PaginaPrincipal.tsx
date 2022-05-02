@@ -76,10 +76,10 @@ export const PaginaPrincipal = () => {
         {carregando ? (
           <LazyThumbList items={20} />
         ) : (
-          <VideoList hover videos={videos?.slice(0, pagina * 10)} />
+          <VideoList hover videos={videos?.slice(0, pagina * 15)} />
         )}
       </article>
-      <div ref={containerRef} className='h-10' />
+      <div ref={containerRef} className='h-10 border-8 border-red-400 ' />
     </section>
   );
 };
