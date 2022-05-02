@@ -29,11 +29,15 @@ const AuthContext = createContext<AuthContextProps>({
 type Props = {
   children?: React.ReactNode;
 };
+
+
 export const AuthContextProvider: React.FC<Props> = ({ children }) => {
+
   const [token, setToken] = useState(localStorage.getItem('token') || '');
   const [foto, setFoto] = useState(localStorage.getItem('foto') || '');
   const [nome, setNome] = useState(localStorage.getItem('nome') || '');
   const [id, setId] = useState(localStorage.getItem('id') || '');
+  const [autenticado, setAutenticado] = useState(false);
 
   useEffect(() => {
     const tokenInLocalStorage = localStorage.getItem('access_token');
@@ -47,6 +51,7 @@ export const AuthContextProvider: React.FC<Props> = ({ children }) => {
       nomeInLocalStorage &&
       idInLocalStorage
     ) {
+      setAutenticado(true);
       setToken(tokenInLocalStorage);
       setFoto(fotoInLocalStorage);
       setNome(nomeInLocalStorage);
@@ -68,9 +73,11 @@ export const AuthContextProvider: React.FC<Props> = ({ children }) => {
     localStorage.setItem('foto', foto);
     setToken(token);
     setFoto(foto);
+    setAutenticado(true);
   };
 
   const deslogarUsuario = () => {
+    setAutenticado(false);
     setToken('');
     setFoto('');
     setNome('');
@@ -82,7 +89,7 @@ export const AuthContextProvider: React.FC<Props> = ({ children }) => {
     localStorage.removeItem('foto');
   };
 
-  const estaAutenticado = (token !== null && token !== '');
+  const estaAutenticado = autenticado;
 
   return (
     <AuthContext.Provider
