@@ -52,9 +52,12 @@ Contém:
 
 ### Exibição do conteúdo
 - Player de Visulização do vídeo;
+- Timestamp;
+- Reprodução do próximo vídeo automática;
 - Lista de vídeos sugeridos;
 - Botão para favoritar vídeo;
-- Adicionar, responder, editar ou excluir um comentário.
+- Adicionar, Curtir ou descurtir um comentário;
+- Responder, editar ou excluir um comentário já existente.
 
 ### Navegação 
 - Sistema de rotas para as páginas específicas;
