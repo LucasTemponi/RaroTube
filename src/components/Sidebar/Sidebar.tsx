@@ -70,8 +70,12 @@ export const SideBar: React.FC<Props> = ({ children, isOpen }) => {
                     </a>
                   </ul>
                 </div>
-                <hr className=' border-raro-rosa w-3/4 mx-auto ' />
-                <h3 className=' mt-6 font-bold mx-auto '>Vídeos públicos</h3>
+                <div className='flex flex-col overflow-auto px-3 bg-gray-50 dark:bg-gray-900 '>
+                  <hr className=' border-raro-rosa w-full mx-auto ' />
+                  <h3 className=' mt-6 font-bold mx-auto dark:text-gray-100 text-raro-cobalto '>
+                    Vídeos públicos
+                  </h3>
+                </div>
               </>
             ) : (
               <div className='flex overflow-auto px-3 bg-gray-50 dark:bg-gray-900 '>
