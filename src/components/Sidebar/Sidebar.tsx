@@ -1,11 +1,7 @@
-import { ReactNode, useEffect, useMemo, useState } from 'react';
-import { useVideos } from '../../hooks/useVideos';
-import { SemanaSideBar } from '../SemanaSideBar/SemanaSideBar';
-import { VideoProps } from '../VideoPlayer/VideoProps';
 
-type semanasProps = {
-  [key: string]: VideoProps[];
-};
+import { ReactNode, useEffect, useState } from "react";
+import { useVideos } from "../../hooks/useVideos";
+import { SemanaSideBar } from "../SemanaSideBar/SemanaSideBar";
 
 export type Props = {
   isOpen?: boolean;
@@ -13,23 +9,13 @@ export type Props = {
 };
 
 export const SideBar: React.FC<Props> = ({ children, isOpen }) => {
-  const todosVideos = useVideos(state => state.videos);
+
+    const topicos = useVideos(state => state.topicos);
 
   const [animation, setAnimation] = useState('');
   const [closeSidebar, setCloseSidebar] = useState(isOpen);
 
-  const semanas: semanasProps = useMemo(() => {
-    const semanas: semanasProps = {};
-    todosVideos.forEach(video => {
-      if (video.topico !== 'aulão') {
-        semanas[video.topico]
-          ? semanas[video.topico].push(video)
-          : (semanas[video.topico] = [video]);
-      }
-    });
-    console.log(semanas);
-    return semanas;
-  }, [todosVideos]);
+
 
   useEffect(() => {
     if (isOpen) {
@@ -52,9 +38,9 @@ export const SideBar: React.FC<Props> = ({ children, isOpen }) => {
           <div
             className={`flex flex-col fixed pt-20 z-10 overflow-auto w-full xl:w-64 h-screen xl:bg-gray-50 bg-gray-50 transition-all duration-200 ease-linear ${animation} `}
           >
-            {Object.keys(semanas).length ? (
-              Object.keys(semanas).map(semana => (
-                <SemanaSideBar semana={semana} videos={semanas[semana]} />
+            {Object.keys(topicos).length ? (
+              Object.keys(topicos).map(semana => (
+                <SemanaSideBar semana={semana} videos={topico[semana]} />
               ))
             ) : (
               <div className='py-2 overflow-auto px-3 bg-gray-50'>
