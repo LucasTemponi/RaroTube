@@ -9,47 +9,59 @@
 </div>
 
 
-#  Projeto Raro Tube
+#  Raro Tube
 
-Projeto final do curso de React da Raro Academy. O Raro Tube é um portal de vídeos, direcionados a alunos contendo vídeos públicos e vídeos privados.  
+Projeto final do curso de React da Raro Academy.
 
+O Raro Tube é um portal de vídeos exclusivo da Raro Academy, que tem como principal objetivo facilitar o acesso dos alunos aos materiais em vídeo que são produzidos ao longo dos cursos da Academy. O desenvolvimento dessa plataforma trás diversas vantagens como a possibilidade de organizar o conteúdo de forma mais eficiente, permitir aos alunos criarem uma lista com seus vídeos favoritos, bem como promover uma maior interação entre os alunos através das curtidas e comentários nos vídeos.
 &nbsp;
 
 ##  **Funcionalidades**
 
 ### Layout
-- Header
-- Menu (autenticado e não autenticado)
-- Conteúdo
+O layout base do app é subdividido em:
+- Header ;
+- Menu (autenticado e não autenticado);
+- Lista de vídeos.
 
-### Home não autenticada
-- Lista de vídeos públicos
-- Botão de login no header
-- Botão de cadastrar no header
-- Funcionalidade de se matricular no menu
+### Home (não autenticada)
+Nessa sessão é possível:
+- Acessar a Lista de videos públicos e visualiza-los;
+- Visualizar comentários feitos por usuários autenticados;
+- Fazer login utilizando o botão 'Login' localizado no canto superior direito no header;
+- Fazer um cadastro utilizando o botão 'Cadastre-se' localizado ao lado do botão de login;
+- Acessar o menu através do botão no canto superior esquerdo e obter mais informações sobre as próximas turmas disponíveis da Raro Academy. 
+
+### Página de Cadastro
+Realiza a inscrição do aluno da plataforma através dos dados:
+- Nome;
+- Senha;
+- Código de Acesso.
 
 ### Página de login
-- Realizar a autenticação
-- Recuperar senha
+- Realiza a autenticação do usuário através do seu email e senha;
+- Possibilita alterar a senha através do link 'Esqueci minha senha';
 
 ### Home autenticada
-- Lista de vídeos favoritos
-- Lista de vídeos recentes
-- Lista de vídeos recomendados
-- Botão dropdown de ações com o usuário (alterar senha, sair)
-- Menu com vídeos das aulas
+Contém:
+- Lista de vídeos favoritos do usuário;
+- Lista de vídeos recentes;
+- Lista de vídeos recomendados;
+- Botão dropdown de ações com o usuário (alterar senha, sair);
+- Menu com os vídeos das aulas separados por semanas. 
 
 ### Exibição do conteúdo
-- Visulização do vídeo
-- Lista de vídeos sugeridos
-- Botão de favoritar vídeo
-- Adicionar comentário
-- Excluir comentário
-
+- Player de Visulização do vídeo;
+- Timestamp;
+- Reprodução do próximo vídeo automática;
+- Lista de vídeos sugeridos;
+- Botão para favoritar vídeo;
+- Adicionar, Curtir ou descurtir um comentário;
+- Responder, editar ou excluir um comentário já existente.
 
 ### Navegação 
-- sistemas de rotas para as páginas
-- página de não encontrada
+- Sistema de rotas para as páginas específicas;
+- Página de rota não identificada (404 -  Not Found)
 
 &nbsp;
  
