@@ -79,7 +79,7 @@ export const PaginaPrincipal = () => {
           <VideoList hover videos={videos?.slice(0, pagina * 15)} />
         )}
       </article>
-      <div ref={containerRef} className='h-10 border-8 border-red-400 ' />
+      <div ref={containerRef} className='h-10 ' />
     </section>
   );
 };
