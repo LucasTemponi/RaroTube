@@ -1,11 +1,6 @@
-import { ReactNode, useEffect, useMemo, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useVideos } from "../../hooks/useVideos";
 import { SemanaSideBar } from "../SemanaSideBar/SemanaSideBar";
-import { VideoProps } from "../VideoPlayer/VideoProps";
-
-type semanasProps = {
-    [key: string]: VideoProps[]
-}
 
 export type Props = {
     isOpen?: boolean,
@@ -13,21 +8,10 @@ export type Props = {
 }
 
 export const SideBar: React.FC<Props> = ({ children, isOpen }) => {
-    const todosVideos = useVideos(state => state.videos);
+    const topicos = useVideos(state => state.topicos);
 
     const [animation, setAnimation] = useState('');
     const [closeSidebar, setCloseSidebar] = useState(isOpen);
-
-    const semanas: semanasProps = useMemo(() => {
-        const semanas: semanasProps = {}
-        todosVideos.forEach(video => {
-            if (video.topico !== 'aulão') {
-                semanas[video.topico] ? semanas[video.topico].push(video) : semanas[video.topico] = [video]
-            }
-        })
-        console.log(semanas)
-        return semanas
-    }, [todosVideos]);
 
     useEffect(() => {
         if (isOpen) {
@@ -49,8 +33,8 @@ export const SideBar: React.FC<Props> = ({ children, isOpen }) => {
             {closeSidebar &&
             <>
                 <div className={`flex flex-col fixed xl:relative z-10 overflow-y-auto xl:overflow-visible w-full xl:w-64 h-screen md:bg-black-rgba xl:bg-gray-50 bg-gray-50 transition-all duration-200 ease-linear ${animation} `}> 
-                        {Object.keys(semanas).length ?
-                            Object.keys(semanas).map(semana => <SemanaSideBar semana={semana} videos={semanas[semana]} />)
+                        {Object.keys(topicos).length ?
+                            Object.keys(topicos).map(semana => <SemanaSideBar semana={semana} videos={topicos[semana]} />)
                             :
                             <div className="py-2 overflow-auto px-3 bg-gray-50 dark:bg-gray-800">
                                 <ul className=' space-y-2 items-center '>

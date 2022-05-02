@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import LazyThumbList from '../../components/LazyThumbList/LazyThumbList';
 import ListaComentarios from '../../components/ListaComentarios/ListaComentarios';
@@ -32,7 +32,7 @@ const VideoPage = () => {
 
   const timestamp = useTimestamp(state => state.setVideo);
 
-  useEffect(() => {
+  useMemo(() => {
     const loadRecomendados = async () => {
       const response = await apiClient.get(`/videos/${id}/recomendacoes`);
       setRecomendados(response.data);
@@ -61,22 +61,18 @@ const VideoPage = () => {
 
     const buscaProximoVideo = () => {
       if (videosCarregados) {
-        console.log(video?.id);
         const videoIndex = todosVideos.findIndex(
           element => element.id === video?.id
         );
-        console.log(videoIndex);
         if (videoIndex >= 0) {
           setProximoVideo(todosVideos.slice(videoIndex - 1)[0]);
         } else {
           setProximoVideo(todosVideos.slice(-1)[0]);
         }
       } else {
-        console.log('todosVideos não carregado');
       }
     };
 
-    console.log('useEffect video,videoCarregados')
     if (video && videosCarregados){
       buscaProximoVideo();
       setCarregando(false);
@@ -92,7 +88,7 @@ const VideoPage = () => {
   return (
     <>
       <div className=' flex flex-col items-center '>
-        <div className=' w-full max-w-screen-2xl '>
+        <div className=' w-full max-w-screen-2xl relative '>
           {!carregando && video && proximoVideo ? (
             <VideoPlayer
               key={video?.id}

@@ -44,7 +44,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = props => {
 
   return (
     <>
-      <div className="w-full h-full">
+      <div className="w-full h-full relative ">
       {videoAcabando && <NextUp {...props.proximoVideo} />}
       <video ref={videoRef} id="VideoPrincipal" className='w-full max-h-[80vh]' title={props.video.nome} controls onTimeUpdate={handleOnTimeUpdate}>
         <source src={props.video.url} />
