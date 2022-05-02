@@ -20,10 +20,10 @@ export const SideBar: React.FC<Props> = ({ children, isOpen }) => {
         setAnimation('translate-x-0');
       }, 20);
     } else {
-      setAnimation('-translate-x-64');
+      setAnimation('-translate-x-full');
       setTimeout(() => {
         setCloseSidebar(isOpen);
-      }, 200);
+      }, 250);
     }
   }, [isOpen]);
 
@@ -31,7 +31,7 @@ export const SideBar: React.FC<Props> = ({ children, isOpen }) => {
     <div className='flex flex-row relative w-full '>
       {closeSidebar && (
         <>
-          <div
+          <div 
             className={`flex flex-col fixed pt-20 z-10 overflow-auto w-full xl:w-64 h-screen xl:bg-gray-50 bg-gray-50 transition-all duration-200 ease-linear ${animation} `}
           >
             {Object.keys(topicos).length ? (
