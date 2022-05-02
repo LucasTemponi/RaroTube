@@ -71,10 +71,10 @@ export const SideBar: React.FC<Props> = ({ children, isOpen }) => {
                 </ul>
               </div>
               <hr className=' border-raro-rosa w-3/4 mx-auto ' />
-              <h3 className=' mt-6 font-bold ml-4 ' >Vídeos públicos</h3>
+              <h3 className=' mt-6 font-bold mx-auto ' >Vídeos públicos</h3>
               </> )
               : (
-                <h3 className=' mt-6 font-bold ml-4 ' >Meu curso</h3>
+                <h3 className='mx-auto mt-6 font-bold  ' >Meu curso</h3>
               )
             }
             { Object.keys(topicos).map(semana => (
