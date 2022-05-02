@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import LazyThumbList from '../../components/LazyThumbList/LazyThumbList';
 import ListaComentarios from '../../components/ListaComentarios/ListaComentarios';
 import { VideoList } from '../../components/VideoList/VideoList';
@@ -32,15 +32,27 @@ const VideoPage = () => {
 
   const timestamp = useTimestamp(state => state.setVideo);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
+
     const loadRecomendados = async () => {
-      const response = await apiClient.get(`/videos/${id}/recomendacoes?itensPorPagina=100`);
+      const response = await apiClient.get(`/videos/${id}/recomendacoes?itensPorPagina=10`);
       setRecomendados(response.data);
     };
 
     const loadVideo = async () => {
-      const response = await apiClient.get(`/videos/${id}`);
-      setVideo(response.data);
+      try{
+        const response = await apiClient.get(`/videos/${id}`);
+        console.log(response.data)
+        setVideo(response.data);
+      }  catch(error: any) {
+        if (error.response.status === 401 || error.response.status === 404) {
+          // Usuário não logado buscando vídeo restrito recebe um '404' ¯\_(ツ)_/¯ 
+          alert('Vídeo restrito ou não encontrado')
+          navigate('/')
+        }
+      }
     };
 
     const loadComentarios = async () => {

@@ -1,6 +1,7 @@
 import { useTimestamp } from "../hooks/useTimestamp";
 
 export const BuscaTimestamps = (texto: string) => {
+  
   const videoTime = useTimestamp(state => state.setTempo);
 
   const regex = /((00|[0-9]|1[0-9]|2[0-3]):)?([0-9]|[0-5][0-9]):([0-5][0-9])/g;

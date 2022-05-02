@@ -19,13 +19,13 @@ export const PaginaPrincipal = () => {
     const todosFavoritos = useFavoritos(state => state.favoritos);
 
     const [carregando, setCarregando] = useState<boolean>(true);
-    const authContext = useAuthContext();
+    const {estaAutenticado} = useAuthContext();
 
     const containerRef = useRef<HTMLDivElement | null>(null);
     const pagina = useScroll(containerRef);
 
     const loadVideos = async () => {
-        if (authContext.estaAutenticado) {
+        if (estaAutenticado) {
             iniciaFavoritos();
             iniciaVideos();
         } else {
@@ -34,16 +34,18 @@ export const PaginaPrincipal = () => {
     };
 
     useEffect(() => {
+        console.log('useEffect estaAutenticado')
+        console.log(estaAutenticado );
         if (!videosCarregados || !favoritosCarregados) {
             loadVideos();
         } else {
             setCarregando(false)
             loadVideos();
         }
-    }, [authContext.estaAutenticado]);
+    }, [estaAutenticado]);
 
     useEffect(() => {
-        if (authContext.estaAutenticado) {
+        if (estaAutenticado) {
             if (videosCarregados && favoritosCarregados) {
                 setCarregando(false);
             }
@@ -57,7 +59,7 @@ export const PaginaPrincipal = () => {
 
     return (
         <section className=' mt-2 max-w-[95vw] lg:max-w-[85vw] mx-auto'>
-            {authContext.estaAutenticado && (
+            {estaAutenticado && (
                 <article className=" mb-10 " >
                     <h1 className=' font-extrabold underline decoration-raro-rosa text-4xl my-2 py-4 text-left text-raro-cobalto'>
                         Vídeos favoritos
